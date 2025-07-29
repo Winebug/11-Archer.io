@@ -7,14 +7,14 @@ public class Enemy : UnitController
     [SerializeField] float attakRange = 1;
     
     
-    //°­ÀÇ¿¡¼­´Â Init·Î ÇÃ·¹ÀÌ¾î ÇÒ´çÇØÁÖ¹Ç·Î, ¾Æ¸¶ ¼öÁ¤ ¿¹Á¤
+    //ê°•ì˜ì—ì„œëŠ” Initë¡œ í”Œë ˆì´ì–´ í• ë‹¹í•´ì£¼ë¯€ë¡œ, ì•„ë§ˆ ìˆ˜ì • ì˜ˆì •
     [SerializeField] Transform playerTemp;
 
 
     protected override void HandleAction() 
     {
 
-        // Å¸°Ù(ÇÃ·¹ÀÌ¾î)°¡ Á×À¸¸é ¿òÁ÷ÀÌÁö ¾ÊÀ½
+        // íƒ€ê²Ÿ(í”Œë ˆì´ì–´)ê°€ ì£½ìœ¼ë©´ ì›€ì§ì´ì§€ ì•ŠìŒ
         if (playerTemp == null)
         {
             
@@ -24,13 +24,16 @@ public class Enemy : UnitController
         float distance = DistanceBetween();
         Vector2 direction = FaceDirection();
 
-        isAttacking = false;    
-        if (distance < attakRange)  //ÇÃ·¹ÀÌ¾î°¡ »ç°Å¸®¿¡ µé¾î¿À¸é, °ø°İ
+        isAttacking = false;
+
+        //í”Œë ˆì´ì–´ê°€ ì‚¬ê±°ë¦¬ì— ë“¤ì–´ì˜¤ë©´, ê³µê²©
+
+        if (distance < attakRange)  
         {
-            Debug.Log("°ø°İ ·ÎÁ÷");
+            Debug.Log("ê³µê²© ë¡œì§");
         }
 
-        // ÇÃ·¹ÀÌ¾î¿¡°Ô Á¢±Ù
+        // í”Œë ˆì´ì–´ì—ê²Œ ì ‘ê·¼
         movementDirection = direction;
 
     }

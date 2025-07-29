@@ -3,36 +3,36 @@ using UnityEngine;
 public class WeaponHandler : MonoBehaviour
 {
     [Header("Attack Info")]
-    [SerializeField] private float delay = 1f; // °ø°İ °£ µô·¹ÀÌ
+    [SerializeField] private float delay = 1f; // ê³µê²© ê°„ ë”œë ˆì´
     public float Delay { get => delay; set => delay = value; }
 
-    [SerializeField] private float weaponSize = 1f; // ¹«±â Å©±â
+    [SerializeField] private float weaponSize = 1f; // ë¬´ê¸° í¬ê¸°
     public float WeaponSize { get => weaponSize; set => weaponSize = value; }
 
-    [SerializeField] private float power = 1f; // °ø°İ·Â
+    [SerializeField] private float power = 1f; // ê³µê²©ë ¥
     public float Power { get => power; set => power = value; }
 
-    [SerializeField] private float speed = 1f; // °ø°İ ¼Óµµ
+    [SerializeField] private float speed = 1f; // ê³µê²© ì†ë„
     public float Speed { get => speed; set => speed = value; }
 
-    [SerializeField] private float attackRange = 10f; // °ø°İ °¡´É ¹üÀ§
+    [SerializeField] private float attackRange = 10f; // ê³µê²© ê°€ëŠ¥ ë²”ìœ„
     public float AttackRange { get => attackRange; set => attackRange = value; }
 
-    public LayerMask target; // °ø°İ °¡´ÉÇÑ ´ë»ó ·¹ÀÌ¾î
+    public LayerMask target; // ê³µê²© ê°€ëŠ¥í•œ ëŒ€ìƒ ë ˆì´ì–´
 
     [Header("Knock Back Info")]
-    [SerializeField] private bool isOnKnockback = false; // ³Ë¹é Àû¿ë ¿©ºÎ
+    [SerializeField] private bool isOnKnockback = false; // ë„‰ë°± ì ìš© ì—¬ë¶€
     public bool IsOnKnockback { get => isOnKnockback; set => isOnKnockback = value; }
 
-    [SerializeField] private float knockbackPower = 0.1f; // ³Ë¹é Èû
+    [SerializeField] private float knockbackPower = 0.1f; // ë„‰ë°± í˜
     public float KnockbackPower { get => knockbackPower; set => knockbackPower = value; }
 
-    [SerializeField] private float knockbackTime = 0.5f; // ³Ë¹é Áö¼Ó ½Ã°£
+    [SerializeField] private float knockbackTime = 0.5f; // ë„‰ë°± ì§€ì† ì‹œê°„
     public float KnockbackTime { get => knockbackTime; set => knockbackTime = value; }
 
     private static readonly int IsAttack = Animator.StringToHash("IsAttack");
 
-    public UnitController Controller { get; private set; } // ÀÌ ¹«±â¸¦ »ç¿ëÇÏ´Â Ä³¸¯ÅÍ ÄÁÆ®·Ñ·¯
+    public UnitController Controller { get; private set; } // ì´ ë¬´ê¸°ë¥¼ ì‚¬ìš©í•˜ëŠ” ìºë¦­í„° ì»¨íŠ¸ë¡¤ëŸ¬
 
     private Animator animator;
     private SpriteRenderer weaponRenderer;
@@ -43,10 +43,10 @@ public class WeaponHandler : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        // °ø°İ ¼Óµµ¿¡ µû¶ó ¾Ö´Ï¸ŞÀÌ¼Ç Àç»ı ¼Óµµ Á¶Àı
+        // ê³µê²© ì†ë„ì— ë”°ë¼ ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ ì†ë„ ì¡°ì ˆ
         animator.speed = 1.0f / delay;
 
-        // ¹«±â Å©±â ¼³Á¤
+        // ë¬´ê¸° í¬ê¸° ì„¤ì •
         transform.localScale = Vector3.one * weaponSize;
     }
 
