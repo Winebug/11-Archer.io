@@ -26,5 +26,6 @@ public class PlayerController : UnitController
 
         lookDirection = new Vector2(horizontal,0);
 
+        isAttacking = true;
     }
 }
