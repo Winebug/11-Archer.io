@@ -79,7 +79,10 @@ public class UnitController : MonoBehaviour
             Debug.Log("isAttacking true");
         }
 
-        Rotate(lookDirection);
+        if (movementDirection.magnitude > 0)
+        {
+            Rotate(lookDirection);
+        }
         HandleAttackDelay(); // 공격 입력 및 쿨타임 관리
 
         
