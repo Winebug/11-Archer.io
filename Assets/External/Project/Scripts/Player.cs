@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class PlayerController : UnitController
+public class Player : UnitController
 {
     protected override void Start()
     {
@@ -24,8 +23,16 @@ public class PlayerController : UnitController
         // 방향 벡터 정규화 (대각선일 때 속도 보정)
         movementDirection = new Vector2(horizontal, vertical).normalized;
 
-        lookDirection = new Vector2(horizontal,0);
+        lookDirection = new Vector2(horizontal, 0);
 
+        // 상시 공격 중 상태
         isAttacking = true;
+
+    }
+
+    public override void Death()
+    {
+        base.Death();
+        //gameManager.GameOver(); // 게임 오버 처리
     }
 }

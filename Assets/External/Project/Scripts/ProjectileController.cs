@@ -46,14 +46,30 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // 지형 충돌 시 → 약간 앞 위치에 이펙트 생성하고 파괴
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
             DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
         }
-        // 공격 대상 레이어에 충돌했을 경우
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
+            // 데미지 적용을 위해 체력 시스템이 있는지 확인
+            UnitController resourceController = collision.GetComponent<UnitController>();
+            if (resourceController != null)
+            {
+                // 데미지 적용
+                resourceController.ChangeHealth(-rangeWeaponHandler.Power);
+
+                // 넉백 설정이 되어 있다면 넉백도 적용
+                if (rangeWeaponHandler.IsOnKnockback)
+                {
+                    UnitController controller = collision.GetComponent<UnitController>();
+                    if (controller != null)
+                    {
+                        controller.ApplyKnockback(transform, rangeWeaponHandler.KnockbackPower, rangeWeaponHandler.KnockbackTime);
+                    }
+                }
+            }
+
             DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
         }
     }
