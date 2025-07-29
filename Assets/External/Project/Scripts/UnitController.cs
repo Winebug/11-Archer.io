@@ -10,7 +10,7 @@ public class UnitController : MonoBehaviour
     [SerializeField] private SpriteRenderer characterRenderer; // 좌우 반전을 위한 렌더러
     [SerializeField] private Transform weaponPivot; // 무기를 회전시킬 기준 위치
 
-    [SerializeField] private float healthChangeDelay = .5f; // 피해 후 무적 지속 시간
+    [SerializeField] protected float healthChangeDelay = .5f; // 피해 후 무적 지속 시간
 
 
     protected Vector2 movementDirection = Vector2.zero; // 현재 이동 방향
@@ -26,9 +26,9 @@ public class UnitController : MonoBehaviour
     protected WeaponHandler weaponHandler; // 장착된 무기
 
     protected bool isAttacking; // 공격 중 여부
-    private float timeSinceLastAttack = float.MaxValue; // 마지막 공격 이후 경과 시간
+    protected float timeSinceLastAttack = float.MaxValue; // 마지막 공격 이후 경과 시간
 
-    private float timeSinceLastChange = float.MaxValue; // 마지막 체력 변경 이후 경과 시간
+    protected float timeSinceLastChange = float.MaxValue; // 마지막 체력 변경 이후 경과 시간
 
     public float CurrentHealth { get; private set; } // 현재 체력 (외부 접근만 허용)
 
@@ -82,16 +82,7 @@ public class UnitController : MonoBehaviour
         Rotate(lookDirection);
         HandleAttackDelay(); // 공격 입력 및 쿨타임 관리
 
-        // 아직 무적 상태라면 시간 누적
-        if (timeSinceLastChange < healthChangeDelay)
-        {
-            // 무적 시간 종료 시 애니메이션에도 알림
-            timeSinceLastChange += Time.deltaTime;
-            if (timeSinceLastChange >= healthChangeDelay)
-            {
-                animationHandler.InvincibilityEnd();
-            }
-        }
+        
     }
 
     protected virtual void FixedUpdate()

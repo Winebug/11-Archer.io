@@ -9,6 +9,21 @@ public class Player : UnitController
         base.Start();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        // 아직 무적 상태라면 시간 누적
+        if (timeSinceLastChange < healthChangeDelay)
+        {
+            // 무적 시간 종료 시 애니메이션에도 알림
+            timeSinceLastChange += Time.deltaTime;
+            if (timeSinceLastChange >= healthChangeDelay)
+            {
+                animationHandler.InvincibilityEnd();
+            }
+        }
+    }
+
     protected override void HandleAction()
     {
         // 키보드 입력을 통해 이동 방향 계산 (좌/우/상/하)
