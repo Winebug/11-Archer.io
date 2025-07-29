@@ -30,10 +30,6 @@ public class Player : UnitController
         float horizontal = Input.GetAxisRaw("Horizontal"); // A/D 또는 ←/→
         float vertical = Input.GetAxisRaw("Vertical"); // W/S 또는 ↑/↓
 
-        bool hDown = Input.GetButtonDown("Horizontal");
-        bool vDown = Input.GetButtonDown("Vertical");
-        bool hUp = Input.GetButtonDown("Horizontal");
-        bool vUp = Input.GetButtonDown("Vertical");
 
         // 방향 벡터 정규화 (대각선일 때 속도 보정)
         movementDirection = new Vector2(horizontal, vertical).normalized;
