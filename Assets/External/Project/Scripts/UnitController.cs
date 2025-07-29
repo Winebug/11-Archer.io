@@ -117,7 +117,8 @@ public class UnitController : MonoBehaviour
         _rigidbody.velocity = direction;
 
         // 이동 애니메이션 처리
-        animationHandler.Move(direction);
+        if (animationHandler != null)
+            animationHandler.Move(direction);
     }
 
     // 스프라이트 좌우 반전(캐릭,무기)
