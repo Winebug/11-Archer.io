@@ -1,3 +1,5 @@
+![Archer.jpg](img/Archer.jpg)
+
 [Commit Convention]
 
 Feat:	새로운 기능 추가  
