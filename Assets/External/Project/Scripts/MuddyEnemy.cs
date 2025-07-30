@@ -5,7 +5,7 @@ using UnityEngine;
 public class MuddyEnemy : Enemy
 {
     bool active = true;
-    bool isHiding = false;
+    bool isHiding = true;
 
     Collider2D selfCollider;
 
@@ -20,11 +20,14 @@ public class MuddyEnemy : Enemy
     {
         base.Start();
 
-        MoleMovemet();
+        StartCoroutine(MoleMovemet());
+
     }
 
     protected override void Update()
     {
+
+
         if (playerTemp == null)
         {
             active = false;
@@ -40,10 +43,12 @@ public class MuddyEnemy : Enemy
 
     IEnumerator MoleMovemet()
     {
+
         while (active)
         {
             //플레이어 근처로 순간이동 
             Teleport();
+            HideAndSeek();
 
             //2초 후 공격
             yield return new WaitForSeconds(2f);
@@ -54,6 +59,7 @@ public class MuddyEnemy : Enemy
             HideAndSeek();
 
             yield return new WaitForSeconds(3f);
+
         }
 
     }
@@ -64,6 +70,8 @@ public class MuddyEnemy : Enemy
         {
             Vector2 target = (Vector2)playerTemp.position + Random.insideUnitCircle * 3f;
 
+            i++;
+
             //벽과 장애물에 순간이동 안되게 하는 코드, obstacleLayer에 벽과 장애물 설정 필요
 
             //if (!Physics2D.OverlapCircle(target, 0.5f, obstacleLayer))
@@ -72,6 +80,7 @@ public class MuddyEnemy : Enemy
                 return;
             //}
 
+            
         }
 
 
@@ -79,6 +88,7 @@ public class MuddyEnemy : Enemy
 
     void HideAndSeek()
     {
+        
         if (isHiding)
         {
             selfCollider.enabled = true;
@@ -89,5 +99,6 @@ public class MuddyEnemy : Enemy
             selfCollider.enabled = false;
             characterRenderer.enabled = false;
         }
+        isHiding = !isHiding;
     }
 }
