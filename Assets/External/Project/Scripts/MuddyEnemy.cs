@@ -7,7 +7,14 @@ public class MuddyEnemy : Enemy
     bool active = true;
     bool isHiding = false;
 
-    Collider2D Collider2D
+    Collider2D selfCollider;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        selfCollider = GetComponentInChildren<Collider2D>();
+    }
 
     protected override void Start()
     {
@@ -61,11 +68,12 @@ public class MuddyEnemy : Enemy
 
             //if (!Physics2D.OverlapCircle(target, 0.5f, obstacleLayer))
             //{
-            //    transform.position = target;
-            //    return;
+                transform.position = target;
+                return;
             //}
 
         }
+
 
     }
 
@@ -73,11 +81,13 @@ public class MuddyEnemy : Enemy
     {
         if (isHiding)
         {
-            
+            selfCollider.enabled = true;
+            characterRenderer.enabled = true;
         }
         else
         {
-            
+            selfCollider.enabled = false;
+            characterRenderer.enabled = false;
         }
     }
 }

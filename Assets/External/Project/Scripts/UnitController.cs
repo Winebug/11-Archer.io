@@ -7,7 +7,7 @@ public class UnitController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    [SerializeField] private SpriteRenderer characterRenderer; // 좌우 반전을 위한 렌더러
+    [SerializeField] protected SpriteRenderer characterRenderer; // 좌우 반전을 위한 렌더러
     [SerializeField] private Transform weaponPivot; // 무기를 회전시킬 기준 위치
 
     [SerializeField] protected float healthChangeDelay = .5f; // 피해 후 무적 지속 시간

@@ -289,9 +289,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -344945420368482204, guid: 5047471bf28a9b64998ca6268608a790, type: 3}
+      propertyPath: playerTemp
+      value: 
+      objectReference: {fileID: 453226533}
     - target: {fileID: 2803047456324451828, guid: 5047471bf28a9b64998ca6268608a790, type: 3}
       propertyPath: m_Name
       value: Muddy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540218901931156638, guid: 5047471bf28a9b64998ca6268608a790, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7841007498852162300, guid: 5047471bf28a9b64998ca6268608a790, type: 3}
       propertyPath: m_Sprite
