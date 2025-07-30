@@ -16,7 +16,7 @@ public class RangeWeaponHandler : WeaponHandler
     [SerializeField] private float duration; // 총알이 살아있는 시간
     public float Duration { get { return duration; } }
 
-    [SerializeField] private float spread; // 총알 퍼짐 각도 범위
+    [SerializeField] private float spread = 0f; // 총알 퍼짐 각도 범위
     public float Spread { get { return spread; } }
 
     private int numberofProjectilesPerShot = 1; // 한 번에 발사할 총알 수
@@ -80,5 +80,10 @@ public class RangeWeaponHandler : WeaponHandler
     public void AddProjectiles()
     {
         projectileCount++;
+
+        if (Controller != null)
+        {
+            Controller.ForceAttackNow();
+        }
     }
 }

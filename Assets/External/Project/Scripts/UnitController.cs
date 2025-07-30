@@ -234,6 +234,11 @@ public class UnitController : MonoBehaviour
             weaponHandler?.Attack();
     }
 
+    public void ForceAttackNow()
+    {
+        timeSinceLastAttack = float.MaxValue; // 다음 프레임에서 바로 공격하도록 강제
+    }
+
     // 공격범위 시각화
     protected virtual void ShowAttackRange()
     {
