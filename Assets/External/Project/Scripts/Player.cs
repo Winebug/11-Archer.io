@@ -61,14 +61,12 @@ public class Player : UnitController
 
         if(closestTarget == null) // 만약 탐색된 적이 없다면
         {
-            Debug.Log("closestTarget is null");
             isAttacking = false; // 공격 중지
             return; // 메서드 종료
         }
 
         else if (closestTarget != null)
         {
-            Debug.Log("closestTarget found");
             Vector2 target = (closestTarget.position - this.transform.position).normalized; // 타겟 벡터값 설정
             lookDirection = target; // 발견된 타겟을 바라보게 설정
             isAttacking = true; // 타겟 공격
@@ -105,28 +103,10 @@ public class Player : UnitController
         //gameManager.GameOver(); // ???? ???? ??? 
     }
 
-    protected override void ShowAttackRange()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, wh.AttackRange);
-    }
-
     // temp 메서드. 나중에 스킬 습득 조건 발동에 맞춰 변경 예정
     private void ShowSkillSelectorUI()
     {
         skillSelectorUI.Initialize(this);
         skillSelectorUI.Show();
     }
-
-    // 디버깅용 기즈모는 OnDrawGizmosSelected()에서 호출
-    // void OnDrawGizmosSelected() // 이 함수는 Unity가 자동으로 호출
-    // {
-    //     // 오브젝트가 선택되었을 때만 기즈모를 그리도록
-    //     // attackRange가 0보다 큰지 확인하는 것이 좋습니다.
-    //     if (showattackRange > 0f)
-    //     {
-    //         Gizmos.color = Color.red; // 기즈모 색상 설정
-    //         Gizmos.DrawWireSphere(transform.position, showattackRange); // attackRange 원 그리기
-    //     }
-    // }
 }

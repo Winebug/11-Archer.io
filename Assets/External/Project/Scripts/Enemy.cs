@@ -70,4 +70,10 @@ public class Enemy : UnitController
     {
         return (playerTemp.position - this.transform.position).normalized;
     }
+
+    public override void Death()
+    {
+        Debug.Log("Enemy Death");
+        base.Death();
+    }
 }

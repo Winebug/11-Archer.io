@@ -54,6 +54,7 @@ public class ProjectileController : MonoBehaviour
         {
             // 데미지 적용을 위해 체력 시스템이 있는지 확인
             UnitController resourceController = collision.GetComponent<UnitController>();
+            
             if (resourceController != null)
             {
                 // 데미지 적용

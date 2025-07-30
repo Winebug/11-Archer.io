@@ -72,19 +72,21 @@ public class UnitController : MonoBehaviour
     {
         HandleAction();
 
-        // 자동 공격 확인용
-        if (isAttacking == true)
-        {
-            Debug.Log("isAttacking true");
-        }
-
         if (movementDirection.magnitude > 0)
         {
             Rotate(lookDirection);
         }
         HandleAttackDelay(); // 공격 입력 및 쿨타임 관리
 
-
+        // 무적 상태 시간 관리
+        if (timeSinceLastChange < healthChangeDelay)
+        {
+            timeSinceLastChange += Time.deltaTime;
+            if (timeSinceLastChange >= healthChangeDelay)
+            {
+                animationHandler.InvincibilityEnd();
+            }
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -167,14 +169,11 @@ public class UnitController : MonoBehaviour
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
         // 데미지일 경우 (음수)
-        if (change < 0)
-        {
-            if (animationHandler != null)
-                animationHandler.Damage(); // 맞는 애니메이션 실행
-            
-            else
-                Debug.LogWarning("animationHandler is null. Damage animation skipped.");
-        }
+        //if (change < 0)
+        //{
+        //    animationHandler.Damage(); // 맞는 애니메이션 실행
+
+        //}
 
         // 체력이 0 이하가 되면 사망 처리
         if (CurrentHealth <= 0f)
