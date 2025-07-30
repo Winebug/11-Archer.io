@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : UnitController
 {
     [SerializeField] private LayerMask enemyLayer; // 공격 대상 레이어
-    [SerializeField] private float attackRange = 10f; // 공격 가능 범위
+    [SerializeField] private float showattackRange = 10f; // 공격 가능 범위
 
     private SkillManager sm;
     protected override void Start()
@@ -75,7 +75,7 @@ public class Player : UnitController
     // 가장 가까운 적 탐색
     private Transform FindClosestTarget()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer); // 공격 범위 내에서 적 검출
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, showattackRange, enemyLayer); // 공격 범위 내에서 적 검출
         Transform closest = null;
         float minDistance = Mathf.Infinity;
 
@@ -112,10 +112,10 @@ public class Player : UnitController
     {
         // 오브젝트가 선택되었을 때만 기즈모를 그리도록
         // attackRange가 0보다 큰지 확인하는 것이 좋습니다.
-        if (attackRange > 0f)
+        if (showattackRange > 0f)
         {
             Gizmos.color = Color.red; // 기즈모 색상 설정
-            Gizmos.DrawWireSphere(transform.position, attackRange); // attackRange 원 그리기
+            Gizmos.DrawWireSphere(transform.position, showattackRange); // attackRange 원 그리기
         }
     }
 }
