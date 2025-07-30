@@ -1,50 +1,51 @@
 using UnityEngine;
 
-// ëª¨ë“  ìºë¦­í„°ì˜ ê¸°ë³¸ ì›€ì§ì„, íšŒì „, ë„‰ë°± ì²˜ë¦¬ë¥¼ ë‹´ë‹¹í•˜ëŠ” ê¸°ë°˜ í´ë˜ìŠ¤
+// ëª¨ë“  ìºë¦­?„°?˜ ê¸°ë³¸ ???ì§ì„, ?šŒ? „, ?„‰ë°? ì²˜ë¦¬ë¥? ?‹´?‹¹?•˜?Š” ê¸°ë°˜ ?´?˜?Š¤
 public class UnitController : MonoBehaviour
 {
-    protected Rigidbody2D _rigidbody; // ì´ë™ì„ ìœ„í•œ ë¬¼ë¦¬ ì»´í¬ë„ŒíŠ¸
+    protected Rigidbody2D _rigidbody; // ?´?™?„ ?œ„?•œ ë¬¼ë¦¬ ì»´í¬?„Œ?Š¸
 
     protected AnimationHandler animationHandler;
 
-    [SerializeField] private SpriteRenderer characterRenderer; // ì¢Œìš° ë°˜ì „ì„ ìœ„í•œ ë Œë”ëŸ¬
-    [SerializeField] private Transform weaponPivot; // ë¬´ê¸°ë¥¼ íšŒì „ì‹œí‚¬ ê¸°ì¤€ ìœ„ì¹˜
+    [SerializeField] private SpriteRenderer characterRenderer; // ì¢Œìš° ë°˜ì „?„ ?œ„?•œ ? Œ?”?Ÿ¬
+    [SerializeField] private Transform weaponPivot; // ë¬´ê¸°ë¥? ?šŒ? „?‹œ?‚¬ ê¸°ì?? ?œ„ì¹?
 
-    [SerializeField] protected float healthChangeDelay = .5f; // í”¼í•´ í›„ ë¬´ì  ì§€ì† ì‹œê°„
+    [SerializeField] protected float healthChangeDelay = .5f; // ?”¼?•´ ?›„ ë¬´ì  ì§??† ?‹œê°?
 
 
-    protected Vector2 movementDirection = Vector2.zero; // í˜„ì¬ ì´ë™ ë°©í–¥
+    protected Vector2 movementDirection = Vector2.zero; // ?˜„?¬ ?´?™ ë°©í–¥
     public Vector2 MovementDirection { get { return movementDirection; } }
 
-    protected Vector2 lookDirection = Vector2.zero; // í˜„ì¬ ë°”ë¼ë³´ëŠ” ë°©í–¥
+    protected Vector2 lookDirection = Vector2.zero; // ?˜„?¬ ë°”ë¼ë³´ëŠ” ë°©í–¥
     public Vector2 LookDirection { get { return lookDirection; } }
 
-    private Vector2 knockback = Vector2.zero; // ë„‰ë°± ë°©í–¥
-    private float knockbackDuration = 0.0f; // ë„‰ë°± ì§€ì† ì‹œê°„
+    private Vector2 knockback = Vector2.zero; // ?„‰ë°? ë°©í–¥
+    private float knockbackDuration = 0.0f; // ?„‰ë°? ì§??† ?‹œê°?
 
-    [SerializeField] public WeaponHandler WeaponPrefab; // ì¥ì°©í•  ë¬´ê¸° í”„ë¦¬íŒ¹ (ì—†ìœ¼ë©´ ìì‹ì—ì„œ ì°¾ì•„ ì‚¬ìš©)
-    protected WeaponHandler weaponHandler; // ì¥ì°©ëœ ë¬´ê¸°
+    [SerializeField] public WeaponHandler WeaponPrefab; // ?¥ì°©í•  ë¬´ê¸° ?”„ë¦¬íŒ¹ (?—†?œ¼ë©? ??‹?—?„œ ì°¾ì•„ ?‚¬?š©)
+    protected WeaponHandler weaponHandler; // ?¥ì°©ëœ ë¬´ê¸°
 
-    protected bool isAttacking; // ê³µê²© ì¤‘ ì—¬ë¶€
-    protected float timeSinceLastAttack = float.MaxValue; // ë§ˆì§€ë§‰ ê³µê²© ì´í›„ ê²½ê³¼ ì‹œê°„
+    protected bool isAttacking; // °ø°İ Áß ¿©ºÎ
+    protected float attackRange; // °ø°İ ¹üÀ§
+    private float timeSinceLastAttack = float.MaxValue; // ¸¶Áö¸· °ø°İ ÀÌÈÄ °æ°ú ½Ã°£
 
-    protected float timeSinceLastChange = float.MaxValue; // ë§ˆì§€ë§‰ ì²´ë ¥ ë³€ê²½ ì´í›„ ê²½ê³¼ ì‹œê°„
+    protected float timeSinceLastChange = float.MaxValue; // ë§ˆì??ë§? ì²´ë ¥ ë³?ê²? ?´?›„ ê²½ê³¼ ?‹œê°?
 
-    public float CurrentHealth { get; private set; } // í˜„ì¬ ì²´ë ¥ (ì™¸ë¶€ ì ‘ê·¼ë§Œ í—ˆìš©)
+    public float CurrentHealth { get; private set; } // ?˜„?¬ ì²´ë ¥ (?™¸ë¶? ? ‘ê·¼ë§Œ ?—ˆ?š©)
 
 
-    // ì²´ë ¥ (1 ~ 100 ì‚¬ì´ ê°’ë§Œ í—ˆìš©)
+    // ì²´ë ¥ (1 ~ 100 ?‚¬?´ ê°’ë§Œ ?—ˆ?š©)
     [Range(1, 100)][SerializeField] private int health = 10;
-    // ì™¸ë¶€ì—ì„œ ì ‘ê·¼ ê°€ëŠ¥í•œ í”„ë¡œí¼í‹° (ê°’ ë³€ê²½ ì‹œ ìë™ìœ¼ë¡œ 0~100 ì‚¬ì´ë¡œ ì œí•œ)
+    // ?™¸ë¶??—?„œ ? ‘ê·? ê°??Š¥?•œ ?”„ë¡œí¼?‹° (ê°? ë³?ê²? ?‹œ ??™?œ¼ë¡? 0~100 ?‚¬?´ë¡? ? œ?•œ)
     public int Health
     {
         get => health;
         set => health = Mathf.Clamp(value, 0, 100);
     }
 
-    // ì´ë™ ì†ë„ (1f ~ 20f ì‚¬ì´ ê°’ë§Œ í—ˆìš©)
+    // ?´?™ ?†?„ (1f ~ 20f ?‚¬?´ ê°’ë§Œ ?—ˆ?š©)
     [Range(1f, 20f)][SerializeField] private float speed = 3;
-    // ì™¸ë¶€ì—ì„œ ì ‘ê·¼ ê°€ëŠ¥í•œ í”„ë¡œí¼í‹° (ê°’ ë³€ê²½ ì‹œ 0~20fë¡œ ì œí•œ)
+    // ?™¸ë¶??—?„œ ? ‘ê·? ê°??Š¥?•œ ?”„ë¡œí¼?‹° (ê°? ë³?ê²? ?‹œ 0~20fë¡? ? œ?•œ)
     public float Speed
     {
         get => speed;
@@ -57,11 +58,11 @@ public class UnitController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         animationHandler = GetComponent<AnimationHandler>();
 
-        // í”„ë¦¬íŒ¹ì´ ì§€ì •ë˜ì–´ ìˆë‹¤ë©´ ìƒì„±í•´ì„œ ì¥ì°© ìœ„ì¹˜ì— ë¶€ì°©
+        // ?”„ë¦¬íŒ¹?´ ì§?? •?˜?–´ ?ˆ?‹¤ë©? ?ƒ?„±?•´?„œ ?¥ì°? ?œ„ì¹˜ì— ë¶?ì°?
         if (WeaponPrefab != null)
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         else
-            weaponHandler = GetComponentInChildren<WeaponHandler>(); // ì´ë¯¸ ë¶™ì–´ ìˆëŠ” ë¬´ê¸° ì‚¬ìš©
+            weaponHandler = GetComponentInChildren<WeaponHandler>(); // ?´ë¯? ë¶™ì–´ ?ˆ?Š” ë¬´ê¸° ?‚¬?š©
     }
 
     protected virtual void Start()
@@ -73,7 +74,7 @@ public class UnitController : MonoBehaviour
     {
         HandleAction();
 
-        // ìë™ ê³µê²© í™•ì¸ìš©
+        // ??™ ê³µê²© ?™•?¸?š©
         if(isAttacking == true)
         {
             Debug.Log("isAttacking true");
@@ -83,7 +84,7 @@ public class UnitController : MonoBehaviour
         {
             Rotate(lookDirection);
         }
-        HandleAttackDelay(); // ê³µê²© ì…ë ¥ ë° ì¿¨íƒ€ì„ ê´€ë¦¬
+        HandleAttackDelay(); // ê³µê²© ?…? ¥ ë°? ì¿¨í???„ ê´?ë¦?
 
         
     }
@@ -93,88 +94,88 @@ public class UnitController : MonoBehaviour
         Movment(movementDirection);
         if (knockbackDuration > 0.0f)
         {
-            knockbackDuration -= Time.fixedDeltaTime; // ë„‰ë°± ì‹œê°„ ê°ì†Œ
+            knockbackDuration -= Time.fixedDeltaTime; // ?„‰ë°? ?‹œê°? ê°ì†Œ
         }
     }
 
-    // ìºë¦­í„°, ì  í•¸ë“¤ì•¡ì…˜ ì˜¤ë²„ë¼ì´ë“œ ë°›ê¸°
+    // ìºë¦­?„°, ?  ?•¸?“¤?•¡?…˜ ?˜¤ë²„ë¼?´?“œ ë°›ê¸°
     protected virtual void HandleAction()
     {
 
     }
 
 
-    // ìºë¦­í„° ì´ë™
+    // ìºë¦­?„° ?´?™
     private void Movment(Vector2 direction)
     {
-        direction = direction * Speed; // ì´ë™ ì†ë„
+        direction = direction * Speed; // ?´?™ ?†?„
 
-        // ë„‰ë°± ì¤‘ì´ë©´ ì´ë™ ì†ë„ ê°ì†Œ + ë„‰ë°± ë°©í–¥ ì ìš©
+        // ?„‰ë°? ì¤‘ì´ë©? ?´?™ ?†?„ ê°ì†Œ + ?„‰ë°? ë°©í–¥ ? ?š©
         if (knockbackDuration > 0.0f)
         {
-            direction *= 0.2f; // ì´ë™ ì†ë„ ê°ì†Œ
-            direction += knockback; // ë„‰ë°± ë°©í–¥ ì¶”ê°€
+            direction *= 0.2f; // ?´?™ ?†?„ ê°ì†Œ
+            direction += knockback; // ?„‰ë°? ë°©í–¥ ì¶”ê??
         }
 
-        // ì‹¤ì œ ë¬¼ë¦¬ ì´ë™
+        // ?‹¤? œ ë¬¼ë¦¬ ?´?™
         _rigidbody.velocity = direction;
 
-        // ì´ë™ ì• ë‹ˆë©”ì´ì…˜ ì²˜ë¦¬
+        // ?´?™ ?• ?‹ˆë©”ì´?…˜ ì²˜ë¦¬
         if (animationHandler != null)
             animationHandler.Move(direction);
     }
 
-    // ìŠ¤í”„ë¼ì´íŠ¸ ì¢Œìš° ë°˜ì „(ìºë¦­,ë¬´ê¸°)
+    // ?Š¤?”„?¼?´?Š¸ ì¢Œìš° ë°˜ì „(ìºë¦­,ë¬´ê¸°)
     private void Rotate(Vector2 direction)
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         bool isLeft = Mathf.Abs(rotZ) > 90f;
 
-        // ìŠ¤í”„ë¼ì´íŠ¸ ì¢Œìš° ë°˜ì „
+        // ?Š¤?”„?¼?´?Š¸ ì¢Œìš° ë°˜ì „
         characterRenderer.flipX = isLeft;
 
         if (weaponPivot != null)
         {
-            // ë¬´ê¸° íšŒì „ ì²˜ë¦¬
+            // ë¬´ê¸° ?šŒ? „ ì²˜ë¦¬
             weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
         }
 
-        // ë¬´ê¸°ë„ í•¨ê»˜ ì¢Œìš° ë°˜ì „ ì²˜ë¦¬
+        // ë¬´ê¸°?„ ?•¨ê»? ì¢Œìš° ë°˜ì „ ì²˜ë¦¬
         weaponHandler?.Rotate(isLeft);
     }
 
-    // ë„‰ë°±
+    // ?„‰ë°?
     public void ApplyKnockback(Transform other, float power, float duration)
     {
         knockbackDuration = duration;
-        // ìƒëŒ€ ë°©í–¥ì„ ë°˜ëŒ€ë¡œ ë°€ì–´ëƒ„
+        // ?ƒ??? ë°©í–¥?„ ë°˜ë??ë¡? ë°??–´?ƒ„
         knockback = -(other.position - transform.position).normalized * power;
     }
 
-    // ì²´ë ¥ ë³€ê²½ í•¨ìˆ˜ (í”¼í•´ or íšŒë³µ)
+    // ì²´ë ¥ ë³?ê²? ?•¨?ˆ˜ (?”¼?•´ or ?šŒë³?)
     public bool ChangeHealth(float change)
     {
-        // ë³€í™” ì—†ê±°ë‚˜ ë¬´ì  ìƒíƒœë©´ ë¬´ì‹œ
+        // ë³??™” ?—†ê±°ë‚˜ ë¬´ì  ?ƒ?ƒœë©? ë¬´ì‹œ
         if (change == 0 || timeSinceLastChange < healthChangeDelay)
         {
             return false;
         }
 
-        timeSinceLastChange = 0f; // ë‹¤ì‹œ ë¬´ì  ì‹œì‘
+        timeSinceLastChange = 0f; // ?‹¤?‹œ ë¬´ì  ?‹œ?‘
 
-        // ì²´ë ¥ ì ìš©
+        // ì²´ë ¥ ? ?š©
         CurrentHealth += change;
         CurrentHealth = CurrentHealth > Health ? Health : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
-        // ë°ë¯¸ì§€ì¼ ê²½ìš° (ìŒìˆ˜)
+        // ?°ë¯¸ì???¼ ê²½ìš° (?Œ?ˆ˜)
         if (change < 0)
         {
-            animationHandler.Damage(); // ë§ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
+            animationHandler.Damage(); // ë§ëŠ” ?• ?‹ˆë©”ì´?…˜ ?‹¤?–‰
 
         }
 
-        // ì²´ë ¥ì´ 0 ì´í•˜ê°€ ë˜ë©´ ì‚¬ë§ ì²˜ë¦¬
+        // ì²´ë ¥?´ 0 ?´?•˜ê°? ?˜ë©? ?‚¬ë§? ì²˜ë¦¬
         if (CurrentHealth <= 0f)
         {
             Death();
@@ -185,10 +186,10 @@ public class UnitController : MonoBehaviour
 
     public virtual void Death()
     {
-        // ì›€ì§ì„ ì •ì§€
+        // ???ì§ì„ ? •ì§?
         _rigidbody.velocity = Vector3.zero;
 
-        // ëª¨ë“  SpriteRendererì˜ íˆ¬ëª…ë„ ë‚®ì¶°ì„œ ì£½ì€ íš¨ê³¼ ì—°ì¶œ
+        // ëª¨ë“  SpriteRenderer?˜ ?ˆ¬ëª…ë„ ?‚®ì¶°ì„œ ì£½ì?? ?š¨ê³? ?—°ì¶?
         foreach (SpriteRenderer renderer in transform.GetComponentsInChildren<SpriteRenderer>())
         {
             Color color = renderer.color;
@@ -196,13 +197,13 @@ public class UnitController : MonoBehaviour
             renderer.color = color;
         }
 
-        // ëª¨ë“  ì»´í¬ë„ŒíŠ¸(ìŠ¤í¬ë¦½íŠ¸ í¬í•¨) ë¹„í™œì„±í™”
+        // ëª¨ë“  ì»´í¬?„Œ?Š¸(?Š¤?¬ë¦½íŠ¸ ?¬?•¨) ë¹„í™œ?„±?™”
         foreach (Behaviour component in transform.GetComponentsInChildren<Behaviour>())
         {
             component.enabled = false;
         }
 
-        // 2ì´ˆ í›„ ì˜¤ë¸Œì íŠ¸ íŒŒê´´
+        // 2ì´? ?›„ ?˜¤ë¸Œì ?Š¸ ?ŒŒê´?
         Destroy(gameObject, 2f);
     }
 
@@ -211,23 +212,24 @@ public class UnitController : MonoBehaviour
         if (weaponHandler == null)
             return;
 
-        // ê³µê²© ì¿¨ë‹¤ìš´ ì¤‘ì´ë©´ ì‹œê°„ ëˆ„ì 
+        // ê³µê²© ì¿¨ë‹¤?š´ ì¤‘ì´ë©? ?‹œê°? ?ˆ„? 
         if (timeSinceLastAttack <= weaponHandler.Delay)
         {
             timeSinceLastAttack += Time.deltaTime;
         }
 
-        // ê³µê²© ì…ë ¥ ì¤‘ì´ê³  ì¿¨íƒ€ì„ì´ ëë‚¬ìœ¼ë©´ ê³µê²© ì‹¤í–‰
+        // ê³µê²© ?…? ¥ ì¤‘ì´ê³? ì¿¨í???„?´ ??‚¬?œ¼ë©? ê³µê²© ?‹¤?–‰
         if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
         {
             timeSinceLastAttack = 0;
-            Attack(); // ì‹¤ì œ ê³µê²© ì‹¤í–‰
+            Debug.Log("player is attacking");
+            Attack(); // ½ÇÁ¦ °ø°İ ½ÇÇà
         }
     }
 
     protected virtual void Attack()
     {
-        // ë°”ë¼ë³´ëŠ” ë°©í–¥ì´ ìˆì„ ë•Œë§Œ ê³µê²©
+        // ë°”ë¼ë³´ëŠ” ë°©í–¥?´ ?ˆ?„ ?•Œë§? ê³µê²©
         if (lookDirection != Vector2.zero)
             weaponHandler?.Attack();
     }

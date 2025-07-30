@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : UnitController
 {
+    [SerializeField] private LayerMask enemyLayer;
     protected override void Start()
     {
         base.Start();
@@ -13,10 +14,10 @@ public class Player : UnitController
     protected override void Update()
     {
         base.Update();
-        // ¾ÆÁ÷ ¹«Àû »óÅÂ¶ó¸é ½Ã°£ ´©Àû
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (timeSinceLastChange < healthChangeDelay)
         {
-            // ¹«Àû ½Ã°£ Á¾·á ½Ã ¾Ö´Ï¸ÞÀÌ¼Ç¿¡µµ ¾Ë¸²
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼Ç¿ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
             timeSinceLastChange += Time.deltaTime;
             if (timeSinceLastChange >= healthChangeDelay)
             {
@@ -27,24 +28,71 @@ public class Player : UnitController
 
     protected override void HandleAction()
     {
-        // Å°º¸µå ÀÔ·ÂÀ» ÅëÇØ ÀÌµ¿ ¹æÇâ °è»ê (ÁÂ/¿ì/»ó/ÇÏ)
-        float horizontal = Input.GetAxisRaw("Horizontal"); // A/D ¶Ç´Â ¡ç/¡æ
-        float vertical = Input.GetAxisRaw("Vertical"); // W/S ¶Ç´Â ¡è/¡é
+        // ????? ????? ???? ??? ???? ???? (??/??/??/??)
+        float horizontal = Input.GetAxisRaw("Horizontal"); // A/D ??? ??/??
+        float vertical = Input.GetAxisRaw("Vertical"); // W/S ??? ??/??
 
+        // bool hDown = Input.GetButtonDown("Horizontal");
+        // bool vDown = Input.GetButtonDown("Vertical");
+        // bool hUp = Input.GetButtonDown("Horizontal");
+        // bool vUp = Input.GetButtonDown("Vertical");
 
-        // ¹æÇâ º¤ÅÍ Á¤±ÔÈ­ (´ë°¢¼±ÀÏ ¶§ ¼Óµµ º¸Á¤)
+        // // ???? ???? ????? (?ï¿½O???? ?? ??? ????)
         movementDirection = new Vector2(horizontal, vertical).normalized;
 
-        lookDirection = new Vector2(horizontal, 0);
+        // lookDirection = new Vector2(horizontal, 0);
 
-        // »ó½Ã °ø°Ý Áß »óÅÂ
+        // ???? ???? ?? ????
         isAttacking = true;
 
+        if (movementDirection.magnitude > 0.01f)
+        {
+            lookDirection = movementDirection;
+            isAttacking = false;
+            return;
+        }
+
+        Transform closestTarget = FindClosestTarget();
+
+        if (closestTarget != null)
+        {
+            Vector2 target = (closestTarget.position - this.transform.position).normalized;
+            lookDirection = target;
+            isAttacking = true;
+        }
+
+        else isAttacking = false;
+    }
+
+    private Transform FindClosestTarget()
+    {
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
+        Transform closest = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (Collider2D target in targets)
+        {
+            float distance = Vector2.Distance(transform.position, target.transform.position);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = target.transform;
+            }
+        }
+
+        return closest;
     }
 
     public override void Death()
     {
         base.Death();
-        //gameManager.GameOver(); // °ÔÀÓ ¿À¹ö Ã³¸®
+        //gameManager.GameOver(); // ???? ???? ??? 
+    }
+
+    private void ShowAttackRange()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
