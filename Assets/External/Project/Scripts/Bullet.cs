@@ -1,0 +1,27 @@
+using UnityEngine;
+
+public class Bullet : MonoBehaviour
+{
+    private Enemy ownerEnemy;
+
+    // Enemy 소유자를 할당받는 함수
+    public void SetOwner(Enemy enemy)
+    {
+        ownerEnemy = enemy;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Debug.Log("플레이어 공격당함");
+            Player player = other.GetComponent<Player>();
+            if (player != null && ownerEnemy != null && ownerEnemy.StatData != null)
+            {
+                float damage = ownerEnemy.StatData.attackPower;
+                player.ChangeHealth(-damage);
+            }
+            Destroy(gameObject);
+        }
+    }
+}

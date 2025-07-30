@@ -10,6 +10,7 @@ public class Enemy : UnitController
     //강의에서는 Init로 플레이어 할당해주므로, 아마 수정 예정
     [SerializeField] protected Transform playerTemp;
     [SerializeField] private MonsterStat statData;
+    public MonsterStat StatData => statData;
     protected override void Start()
     {
         base.Start();
