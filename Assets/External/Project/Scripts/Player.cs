@@ -5,9 +5,11 @@ using UnityEngine;
 public class Player : UnitController
 {
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private SkillSelectorUI skillSelectorUI;
     protected override void Start()
     {
         base.Start();
+        ShowSkillSelectorUI();
     }
 
 
@@ -94,5 +96,12 @@ public class Player : UnitController
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    // temp 메서드. 나중에 스킬 습득 조건 발동에 맞춰 변경 예정
+    private void ShowSkillSelectorUI()
+    {
+        skillSelectorUI.Initialize(this);
+        skillSelectorUI.Show();
     }
 }
