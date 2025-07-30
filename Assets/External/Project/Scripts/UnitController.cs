@@ -155,13 +155,9 @@ public class UnitController : MonoBehaviour
     // 체력 변경 함수 (피해 or 회복)
     public bool ChangeHealth(float change)
     {
-        Debug.Log($"ChangeHealth: {change}");
-
         // 변화 없거나 무적 상태면 무시
         if (change == 0 || timeSinceLastChange < healthChangeDelay)
         {
-            Debug.Log($"timeSinceLastChange : {timeSinceLastChange}");
-            Debug.Log("ChangeHealth: 무적 상태이거나 변화 없음");
             return false;
         }
 
@@ -171,8 +167,6 @@ public class UnitController : MonoBehaviour
         CurrentHealth += change;
         CurrentHealth = CurrentHealth > Health ? Health : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
-
-        Debug.Log($"CurrentHealth : {CurrentHealth}");
 
         // 데미지일 경우 (음수)
         //if (change < 0)
