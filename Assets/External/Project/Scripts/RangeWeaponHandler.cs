@@ -5,30 +5,30 @@ public class RangeWeaponHandler : WeaponHandler
 {
 
     [Header("Ranged Attack Data")]
-    [SerializeField] private Transform projectileSpawnPosition; // ÃÑ¾ËÀÌ ¹ß»çµÇ´Â À§Ä¡
+    [SerializeField] private Transform projectileSpawnPosition; // ì´ì•Œì´ ë°œì‚¬ë˜ëŠ” ìœ„ì¹˜
 
-    [SerializeField] private int bulletIndex; // »ç¿ëÇÒ ÃÑ¾Ë ÇÁ¸®ÆÕ ÀÎµ¦½º
+    [SerializeField] private int bulletIndex; // ì‚¬ìš©í•  ì´ì•Œ í”„ë¦¬íŒ¹ ì¸ë±ìŠ¤
     public int BulletIndex { get { return bulletIndex; } }
 
-    [SerializeField] private float bulletSize = 1; // ÃÑ¾Ë Å©±â
+    [SerializeField] private float bulletSize = 1; // ì´ì•Œ í¬ê¸°
     public float BulletSize { get { return bulletSize; } }
 
-    [SerializeField] private float duration; // ÃÑ¾ËÀÌ »ì¾ÆÀÖ´Â ½Ã°£
+    [SerializeField] private float duration; // ì´ì•Œì´ ì‚´ì•„ìˆëŠ” ì‹œê°„
     public float Duration { get { return duration; } }
 
-    [SerializeField] private float spread; // ÃÑ¾Ë ÆÛÁü °¢µµ ¹üÀ§
+    [SerializeField] private float spread; // ì´ì•Œ í¼ì§ ê°ë„ ë²”ìœ„
     public float Spread { get { return spread; } }
 
-    [SerializeField] private int numberofProjectilesPerShot; // ÇÑ ¹ø¿¡ ¹ß»çÇÒ ÃÑ¾Ë ¼ö
+    [SerializeField] private int numberofProjectilesPerShot; // í•œ ë²ˆì— ë°œì‚¬í•  ì´ì•Œ ìˆ˜
     public int NumberofProjectilesPerShot { get { return numberofProjectilesPerShot; } }
 
-    [SerializeField] private float multipleProjectilesAngel; // ÃÑ¾Ëµé °£ÀÇ °íÁ¤ °¢µµ °£°İ
+    [SerializeField] private float multipleProjectilesAngel; // ì´ì•Œë“¤ ê°„ì˜ ê³ ì • ê°ë„ ê°„ê²©
     public float MultipleProjectilesAngel { get { return multipleProjectilesAngel; } }
 
-    [SerializeField] private Color projectileColor; // ÃÑ¾Ë »ö»ó (½Ã°¢Àû È¿°ú)
+    [SerializeField] private Color projectileColor; // ì´ì•Œ ìƒ‰ìƒ (ì‹œê°ì  íš¨ê³¼)
     public Color ProjectileColor { get { return projectileColor; } }
 
-    private ProjectileManager projectileManager; // Åõ»çÃ¼¸¦ ¹ß»çÇÏ´Â ¸Å´ÏÀú ÂüÁ¶
+    private ProjectileManager projectileManager; // íˆ¬ì‚¬ì²´ë¥¼ ë°œì‚¬í•˜ëŠ” ë§¤ë‹ˆì € ì°¸ì¡°
     protected override void Start()
     {
         base.Start();
@@ -39,36 +39,36 @@ public class RangeWeaponHandler : WeaponHandler
     {
         base.Attack();
 
-        float projectilesAngleSpace = multipleProjectilesAngel; // ÃÑ¾Ë °£ °¢µµ °£°İ
-        int numberOfProjectilesPerShot = numberofProjectilesPerShot; // ¹ß»çÇÒ ÃÑ¾Ë ¼ö
+        float projectilesAngleSpace = multipleProjectilesAngel; // ì´ì•Œ ê°„ ê°ë„ ê°„ê²©
+        int numberOfProjectilesPerShot = numberofProjectilesPerShot; // ë°œì‚¬í•  ì´ì•Œ ìˆ˜
 
-        // ÃÑ¾ËµéÀ» ÁÂ¿ì ´ëÄªÀ¸·Î ÆÛÁö°Ô ÇÏ±â À§ÇÑ ½ÃÀÛ °¢µµ °è»ê
+        // ì´ì•Œë“¤ì„ ì¢Œìš° ëŒ€ì¹­ìœ¼ë¡œ í¼ì§€ê²Œ í•˜ê¸° ìœ„í•œ ì‹œì‘ ê°ë„ ê³„ì‚°
         float minAngle = -(numberOfProjectilesPerShot / 2f) * projectilesAngleSpace;
 
 
-        // °¢ ÃÑ¾Ë¸¶´Ù È¸Àü °¢µµ °è»ê ÈÄ ¹ß»ç
+        // ê° ì´ì•Œë§ˆë‹¤ íšŒì „ ê°ë„ ê³„ì‚° í›„ ë°œì‚¬
         for (int i = 0; i < numberOfProjectilesPerShot; i++)
         {
-            float angle = minAngle + projectilesAngleSpace * i; // ±âº» °¢µµ
-            float randomSpread = Random.Range(-spread, spread); // ·£´ı ÆÛÁü Àû¿ë
+            float angle = minAngle + projectilesAngleSpace * i; // ê¸°ë³¸ ê°ë„
+            float randomSpread = Random.Range(-spread, spread); // ëœë¤ í¼ì§ ì ìš©
             angle += randomSpread;
 
-            // ½ÇÁ¦ Åõ»çÃ¼ »ı¼º (Controller.LookDirection = Ä³¸¯ÅÍ°¡ ¹Ù¶óº¸´Â ¹æÇâ)
+            // ì‹¤ì œ íˆ¬ì‚¬ì²´ ìƒì„± (Controller.LookDirection = ìºë¦­í„°ê°€ ë°”ë¼ë³´ëŠ” ë°©í–¥)
             CreateProjectile(Controller.LookDirection, angle);
         }
     }
 
     private void CreateProjectile(Vector2 _lookDirection, float angle)
     {
-        // È¸ÀüµÈ ¹æÇâ º¤ÅÍ °è»ê ÈÄ Åõ»çÃ¼ ¹ß»ç ¿äÃ»
+        // íšŒì „ëœ ë°©í–¥ ë²¡í„° ê³„ì‚° í›„ íˆ¬ì‚¬ì²´ ë°œì‚¬ ìš”ì²­
         projectileManager.ShootBullet(
-            this,                                 // ¾î¶² ¹«±â¿¡¼­ ¹ß»çÇß´ÂÁö (RangeWeaponHandler)
-            projectileSpawnPosition.position,     // ÃÑ¾ËÀÌ ³ª¿Ã À§Ä¡
-            RotateVector2(_lookDirection, angle)  // ¹æÇâ º¤ÅÍ È¸Àü (Åº ÆÛÁü, È®»ê µî ±¸Çö¿¡ »ç¿ë)
+            this,                                 // ì–´ë–¤ ë¬´ê¸°ì—ì„œ ë°œì‚¬í–ˆëŠ”ì§€ (RangeWeaponHandler)
+            projectileSpawnPosition.position,     // ì´ì•Œì´ ë‚˜ì˜¬ ìœ„ì¹˜
+            RotateVector2(_lookDirection, angle)  // ë°©í–¥ ë²¡í„° íšŒì „ (íƒ„ í¼ì§, í™•ì‚° ë“± êµ¬í˜„ì— ì‚¬ìš©)
         );
     }
 
-    // ¹æÇâ º¤ÅÍ¸¦ ÁÖ¾îÁø °¢µµ¸¸Å­ È¸Àü
+    // ë°©í–¥ ë²¡í„°ë¥¼ ì£¼ì–´ì§„ ê°ë„ë§Œí¼ íšŒì „
     private static Vector2 RotateVector2(Vector2 v, float degree)
     {
         return Quaternion.Euler(0, 0, degree) * v;
