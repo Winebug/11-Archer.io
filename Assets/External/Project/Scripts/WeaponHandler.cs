@@ -62,12 +62,20 @@ public class WeaponHandler : MonoBehaviour
 
     public void AttackAnimation()
     {
+        if (animator == null)
+        {
+            //애니메이터없을경우 예외처리
+            return;
+        }
         animator.SetTrigger(IsAttack);
     }
 
     public virtual void Rotate(bool isLeft)
     {
-        weaponRenderer.flipY = isLeft;
+        if (weaponRenderer != null)
+        {
+            weaponRenderer.flipY = isLeft;
+        }
     }
 
 

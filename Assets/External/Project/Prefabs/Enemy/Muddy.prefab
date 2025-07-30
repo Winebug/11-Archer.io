@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6609226266096557723}
   - component: {fileID: 5540218901931156638}
   m_Layer: 7
-  m_Name: Ogre
+  m_Name: Muddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
