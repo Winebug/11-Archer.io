@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Player : UnitController
 {
+
     [SerializeField] private LayerMask enemyLayer; // 공격 대상 레이어
     private SkillManager sm;
     protected override void Start()
     {
         base.Start();
-        sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
+       // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
+        ShowSkillSelectorUI();
     }
+
+    [SerializeField] private SkillSelectorUI skillSelectorUI;
 
 
     protected override void Update()
@@ -25,16 +29,6 @@ public class Player : UnitController
             {
                 animationHandler.InvincibilityEnd();
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.J) && sm != null) // J 키 누르면 0 번 스킬 발동
-        {
-            sm.UseSkill(0, this); // 0 번 스킬 발동
-        }
-        
-        if (Input.GetKeyDown(KeyCode.K) && sm != null) // K 키 누르면 1 번 스킬 발동
-        {
-            sm.UseSkill(1, this); // 1 번 스킬 발동
         }
     }
 
@@ -108,5 +102,12 @@ public class Player : UnitController
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    // temp 메서드. 나중에 스킬 습득 조건 발동에 맞춰 변경 예정
+    private void ShowSkillSelectorUI()
+    {
+        skillSelectorUI.Initialize(this);
+        skillSelectorUI.Show();
     }
 }

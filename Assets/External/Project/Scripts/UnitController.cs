@@ -12,7 +12,6 @@ public class UnitController : MonoBehaviour
 
     [SerializeField] protected float healthChangeDelay = .5f; // 피해 후 무적 지속 시간
 
-
     protected Vector2 movementDirection = Vector2.zero; // 현재 이동 방향
     public Vector2 MovementDirection { get { return movementDirection; } }
 
