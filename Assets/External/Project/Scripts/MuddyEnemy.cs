@@ -68,7 +68,7 @@ public class MuddyEnemy : Enemy
     {
         for (int i = 0; i < 10; i++)
         {
-            Vector2 target = (Vector2)playerTemp.position + Random.insideUnitCircle * 3f;
+            Vector2 target = RandomDonutPosition(playerTemp.position, 3f, 5f);
 
             i++;
 
@@ -84,6 +84,15 @@ public class MuddyEnemy : Enemy
         }
 
 
+    }
+
+    Vector2 RandomDonutPosition(Vector2 center, float minRadius, float maxRadius)
+    {
+        float angle = Random.Range(0f, 2f * Mathf.PI);
+        float radius = Random.Range(minRadius, maxRadius); 
+
+        Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+        return center + offset;
     }
 
     void HideAndSeek()
