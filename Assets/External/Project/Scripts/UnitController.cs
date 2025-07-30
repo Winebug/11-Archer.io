@@ -75,7 +75,7 @@ public class UnitController : MonoBehaviour
         HandleAction();
 
         // 자동 공격 확인용
-        if(isAttacking == true)
+        if (isAttacking == true)
         {
             Debug.Log("isAttacking true");
         }
@@ -86,7 +86,7 @@ public class UnitController : MonoBehaviour
         }
         HandleAttackDelay(); // 공격 입력 및 쿨타임 관리
 
-        
+
     }
 
     protected virtual void FixedUpdate()
@@ -233,4 +233,9 @@ public class UnitController : MonoBehaviour
             weaponHandler?.Attack();
     }
 
+    // 공격범위 시각화
+    protected virtual void ShowAttackRange()
+    {
+
+    }
 }
