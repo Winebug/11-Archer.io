@@ -8,16 +8,27 @@ public class Enemy : UnitController
     
     
     //강의에서는 Init로 플레이어 할당해주므로, 아마 수정 예정
-    [SerializeField] protected Transform playerTemp;
+    [SerializeField] Transform playerTemp;
+    [SerializeField] private MonsterStat statData;
+    protected override void Start()
+    {
+        base.Start();
 
-
-    protected override void HandleAction() 
+        if (statData != null) //몬스터 기본스탯등을 불러와서 초기화
+        {
+            Health = statData.health;
+            Speed = statData.moveSpeed;
+            Health = statData.health;
+            weaponHandler = statData.weaponPrefab;
+        }
+    }
+    protected override void HandleAction()
     {
 
         // 타겟(플레이어)가 없으면 움직이지 않음
         if (playerTemp == null)
         {
-            
+
             return;
         }
 
@@ -30,7 +41,7 @@ public class Enemy : UnitController
 
         //플레이어가 사거리에 들어오면, 공격
 
-        if (distance < attakRange)  
+        if (distance < attakRange)
         {
             int layerMaskTarget = weaponHandler.target;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
