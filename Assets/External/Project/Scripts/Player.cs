@@ -1,17 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Player : UnitController
 {
-
     [SerializeField] private LayerMask enemyLayer; // 공격 대상 레이어
+    private WeaponHandler wh;
+    private int critical = 0;
+    public int Critical
+    {
+        get => critical;
+        set => critical = Math.Clamp(value, 0, 100);
+    }
     private SkillManager sm;
     protected override void Start()
     {
         base.Start();
-       // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
+        // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
         ShowSkillSelectorUI();
+        wh = GetComponentInChildren<WeaponHandler>();
     }
 
     [SerializeField] private SkillSelectorUI skillSelectorUI;
@@ -34,21 +43,11 @@ public class Player : UnitController
 
     protected override void HandleAction()
     {
-        // ????? ????? ???? ??? ???? ???? (??/??/??/??)
-        float horizontal = Input.GetAxisRaw("Horizontal"); // A/D ??? ??/??
-        float vertical = Input.GetAxisRaw("Vertical"); // W/S ??? ??/??
+        float horizontal = Input.GetAxisRaw("Horizontal"); 
+        float vertical = Input.GetAxisRaw("Vertical"); 
 
-        // bool hDown = Input.GetButtonDown("Horizontal");
-        // bool vDown = Input.GetButtonDown("Vertical");
-        // bool hUp = Input.GetButtonDown("Horizontal");
-        // bool vUp = Input.GetButtonDown("Vertical");
-
-        // // ???? ???? ????? (?�O???? ?? ??? ????)
         movementDirection = new Vector2(horizontal, vertical).normalized; // 벡터 정규화
 
-        // lookDirection = new Vector2(horizontal, 0);
-
-        // ???? ???? ?? ????
         isAttacking = true; // 상시 공격 상태
 
         if (movementDirection.magnitude > 0.01f) // 이동 중인지 확인
@@ -73,7 +72,7 @@ public class Player : UnitController
     // 가장 가까운 적 탐색
     private Transform FindClosestTarget()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer); // 공격 범위 내에서 적 검출
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, wh.AttackRange, enemyLayer); // 공격 범위 내에서 적 검출
         Transform closest = null;
         float minDistance = Mathf.Infinity;
 
@@ -101,7 +100,7 @@ public class Player : UnitController
     protected override void ShowAttackRange()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, wh.AttackRange);
     }
 
     // temp 메서드. 나중에 스킬 습득 조건 발동에 맞춰 변경 예정
