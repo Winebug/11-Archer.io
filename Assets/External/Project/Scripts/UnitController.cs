@@ -26,6 +26,7 @@ public class UnitController : MonoBehaviour
     protected WeaponHandler weaponHandler; // 장착된 무기
 
     protected bool isAttacking; // 공격 중 여부
+    protected float attackRange; // 공격 범위
     private float timeSinceLastAttack = float.MaxValue; // 마지막 공격 이후 경과 시간
 
     private float timeSinceLastChange = float.MaxValue; // 마지막 체력 변경 이후 경과 시간
@@ -226,6 +227,7 @@ public class UnitController : MonoBehaviour
         if (isAttacking && timeSinceLastAttack > weaponHandler.Delay)
         {
             timeSinceLastAttack = 0;
+            Debug.Log("player is attacking");
             Attack(); // 실제 공격 실행
         }
     }

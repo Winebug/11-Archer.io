@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : UnitController
 {
+    [SerializeField] private LayerMask enemyLayer;
     protected override void Start()
     {
         base.Start();
@@ -15,24 +16,67 @@ public class Player : UnitController
         float horizontal = Input.GetAxisRaw("Horizontal"); // A/D ??? ??/??
         float vertical = Input.GetAxisRaw("Vertical"); // W/S ??? ??/??
 
-        bool hDown = Input.GetButtonDown("Horizontal");
-        bool vDown = Input.GetButtonDown("Vertical");
-        bool hUp = Input.GetButtonDown("Horizontal");
-        bool vUp = Input.GetButtonDown("Vertical");
+        // bool hDown = Input.GetButtonDown("Horizontal");
+        // bool vDown = Input.GetButtonDown("Vertical");
+        // bool hUp = Input.GetButtonDown("Horizontal");
+        // bool vUp = Input.GetButtonDown("Vertical");
 
-        // ???? ???? ????? (?“O???? ?? ??? ????)
+        // // ???? ???? ????? (?ï¿½O???? ?? ??? ????)
         movementDirection = new Vector2(horizontal, vertical).normalized;
 
-        lookDirection = new Vector2(horizontal, 0);
+        // lookDirection = new Vector2(horizontal, 0);
 
         // ???? ???? ?? ????
         isAttacking = true;
 
+        if (movementDirection.magnitude > 0.01f)
+        {
+            lookDirection = movementDirection;
+            isAttacking = false;
+            return;
+        }
+
+        Transform closestTarget = FindClosestTarget();
+
+        if (closestTarget != null)
+        {
+            Vector2 target = (closestTarget.position - this.transform.position).normalized;
+            lookDirection = target;
+            isAttacking = true;
+        }
+
+        else isAttacking = false;
+    }
+
+    private Transform FindClosestTarget()
+    {
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
+        Transform closest = null;
+        float minDistance = Mathf.Infinity;
+
+        foreach (Collider2D target in targets)
+        {
+            float distance = Vector2.Distance(transform.position, target.transform.position);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = target.transform;
+            }
+        }
+
+        return closest;
     }
 
     public override void Death()
     {
         base.Death();
         //gameManager.GameOver(); // ???? ???? ??? 
+    }
+
+    private void ShowAttackRange()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
