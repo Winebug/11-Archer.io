@@ -55,7 +55,7 @@ public class UnitController : MonoBehaviour
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        animationHandler = GetComponent<AnimationHandler>();
+        animationHandler = GetComponentInChildren<AnimationHandler>();
 
         // 프리팹이 지정되어 있다면 생성해서 장착 위치에 부착
         if (WeaponPrefab != null)
