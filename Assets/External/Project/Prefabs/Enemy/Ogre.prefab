@@ -85,7 +85,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 6163549590856308225, guid: ba44010f92180134296d86fec6624a9d, type: 3}
   health: 10
   speed: 3
-  attakRange: 1
+  attakRange: 1.4
   playerTemp: {fileID: 0}
   statData: {fileID: 0}
 --- !u!50 &5540218901931156638
@@ -114,7 +114,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &4501433230511940637
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170,6 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6283307867947164507}
   - component: {fileID: 7841007498852162300}
+  - component: {fileID: 3518539667997869770}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -244,3 +245,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3518539667997869770
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477563625554799130}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce2c1cd79c624f9478aa127e3b4181ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

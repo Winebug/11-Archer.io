@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 7855191588922686538}
   - component: {fileID: 5261663675278192890}
   m_Layer: 0
-  m_Name: E_Mud_falseWeapon
+  m_Name: E_MudCross
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
