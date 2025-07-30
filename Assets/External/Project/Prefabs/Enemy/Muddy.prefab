@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1809867879456132826}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 8310608176138239323}
   - component: {fileID: 6609226266096557723}
   - component: {fileID: 5540218901931156638}
-  m_Layer: 0
-  m_Name: Ogre
+  m_Layer: 7
+  m_Name: Muddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6283307867947164507}
   - component: {fileID: 7841007498852162300}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
