@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Player : UnitController
 {
-
     [SerializeField] private LayerMask enemyLayer; // 공격 대상 레이어
+    [SerializeField] private float attackRange = 10f; // 공격 가능 범위
+
     private SkillManager sm;
     protected override void Start()
     {
@@ -34,16 +35,9 @@ public class Player : UnitController
 
     protected override void HandleAction()
     {
-        // ????? ????? ???? ??? ???? ???? (??/??/??/??)
         float horizontal = Input.GetAxisRaw("Horizontal"); // A/D ??? ??/??
         float vertical = Input.GetAxisRaw("Vertical"); // W/S ??? ??/??
 
-        // bool hDown = Input.GetButtonDown("Horizontal");
-        // bool vDown = Input.GetButtonDown("Vertical");
-        // bool hUp = Input.GetButtonDown("Horizontal");
-        // bool vUp = Input.GetButtonDown("Vertical");
-
-        // // ???? ???? ????? (?�O???? ?? ??? ????)
         movementDirection = new Vector2(horizontal, vertical).normalized; // 벡터 정규화
 
         // lookDirection = new Vector2(horizontal, 0);
@@ -60,8 +54,16 @@ public class Player : UnitController
 
         Transform closestTarget = FindClosestTarget(); // 가장 가까운 적 탐색 메서드의 리턴값을 closestTarget 변수에 저장
 
-        if (closestTarget != null)
+        if(closestTarget == null) // 만약 탐색된 적이 없다면
         {
+            Debug.Log("closestTarget is null");
+            isAttacking = false; // 공격 중지
+            return; // 메서드 종료
+        }
+
+        else if (closestTarget != null)
+        {
+            Debug.Log("closestTarget found");
             Vector2 target = (closestTarget.position - this.transform.position).normalized; // 타겟 벡터값 설정
             lookDirection = target; // 발견된 타겟을 바라보게 설정
             isAttacking = true; // 타겟 공격
@@ -98,16 +100,22 @@ public class Player : UnitController
         //gameManager.GameOver(); // ???? ???? ??? 
     }
 
-    protected override void ShowAttackRange()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
-
     // temp 메서드. 나중에 스킬 습득 조건 발동에 맞춰 변경 예정
     private void ShowSkillSelectorUI()
     {
         skillSelectorUI.Initialize(this);
         skillSelectorUI.Show();
+    }
+
+    // 디버깅용 기즈모는 OnDrawGizmosSelected()에서 호출
+    void OnDrawGizmosSelected() // 이 함수는 Unity가 자동으로 호출
+    {
+        // 오브젝트가 선택되었을 때만 기즈모를 그리도록
+        // attackRange가 0보다 큰지 확인하는 것이 좋습니다.
+        if (attackRange > 0f)
+        {
+            Gizmos.color = Color.red; // 기즈모 색상 설정
+            Gizmos.DrawWireSphere(transform.position, attackRange); // attackRange 원 그리기
+        }
     }
 }
