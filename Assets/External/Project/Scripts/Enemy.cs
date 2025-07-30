@@ -66,7 +66,7 @@ public class Enemy : UnitController
         return Vector3.Distance(this.transform.position, playerTemp.position);
     }
 
-    Vector2 FaceDirection()
+    protected Vector2 FaceDirection()
     {
         return (playerTemp.position - this.transform.position).normalized;
     }

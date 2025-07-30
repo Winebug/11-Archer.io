@@ -26,8 +26,6 @@ public class MuddyEnemy : Enemy
 
     protected override void Update()
     {
-
-
         if (playerTemp == null)
         {
             active = false;
@@ -54,8 +52,9 @@ public class MuddyEnemy : Enemy
             yield return new WaitForSeconds(2f);
             isAttacking = true;
 
-            //3초 후 공격
+            //3초 후 숨기
             yield return new WaitForSeconds(3f);
+            isAttacking = false;
             HideAndSeek();
 
             yield return new WaitForSeconds(3f);
@@ -66,6 +65,9 @@ public class MuddyEnemy : Enemy
 
     void Teleport()
     {
+        if (playerTemp == null)
+            return;
+        
         for (int i = 0; i < 10; i++)
         {
             Vector2 target = RandomDonutPosition(playerTemp.position, 3f, 5f);
