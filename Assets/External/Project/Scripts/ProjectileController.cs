@@ -2,26 +2,26 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    [SerializeField] private LayerMask levelCollisionLayer; // ÁöÇü(º® µî) Ãæµ¹ ÆÇÁ¤¿ë ·¹ÀÌ¾î
+    [SerializeField] private LayerMask levelCollisionLayer; // ì§€í˜•(ë²½ ë“±) ì¶©ëŒ íŒì •ìš© ë ˆì´ì–´
 
-    private RangeWeaponHandler rangeWeaponHandler; // ¹ß»ç¿¡ »ç¿ëµÈ ¹«±â Á¤º¸ ÂüÁ¶
+    private RangeWeaponHandler rangeWeaponHandler; // ë°œì‚¬ì— ì‚¬ìš©ëœ ë¬´ê¸° ì •ë³´ ì°¸ì¡°
 
-    private float currentDuration; // ÇöÀç±îÁö »ì¾ÆÀÖ´Â ½Ã°£
-    private Vector2 direction; // ¹ß»ç ¹æÇâ
-    private bool isReady; // ¹ß»ç ÁØºñ ¿Ï·á ¿©ºÎ
-    private Transform pivot; // ÃÑ¾ËÀÇ ½Ã°¢ È¸ÀüÀ» À§ÇÑ ÇÇ¹ş
+    private float currentDuration; // í˜„ì¬ê¹Œì§€ ì‚´ì•„ìˆëŠ” ì‹œê°„
+    private Vector2 direction; // ë°œì‚¬ ë°©í–¥
+    private bool isReady; // ë°œì‚¬ ì¤€ë¹„ ì™„ë£Œ ì—¬ë¶€
+    private Transform pivot; // ì´ì•Œì˜ ì‹œê° íšŒì „ì„ ìœ„í•œ í”¼ë²—
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer spriteRenderer;
 
-    public bool fxOnDestory = true; // Ãæµ¹ ½Ã ÀÌÆåÆ®¸¦ »ı¼ºÇÒÁö ¿©ºÎ
+    public bool fxOnDestory = true; // ì¶©ëŒ ì‹œ ì´í™íŠ¸ë¥¼ ìƒì„±í• ì§€ ì—¬ë¶€
 
-    // ÃÊ±â ÄÄÆ÷³ÍÆ® ÂüÁ¶ ¼³Á¤
+    // ì´ˆê¸° ì»´í¬ë„ŒíŠ¸ ì°¸ì¡° ì„¤ì •
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
-        pivot = transform.GetChild(0); // ÇÇ¹ş ¿ÀºêÁ§Æ® (½ºÇÁ¶óÀÌÆ® È¸Àü¿ë)
+        pivot = transform.GetChild(0); // í”¼ë²— ì˜¤ë¸Œì íŠ¸ (ìŠ¤í”„ë¼ì´íŠ¸ íšŒì „ìš©)
     }
 
     private void Update()
@@ -31,16 +31,16 @@ public class ProjectileController : MonoBehaviour
             return;
         }
 
-        // »ıÁ¸ ½Ã°£ ´©Àû
+        // ìƒì¡´ ì‹œê°„ ëˆ„ì 
         currentDuration += Time.deltaTime;
 
-        // ¼³Á¤µÈ Áö¼Ó ½Ã°£ ÃÊ°ú ½Ã ÀÚµ¿ ÆÄ±«
+        // ì„¤ì •ëœ ì§€ì† ì‹œê°„ ì´ˆê³¼ ì‹œ ìë™ íŒŒê´´
         if (currentDuration > rangeWeaponHandler.Duration)
         {
             DestroyProjectile(transform.position, false);
         }
 
-        // ¹°¸® ÀÌµ¿ Ã³¸® (¹æÇâ * ¼Óµµ)
+        // ë¬¼ë¦¬ ì´ë™ ì²˜ë¦¬ (ë°©í–¥ * ì†ë„)
         _rigidbody.velocity = direction * rangeWeaponHandler.Speed;
     }
 
@@ -52,14 +52,14 @@ public class ProjectileController : MonoBehaviour
         }
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
-            // µ¥¹ÌÁö Àû¿ëÀ» À§ÇØ Ã¼·Â ½Ã½ºÅÛÀÌ ÀÖ´ÂÁö È®ÀÎ
+            // ë°ë¯¸ì§€ ì ìš©ì„ ìœ„í•´ ì²´ë ¥ ì‹œìŠ¤í…œì´ ìˆëŠ”ì§€ í™•ì¸
             UnitController resourceController = collision.GetComponent<UnitController>();
             if (resourceController != null)
             {
-                // µ¥¹ÌÁö Àû¿ë
+                // ë°ë¯¸ì§€ ì ìš©
                 resourceController.ChangeHealth(-rangeWeaponHandler.Power);
 
-                // ³Ë¹é ¼³Á¤ÀÌ µÇ¾î ÀÖ´Ù¸é ³Ë¹éµµ Àû¿ë
+                // ë„‰ë°± ì„¤ì •ì´ ë˜ì–´ ìˆë‹¤ë©´ ë„‰ë°±ë„ ì ìš©
                 if (rangeWeaponHandler.IsOnKnockback)
                 {
                     UnitController controller = collision.GetComponent<UnitController>();
@@ -82,14 +82,14 @@ public class ProjectileController : MonoBehaviour
         this.direction = direction;
         currentDuration = 0;
 
-        // Å©±â ¹× »ö»ó Àû¿ë
+        // í¬ê¸° ë° ìƒ‰ìƒ ì ìš©
         transform.localScale = Vector3.one * weaponHandler.BulletSize;
         spriteRenderer.color = weaponHandler.ProjectileColor;
 
-        // È¸Àü ¹æÇâ ¼³Á¤ (Á¤¸é ¹æÇâ ÁöÁ¤)
+        // íšŒì „ ë°©í–¥ ì„¤ì • (ì •ë©´ ë°©í–¥ ì§€ì •)
         transform.right = this.direction;
 
-        // X ¹æÇâ¿¡ µû¶ó ½ºÇÁ¶óÀÌÆ® À§¾Æ·¡ ¹İÀü (ÁÂ¿ì ¹ß»ç ½Ã)
+        // X ë°©í–¥ì— ë”°ë¼ ìŠ¤í”„ë¼ì´íŠ¸ ìœ„ì•„ë˜ ë°˜ì „ (ì¢Œìš° ë°œì‚¬ ì‹œ)
         if (this.direction.x < 0)
             pivot.localRotation = Quaternion.Euler(180, 0, 0);
         else
@@ -98,7 +98,7 @@ public class ProjectileController : MonoBehaviour
         isReady = true;
     }
 
-    // Åõ»çÃ¼ ÆÄ±« ÇÔ¼ö
+    // íˆ¬ì‚¬ì²´ íŒŒê´´ í•¨ìˆ˜
     private void DestroyProjectile(Vector3 position, bool createFx)
     {
         Destroy(this.gameObject);

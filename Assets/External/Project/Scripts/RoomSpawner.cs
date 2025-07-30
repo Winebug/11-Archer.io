@@ -14,21 +14,21 @@ public class RoomSpawner : MonoBehaviour
 
     public void SpawnRandomContent()
     {
-        // Àå¾Ö¹° ·£´ı »ı¼º
+        // ì¥ì• ë¬¼ ëœë¤ ìƒì„±
         foreach (var point in obstacleSpawnPoints)
         {
             GameObject prefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
             Instantiate(prefab, point.position, Quaternion.identity, transform);
         }
 
-        // Àû ·£´ı »ı¼º
+        // ì  ëœë¤ ìƒì„±
         foreach (var point in enemySpawnPoints)
         {
             GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
             Instantiate(prefab, point.position, Quaternion.identity, transform);
         }
 
-        // ¾ÆÀÌÅÛ ·£´ı »ı¼º
+        // ì•„ì´í…œ ëœë¤ ìƒì„±
         foreach (var point in itemSpawnPoints)
         {
             GameObject prefab = itemPrefabs[Random.Range(0, itemPrefabs.Length)];
