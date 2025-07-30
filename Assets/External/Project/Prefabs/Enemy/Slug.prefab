@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4201259677155658677}
   - component: {fileID: 7608293440243529249}
   - component: {fileID: 1784646256527843934}
+  - component: {fileID: 4004765489756480951}
   m_Layer: 0
   m_Name: Slug
   m_TagString: Untagged
@@ -135,6 +136,51 @@ MonoBehaviour:
   statData: {fileID: 11400000, guid: 6fa7563ebc1c8bb44b0a258bff13e6c0, type: 2}
   bulletShooter: {fileID: 7608293440243529249}
   fireCooldown: 2
+--- !u!61 &4004765489756480951
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3302388366905966433}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0322026, y: -0.16745347}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9355948, y: 1.1545724}
+  m_EdgeRadius: 0
 --- !u!1 &4178783994475545694
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +223,7 @@ GameObject:
   - component: {fileID: 490262528362975737}
   - component: {fileID: 182400856008622147}
   - component: {fileID: 6747343799337578107}
+  - component: {fileID: 9009546663569789289}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -272,6 +319,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9009546663569789289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857436798214825018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07be3c65ee309545b06ee90895d3e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6103330231159878462
 GameObject:
   m_ObjectHideFlags: 0
