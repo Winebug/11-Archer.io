@@ -39,6 +39,8 @@ public class RangeWeaponHandler : WeaponHandler
     {
         base.Attack();
 
+        
+
         float projectilesAngleSpace = multipleProjectilesAngel; // 총알 간 각도 간격
         int numberOfProjectilesPerShot = numberofProjectilesPerShot + projectileCount; // 발사할 총알 수
 
@@ -49,6 +51,8 @@ public class RangeWeaponHandler : WeaponHandler
         // 각 총알마다 회전 각도 계산 후 발사
         for (int i = 0; i < numberOfProjectilesPerShot; i++)
         {
+            Debug.Log("CreateProjectile");
+
             float angle = minAngle + projectilesAngleSpace * i; // 기본 각도
             float randomSpread = Random.Range(-spread, spread); // 랜덤 퍼짐 적용
             angle += randomSpread;
