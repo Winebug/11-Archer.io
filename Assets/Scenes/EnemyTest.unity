@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 453226534}
   m_Layer: 6
   m_Name: DummyPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +238,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -293,6 +293,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Muddy
       objectReference: {fileID: 0}
+    - target: {fileID: 2803047456324451828, guid: 5047471bf28a9b64998ca6268608a790, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6609226266096557723, guid: 5047471bf28a9b64998ca6268608a790, type: 3}
+      propertyPath: playerTemp
+      value: 
+      objectReference: {fileID: 453226533}
     - target: {fileID: 7841007498852162300, guid: 5047471bf28a9b64998ca6268608a790, type: 3}
       propertyPath: m_Sprite
       value: 
