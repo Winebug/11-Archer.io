@@ -13,7 +13,14 @@ public class AnimationHandler : MonoBehaviour
     protected virtual void Awake()
     {
         // 애니메이터 컴포넌트를 자식에서 가져옴
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
+    
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>(); // 자식까지 검색
+        
+        if (animator == null)
+            Debug.LogWarning("Animator not found on " + gameObject.name);
     }
 
     public void Move(Vector2 obj)

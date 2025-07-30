@@ -54,7 +54,7 @@ public class UnitController : MonoBehaviour
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        animationHandler = GetComponent<AnimationHandler>();
+        animationHandler = GetComponentInChildren<AnimationHandler>();
 
         // 프리팹이 지정되어 있다면 생성해서 장착 위치에 부착
         if (WeaponPrefab != null)
@@ -169,8 +169,11 @@ public class UnitController : MonoBehaviour
         // 데미지일 경우 (음수)
         if (change < 0)
         {
-            animationHandler.Damage(); // 맞는 애니메이션 실행
-
+            if (animationHandler != null)
+                animationHandler.Damage(); // 맞는 애니메이션 실행
+            
+            else
+                Debug.LogWarning("animationHandler is null. Damage animation skipped.");
         }
 
         // 체력이 0 이하가 되면 사망 처리
