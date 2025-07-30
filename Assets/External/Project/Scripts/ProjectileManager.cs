@@ -5,7 +5,7 @@ public class ProjectileManager : MonoBehaviour
     private static ProjectileManager instance;
     public static ProjectileManager Instance { get { return instance; } }
 
-    // ¹ß»çÇÒ Åõ»çÃ¼ ÇÁ¸®ÆÕ ¹è¿­ (ÃÑ¾Ë Á¾·ùº°)
+    // ë°œì‚¬í•  íˆ¬ì‚¬ì²´ í”„ë¦¬íŒ¹ ë°°ì—´ (ì´ì•Œ ì¢…ë¥˜ë³„)
     [SerializeField] private GameObject[] projectilePrefabs;
 
     private void Awake()
@@ -15,13 +15,13 @@ public class ProjectileManager : MonoBehaviour
 
     public void ShootBullet(RangeWeaponHandler rangeWeaponHandler, Vector2 startPostiion, Vector2 direction)
     {
-        // ÇØ´ç ¹«±â¿¡¼­ »ç¿ëÇÒ Åõ»çÃ¼ ÇÁ¸®ÆÕ °¡Á®¿À±â
+        // í•´ë‹¹ ë¬´ê¸°ì—ì„œ ì‚¬ìš©í•  íˆ¬ì‚¬ì²´ í”„ë¦¬íŒ¹ ê°€ì ¸ì˜¤ê¸°
         GameObject origin = projectilePrefabs[rangeWeaponHandler.BulletIndex];
 
-        // ÁöÁ¤µÈ À§Ä¡¿¡ Åõ»çÃ¼ »ı¼º
+        // ì§€ì •ëœ ìœ„ì¹˜ì— íˆ¬ì‚¬ì²´ ìƒì„±
         GameObject obj = Instantiate(origin, startPostiion, Quaternion.identity);
 
-        // Åõ»çÃ¼¿¡ ÃÊ±â Á¤º¸ Àü´Ş (¹æÇâ, ¹«±â µ¥ÀÌÅÍ)
+        // íˆ¬ì‚¬ì²´ì— ì´ˆê¸° ì •ë³´ ì „ë‹¬ (ë°©í–¥, ë¬´ê¸° ë°ì´í„°)
         ProjectileController projectileController = obj.GetComponent<ProjectileController>();
         projectileController.Init(direction, rangeWeaponHandler);
     }

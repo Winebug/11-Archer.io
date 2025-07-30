@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public class RoomManager : MonoBehaviour
 {
-    [Header("¹æ »ı¼º ¼³Á¤")]
-    public GameObject roomPrefab;        // Level ÇÁ¸®ÆÕ
-    public Vector3 nextRoomOffset = new Vector3(0, 20, 0); // ¹æ °£ °Å¸® (YÃàÀ¸·Î 20¾¿ À§·Î)
+    [Header("ë°© ìƒì„± ì„¤ì •")]
+    public GameObject roomPrefab;        // Level í”„ë¦¬íŒ¹
+    public Vector3 nextRoomOffset = new Vector3(0, 20, 0); // ë°© ê°„ ê±°ë¦¬ (Yì¶•ìœ¼ë¡œ 20ì”© ìœ„ë¡œ)
 
-    [Header("ÃÊ±â ¼³Á¤")]
-    public float spawnInterval = 10f;    // ¹æ »ı¼º ÁÖ±â (ÃÊ)
-    public int maxRooms = 10;            // ÃÖ´ë ¹æ °³¼ö
+    [Header("ì´ˆê¸° ì„¤ì •")]
+    public float spawnInterval = 10f;    // ë°© ìƒì„± ì£¼ê¸° (ì´ˆ)
+    public int maxRooms = 10;            // ìµœëŒ€ ë°© ê°œìˆ˜
 
     private Vector3 nextSpawnPos = Vector3.zero;
     private List<GameObject> rooms = new List<GameObject>();
@@ -21,7 +21,7 @@ public class RoomManager : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        // 10ÃÊ¸¶´Ù ¹æ »ı¼º
+        // 10ì´ˆë§ˆë‹¤ ë°© ìƒì„±
         if (timer >= spawnInterval && roomCount < maxRooms)
         {
             SpawnRoom();
@@ -31,10 +31,10 @@ public class RoomManager : MonoBehaviour
 
     void SpawnRoom()
     {
-        // »õ·Î¿î ¹æ »ı¼º
+        // ìƒˆë¡œìš´ ë°© ìƒì„±
         GameObject newRoom = Instantiate(roomPrefab, nextSpawnPos, Quaternion.identity);
 
-        // RoomSpawner ½ÇÇà
+        // RoomSpawner ì‹¤í–‰
         RoomSpawner spawner = newRoom.GetComponent<RoomSpawner>();
         if (spawner != null)
         {
@@ -44,9 +44,9 @@ public class RoomManager : MonoBehaviour
         rooms.Add(newRoom);
         roomCount++;
 
-        // ´ÙÀ½ ¹æ À§Ä¡ ¾÷µ¥ÀÌÆ®
+        // ë‹¤ìŒ ë°© ìœ„ì¹˜ ì—…ë°ì´íŠ¸
         nextSpawnPos += nextRoomOffset;
 
-        Debug.Log($"¹æ {roomCount} »ı¼º ¿Ï·á! À§Ä¡: {nextSpawnPos}");
+        Debug.Log($"ë°© {roomCount} ìƒì„± ì™„ë£Œ! ìœ„ì¹˜: {nextSpawnPos}");
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationHandler : MonoBehaviour
 {
-    // Animator ÆÄ¶ó¹ÌÅÍ ÀÌ¸§À» ¹Ì¸® ÇØ½Ã·Î º¯È¯ÇØ Ä³½Ì (¼º´É ÃÖÀûÈ­)
+    // Animator íŒŒë¼ë¯¸í„° ì´ë¦„ì„ ë¯¸ë¦¬ í•´ì‹œë¡œ ë³€í™˜í•´ ìºì‹± (ì„±ëŠ¥ ìµœì í™”)
     private static readonly int IsMoving = Animator.StringToHash("IsMove");
     private static readonly int IsDamage = Animator.StringToHash("IsDamage");
 
@@ -12,25 +12,25 @@ public class AnimationHandler : MonoBehaviour
 
     protected virtual void Awake()
     {
-        // ¾Ö´Ï¸ŞÀÌÅÍ ÄÄÆ÷³ÍÆ®¸¦ ÀÚ½Ä¿¡¼­ °¡Á®¿È
+        // ì• ë‹ˆë©”ì´í„° ì»´í¬ë„ŒíŠ¸ë¥¼ ìì‹ì—ì„œ ê°€ì ¸ì˜´
         animator = GetComponentInChildren<Animator>();
     }
 
     public void Move(Vector2 obj)
     {
-        // ÀÌµ¿ ¹æÇâ º¤ÅÍÀÇ Å©±â¸¦ ÀÌ¿ëÇØ ¿òÁ÷ÀÌ´Â ÁßÀÎÁö ÆÇ´Ü
+        // ì´ë™ ë°©í–¥ ë²¡í„°ì˜ í¬ê¸°ë¥¼ ì´ìš©í•´ ì›€ì§ì´ëŠ” ì¤‘ì¸ì§€ íŒë‹¨
         animator.SetBool(IsMoving, obj.magnitude > .5f);
     }
 
     public void Damage()
     {
-        // ÇÇ°İ ¾Ö´Ï¸ŞÀÌ¼Ç »óÅÂ ÁøÀÔ
+        // í”¼ê²© ì• ë‹ˆë©”ì´ì…˜ ìƒíƒœ ì§„ì…
         animator.SetBool(IsDamage, true);
     }
 
     public void InvincibilityEnd()
     {
-        // ¹«Àû ½Ã°£ Á¾·á ½Ã È£Ãâ
+        // ë¬´ì  ì‹œê°„ ì¢…ë£Œ ì‹œ í˜¸ì¶œ
         animator.SetBool(IsDamage, false);
     }
 }
