@@ -4,6 +4,7 @@ public class WeaponHandler : MonoBehaviour
 {
     [Header("Attack Info")]
     [SerializeField] private float delay = 1f; // 공격 간 딜레이
+    public int projectileCount; // 몇개의 발사체가 생성되는지 카운트
     public float Delay { get => delay; set => delay = value; }
 
     [SerializeField] private float weaponSize = 1f; // 무기 크기
@@ -78,5 +79,8 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-
+    public void AddProjectiles()
+    {
+        projectileCount++;
+    }
 }

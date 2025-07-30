@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Player : UnitController
 {
     [SerializeField] private LayerMask enemyLayer; // 공격 대상 레이어
-    [SerializeField] private float showattackRange = 10f; // 공격 가능 범위
-
+    private WeaponHandler wh;
+    private int critical = 0;
+    public int Critical
+    {
+        get => critical;
+        set => critical = Math.Clamp(value, 0, 100);
+    }
     private SkillManager sm;
     protected override void Start()
     {
         base.Start();
-       // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
+        // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
         ShowSkillSelectorUI();
+        wh = GetComponentInChildren<WeaponHandler>();
     }
 
     [SerializeField] private SkillSelectorUI skillSelectorUI;
@@ -35,14 +43,11 @@ public class Player : UnitController
 
     protected override void HandleAction()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal"); // A/D ??? ??/??
-        float vertical = Input.GetAxisRaw("Vertical"); // W/S ??? ??/??
+        float horizontal = Input.GetAxisRaw("Horizontal"); 
+        float vertical = Input.GetAxisRaw("Vertical"); 
 
         movementDirection = new Vector2(horizontal, vertical).normalized; // 벡터 정규화
 
-        // lookDirection = new Vector2(horizontal, 0);
-
-        // ???? ???? ?? ????
         isAttacking = true; // 상시 공격 상태
 
         if (movementDirection.magnitude > 0.01f) // 이동 중인지 확인
@@ -73,7 +78,7 @@ public class Player : UnitController
     // 가장 가까운 적 탐색
     private Transform FindClosestTarget()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, showattackRange, enemyLayer); // 공격 범위 내에서 적 검출
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, wh.AttackRange, enemyLayer); // 공격 범위 내에서 적 검출
         Transform closest = null;
         float minDistance = Mathf.Infinity;
 
@@ -98,6 +103,12 @@ public class Player : UnitController
         //gameManager.GameOver(); // ???? ???? ??? 
     }
 
+    protected override void ShowAttackRange()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, wh.AttackRange);
+    }
+
     // temp 메서드. 나중에 스킬 습득 조건 발동에 맞춰 변경 예정
     private void ShowSkillSelectorUI()
     {
@@ -106,14 +117,14 @@ public class Player : UnitController
     }
 
     // 디버깅용 기즈모는 OnDrawGizmosSelected()에서 호출
-    void OnDrawGizmosSelected() // 이 함수는 Unity가 자동으로 호출
-    {
-        // 오브젝트가 선택되었을 때만 기즈모를 그리도록
-        // attackRange가 0보다 큰지 확인하는 것이 좋습니다.
-        if (showattackRange > 0f)
-        {
-            Gizmos.color = Color.red; // 기즈모 색상 설정
-            Gizmos.DrawWireSphere(transform.position, showattackRange); // attackRange 원 그리기
-        }
-    }
+    // void OnDrawGizmosSelected() // 이 함수는 Unity가 자동으로 호출
+    // {
+    //     // 오브젝트가 선택되었을 때만 기즈모를 그리도록
+    //     // attackRange가 0보다 큰지 확인하는 것이 좋습니다.
+    //     if (showattackRange > 0f)
+    //     {
+    //         Gizmos.color = Color.red; // 기즈모 색상 설정
+    //         Gizmos.DrawWireSphere(transform.position, showattackRange); // attackRange 원 그리기
+    //     }
+    // }
 }
