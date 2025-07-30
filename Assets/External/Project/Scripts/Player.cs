@@ -56,14 +56,12 @@ public class Player : UnitController
 
         if(closestTarget == null) // 만약 탐색된 적이 없다면
         {
-            Debug.Log("closestTarget is null");
             isAttacking = false; // 공격 중지
             return; // 메서드 종료
         }
 
         else if (closestTarget != null)
         {
-            Debug.Log("closestTarget found");
             Vector2 target = (closestTarget.position - this.transform.position).normalized; // 타겟 벡터값 설정
             lookDirection = target; // 발견된 타겟을 바라보게 설정
             isAttacking = true; // 타겟 공격

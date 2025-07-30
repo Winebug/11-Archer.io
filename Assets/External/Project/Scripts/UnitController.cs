@@ -73,19 +73,21 @@ public class UnitController : MonoBehaviour
     {
         HandleAction();
 
-        // 자동 공격 확인용
-        if (isAttacking == true)
-        {
-            Debug.Log("isAttacking true");
-        }
-
         if (movementDirection.magnitude > 0)
         {
             Rotate(lookDirection);
         }
         HandleAttackDelay(); // 공격 입력 및 쿨타임 관리
 
-
+        // 무적 상태 시간 관리
+        if (timeSinceLastChange < healthChangeDelay)
+        {
+            timeSinceLastChange += Time.deltaTime;
+            if (timeSinceLastChange >= healthChangeDelay)
+            {
+                animationHandler.InvincibilityEnd();
+            }
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -154,9 +156,13 @@ public class UnitController : MonoBehaviour
     // 체력 변경 함수 (피해 or 회복)
     public bool ChangeHealth(float change)
     {
+        Debug.Log($"ChangeHealth: {change}");
+
         // 변화 없거나 무적 상태면 무시
         if (change == 0 || timeSinceLastChange < healthChangeDelay)
         {
+            Debug.Log($"timeSinceLastChange : {timeSinceLastChange}");
+            Debug.Log("ChangeHealth: 무적 상태이거나 변화 없음");
             return false;
         }
 
@@ -167,12 +173,14 @@ public class UnitController : MonoBehaviour
         CurrentHealth = CurrentHealth > Health ? Health : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
-        // 데미지일 경우 (음수)
-        if (change < 0)
-        {
-            animationHandler.Damage(); // 맞는 애니메이션 실행
+        Debug.Log($"CurrentHealth : {CurrentHealth}");
 
-        }
+        // 데미지일 경우 (음수)
+        //if (change < 0)
+        //{
+        //    animationHandler.Damage(); // 맞는 애니메이션 실행
+
+        //}
 
         // 체력이 0 이하가 되면 사망 처리
         if (CurrentHealth <= 0f)
@@ -230,11 +238,5 @@ public class UnitController : MonoBehaviour
         // 바라보는 방향이 있을 때만 공격
         if (lookDirection != Vector2.zero)
             weaponHandler?.Attack();
-    }
-
-    // 공격범위 시각화
-    protected virtual void ShowAttackRange()
-    {
-
     }
 }
