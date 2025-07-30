@@ -4,26 +4,25 @@ using UnityEngine;
 
 public class MeleeWeaponHandler : WeaponHandler
 {
-    [Header("Melee Attack Info")]
-    public Vector2 collideBoxSize = Vector2.one;
+    Collider2D weaponCollider;
+    List<Collider2D> alredyHitTargets;
+
 
     protected override void Start()
     {
         base.Start();
-        collideBoxSize = collideBoxSize * WeaponSize;
+        weaponCollider = GetComponentInChildren<Collider2D>();
+        if (weaponCollider != null)
+        {
+            weaponCollider.enabled = false;
+        }
+
+        alredyHitTargets = new List<Collider2D>();
     }
 
     public override void Attack()
     {
         base.Attack();
-
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position + (Vector3)Controller.LookDirection * collideBoxSize.x, collideBoxSize, 0, Vector2.zero, 0, target);
-
-        if (hit.collider != null)
-        {
-            //충돌 대상의 체력을 깎을 수 있다면, 깎기
-            
-        }
     }
 
     public override void Rotate(bool isLeft)
@@ -32,5 +31,32 @@ public class MeleeWeaponHandler : WeaponHandler
             transform.eulerAngles = new Vector3(0, 180, 0);
         else
             transform.eulerAngles = new Vector3(0, 0, 0);
+    }
+
+    
+    //애니메이션에서 공격판정 시작 부분에 이 함수를 호출
+    public void TurnOnCollider()
+    {
+        alredyHitTargets.Clear();
+        weaponCollider.enabled = true;
+    }
+
+    public void meleeProcess(Collider2D meleeHitTarget)
+    {
+        if (((1 << meleeHitTarget.gameObject.layer) & target) != 0 && !alredyHitTargets.Contains(meleeHitTarget))
+        {
+            Debug.Log("공격 성공");
+
+
+            // 데미지 계산
+
+            alredyHitTargets.Add(meleeHitTarget);
+        }
+    }
+
+    //애니메이션에서 공격판정 끝나는 부분에 이 함수를 호출
+    public void TurnOffCollider()
+    {
+        weaponCollider.enabled = false;
     }
 }
