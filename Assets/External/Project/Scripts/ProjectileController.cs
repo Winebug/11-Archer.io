@@ -38,7 +38,6 @@ public class ProjectileController : MonoBehaviour
 
         // 생존 시간 누적
         currentDuration += Time.deltaTime;
-        Debug.Log($"[Projectile] {gameObject.name}: duration={rangeWeaponHandler?.Duration}, current={currentDuration}");
 
         // 설정된 지속 시간 초과 시 자동 파괴
         if (currentDuration > rangeWeaponHandler.Duration)
@@ -52,7 +51,6 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"[Ricochet] 충돌 직전 bounceCount = {bounceCount}, max = {maxBounces}");
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
             if (rangeWeaponHandler.shooter != null &&
@@ -60,29 +58,27 @@ public class ProjectileController : MonoBehaviour
                 player.HasWallReflection &&
                 wallBounceCount < 1)
             {
-                ContactPoint2D[] contacts = new ContactPoint2D[1];
-                int contactCount = _rigidbody.GetContacts(contacts);
-
-                if (contactCount > 0)
-                {
-                    Vector2 normal = contacts[0].normal;
-                    Vector2 incoming = _rigidbody.velocity.normalized;
-                    direction = Vector2.Reflect(incoming, normal).normalized;
-
-                    wallBounceCount++;
-                    damageValue *= player.WallReflectionDamageMultiplier;
-                    transform.right = direction;
-                    transform.position += (Vector3)direction * 0.1f;
-
-                    if (direction.x < 0)
-                        pivot.localRotation = Quaternion.Euler(180, 0, 0);
-                    else
-                        pivot.localRotation = Quaternion.Euler(0, 0, 0);
-
-                    return; // 반사 후 종료
-                }
+                Vector2 collisionPoint = collision.ClosestPoint(transform.position);
+                Vector2 incoming = -direction; // 입사 방향 (반대 방향으로 계산)
+                
+                // 법선(normal) 계산: 충돌 지점에서 벽의 법선 근사 (Collider에서 정확한 normal을 얻기 위해 Contact 사용 추천, 하지만 간단히)
+                Vector2 normal = ((Vector2)transform.position - collisionPoint).normalized; // 근사 normal
+                
+                direction = Vector2.Reflect(incoming, normal).normalized; // 반사 방향 계산
+                wallBounceCount++; // 튕김 횟수 증가
+                damageValue *= player.WallReflectionDamageMultiplier; // 데미지 감소 적용
+                
+                // 위치 약간 조정하여 즉시 재충돌 방지
+                transform.position += (Vector3)(direction * 0.1f);
+                
+                // 피벗 회전 업데이트 (Init처럼)
+                transform.right = direction;
+                if (direction.x < 0)
+                    pivot.localRotation = Quaternion.Euler(180, 0, 0);
+                else
+                    pivot.localRotation = Quaternion.Euler(0, 0, 0);
             }
-
+            
             else
                 DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
         }
@@ -101,7 +97,7 @@ public class ProjectileController : MonoBehaviour
                     // 멀티샷 데미지 감소
                     if (player.MultiShotCount > 0)
                         finalDamage *= player.MultiShotDamageMultiplier;
-
+                        
                     // Rage 스킬 적용
                     if (player.IsRage)
                     {
@@ -167,42 +163,22 @@ public class ProjectileController : MonoBehaviour
 
                     if (nextTarget != null)
                     {
-                        Debug.Log($"[Ricochet] 반동 대상 발견: {nextTarget.name} / bounceCount = {bounceCount + 1}");
                         Vector2 newDirection = (nextTarget.position - transform.position).normalized;
-                        // GameObject ricochet = Instantiate(gameObject, transform.position, Quaternion.identity);
-                        // var ricochetController = ricochet.GetComponent<ProjectileController>();
-                        // ricochetController.bounceCount = this.bounceCount + 1;
-                        // ricochetController.damageValue = this.damageValue * ricochetPlayer.RicochetDamageMultiplier;
-                        // ricochetController.Init(newDirection, rangeWeaponHandler);
+                        GameObject ricochet = Instantiate(gameObject, transform.position, Quaternion.identity);
+                        var ricochetController = ricochet.GetComponent<ProjectileController>();
+                        ricochetController.bounceCount = this.bounceCount + 1;
+                        ricochetController.damageValue = this.damageValue * ricochetPlayer.RicochetDamageMultiplier;
+                        ricochetController.Init(newDirection, rangeWeaponHandler);
 
-                        ProjectileManager.Instance.ShootBullet(
-                            rangeWeaponHandler,
-                            transform.position,
-                            newDirection,
-                            bounceCount + 1,
-                            damageValue * ricochetPlayer.RicochetDamageMultiplier
-                        );
-                        Destroy(this.gameObject);
+                        Destroy(gameObject);
                         return;
                     }
-                    else
-                        Debug.Log($"[Ricochet] 반동 대상 없음 / bounceCount = {bounceCount}");
                 }
             }
 
             DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestory);
         }
     }
-
-    public void SetRicochetData(int count, float? overrideDamage)
-    {
-        this.bounceCount = count;
-
-        if (overrideDamage != null)
-            this.damageValue = overrideDamage.Value;
-         Debug.Log($"[Ricochet] Set: bounceCount = {bounceCount}, damage = {damageValue}");
-    }
-
 
     private Transform FindNextTarget(Transform excludeTarget)
     {
@@ -229,9 +205,6 @@ public class ProjectileController : MonoBehaviour
 
     public void Init(Vector2 direction, RangeWeaponHandler weaponHandler)
     {
-        if (weaponHandler == null) 
-            Debug.LogError("[ProjectileController] weaponHandler is null in Init()");
-
         rangeWeaponHandler = weaponHandler;
 
         this.direction = direction;

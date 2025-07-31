@@ -13,7 +13,7 @@ public class ProjectileManager : MonoBehaviour
         instance = this;
     }
 
-    public void ShootBullet(RangeWeaponHandler rangeWeaponHandler, Vector2 startPostiion, Vector2 direction, int bouncecount = 0, float? overrideDamage = null)
+    public void ShootBullet(RangeWeaponHandler rangeWeaponHandler, Vector2 startPostiion, Vector2 direction)
     {
         // 해당 무기에서 사용할 투사체 프리팹 가져오기
         GameObject origin = projectilePrefabs[rangeWeaponHandler.BulletIndex];
@@ -26,7 +26,6 @@ public class ProjectileManager : MonoBehaviour
         // 투사체에 초기 정보 전달 (방향, 무기 데이터)
         ProjectileController projectileController = obj.GetComponent<ProjectileController>();
         projectileController.Init(direction, rangeWeaponHandler);
-        projectileController.SetRicochetData(bouncecount, overrideDamage);
     }
 
 }
