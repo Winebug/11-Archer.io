@@ -19,7 +19,7 @@ public class MuddyEnemy : Enemy
     protected override void Start()
     {
         base.Start();
-
+        lookDirection = Vector3.up;
         StartCoroutine(MoleMovemet());
 
     }
@@ -31,11 +31,17 @@ public class MuddyEnemy : Enemy
             active = false;
             return;
         }
+        base.Update();
     }
 
     protected override void FixedUpdate()
     {
         
+    }
+
+    protected override void HandleAction()
+    {
+
     }
 
 
@@ -51,6 +57,7 @@ public class MuddyEnemy : Enemy
             //2초 후 공격
             yield return new WaitForSeconds(2f);
             isAttacking = true;
+            Debug.Log("isAttacking");
 
             //3초 후 숨기
             yield return new WaitForSeconds(3f);

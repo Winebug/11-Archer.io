@@ -108,7 +108,7 @@ MonoBehaviour:
   characterRenderer: {fileID: 7841007498852162300}
   weaponPivot: {fileID: 1809867879456132826}
   healthChangeDelay: 0.5
-  WeaponPrefab: {fileID: 0}
+  WeaponPrefab: {fileID: 5261663675278192890, guid: a335fc2b874614e40b752c92b02bc4c8, type: 3}
   health: 10
   speed: 3
   attakRange: 1
@@ -187,7 +187,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 8925949710039a14caf719c2f81c5f0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6609226266096557723}
   - component: {fileID: 5540218901931156638}
   - component: {fileID: 4501433230511940637}
+  - component: {fileID: -5865063931640449155}
   m_Layer: 7
   m_Name: Ogre
   m_TagString: Untagged
@@ -85,7 +86,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 6163549590856308225, guid: ba44010f92180134296d86fec6624a9d, type: 3}
   health: 10
   speed: 3
-  attakRange: 1.4
+  attakRange: 1.8
   playerTemp: {fileID: 0}
   statData: {fileID: 0}
 --- !u!50 &5540218901931156638
@@ -160,6 +161,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.272589, y: 1.644301}
   m_EdgeRadius: 0
+--- !u!114 &-5865063931640449155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2803047456324451828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07be3c65ee309545b06ee90895d3e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8477563625554799130
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6283307867947164507}
   - component: {fileID: 7841007498852162300}
-  - component: {fileID: 3518539667997869770}
+  - component: {fileID: 3024013945704326094}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -233,7 +246,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: b9581faccbf32c848af4e1454dd125bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -245,7 +258,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &3518539667997869770
+--- !u!95 &3024013945704326094
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

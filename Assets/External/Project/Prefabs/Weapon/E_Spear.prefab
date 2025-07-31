@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4613581014234309147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 0, z: 0}
+  m_LocalPosition: {x: -0.187, y: 0.302, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 120
-  m_Sprite: {fileID: 21300000, guid: 91bb0946c297b0842972f1e379a7ba6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69786a420b2bdbc4b93fd08c2af718aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 4613581014234309147}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aecd7c409f937e84880055f4f0b95651, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1da107c86789e7a41b6da0b3d90073e4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -168,18 +168,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.027705371, y: 0}
+  m_Offset: {x: 0.0030394197, y: 0.7447243}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5625, y: 1.1875}
+    oldSize: {x: 0.375, y: 1.875}
     newSize: {x: 0.875, y: 1.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.50708926, y: 1.1875}
+  m_Size: {x: 0.40302992, y: 0.4264667}
   m_EdgeRadius: 0
 --- !u!114 &9132152185527797364
 MonoBehaviour:
@@ -202,9 +202,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7855191588922686538}
-  - component: {fileID: 6163549590856308225}
+  - component: {fileID: 8621501774489494204}
   m_Layer: 0
-  m_Name: E_Cleaver_EquipWeapon
+  m_Name: E_Spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,15 +218,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9219811288996558544}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8606540608456630945}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6163549590856308225
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &8621501774489494204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,17 +235,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9219811288996558544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e18d6451347dcc47b3b7dd777c20107, type: 3}
+  m_Script: {fileID: 11500000, guid: ac8a07b6b39e02c4c855c138b9e2a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
   weaponSize: 1
-  power: 1
+  power: 5
   speed: 1
   attackRange: 1
   target:
     serializedVersion: 2
     m_Bits: 64
   isOnKnockback: 1
-  knockbackPower: 2
-  knockbackTime: 0.5
+  knockbackPower: 10
+  knockbackTime: 2
+  shouldRotate: 1

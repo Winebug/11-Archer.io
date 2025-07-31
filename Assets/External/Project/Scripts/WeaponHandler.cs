@@ -34,7 +34,7 @@ public class WeaponHandler : MonoBehaviour
 
     public UnitController Controller { get; private set; } // 이 무기를 사용하는 캐릭터 컨트롤러
 
-    private Animator animator;
+    protected Animator animator;
     private SpriteRenderer weaponRenderer;
 
     protected virtual void Awake()
