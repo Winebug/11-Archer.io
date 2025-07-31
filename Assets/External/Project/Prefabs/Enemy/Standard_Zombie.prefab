@@ -173,7 +173,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 0}
   health: 10
   speed: 3
-  attakRange: 1
+  attakRange: 0.8
   playerTemp: {fileID: 0}
   statData: {fileID: 11400000, guid: 59d548c7f00a88f499de19810f8ffbc1, type: 2}
 --- !u!50 &8343173671428719356

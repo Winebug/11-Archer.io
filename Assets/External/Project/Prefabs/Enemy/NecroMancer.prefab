@@ -404,3 +404,4 @@ MonoBehaviour:
   - {fileID: 3123671593364264763, guid: 20c41b4096735454dae602749b7a2d5b, type: 3}
   - {fileID: 3302388366905966433, guid: 5f12d3025b2130242a7874cf29a27584, type: 3}
   summonCooldown: 10
+  magicCirclePrefab: {fileID: 4788877869406320519, guid: 65c627eaa5a048b4a934580442025054, type: 3}
