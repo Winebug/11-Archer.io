@@ -47,6 +47,16 @@ public class MeleeWeaponHandler : WeaponHandler
         {
             Debug.Log("공격 성공");
 
+            UnitController unit = GetComponent<UnitController>();
+            if (unit != null)
+            {
+                //unit.ChangeHealth
+
+                if(IsOnKnockback)
+                    unit.ApplyKnockback(transform, KnockbackPower, KnockbackTime);
+            }
+            
+
 
             // 데미지 계산
 
