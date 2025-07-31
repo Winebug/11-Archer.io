@@ -41,8 +41,8 @@ public class SkillSelectorUI : MonoBehaviour
         {
             int index = i;
             Skill skill = currentChoices[index];
-
             Image image = skillButtons[index].transform.Find("Icon")?.GetComponent<Image>();
+            
             if (image != null && skill.icon != null)
             {
                 image.sprite = skill.icon;

@@ -1439,7 +1439,8 @@ MonoBehaviour:
   speed: 3
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
+  showattackRange: 10
   skillSelectorUI: {fileID: 0}
 --- !u!114 &1479416939
 MonoBehaviour:

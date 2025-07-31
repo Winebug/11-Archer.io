@@ -77,6 +77,4 @@ public class WeaponHandler : MonoBehaviour
             weaponRenderer.flipY = isLeft;
         }
     }
-
-
 }

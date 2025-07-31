@@ -7,7 +7,7 @@ public class UnitController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
 
-    [SerializeField] private SpriteRenderer characterRenderer; // 좌우 반전을 위한 렌더러
+    [SerializeField] protected SpriteRenderer characterRenderer; // 좌우 반전을 위한 렌더러
     [SerializeField] private Transform weaponPivot; // 무기를 회전시킬 기준 위치
 
     [SerializeField] protected float healthChangeDelay = .5f; // 피해 후 무적 지속 시간
@@ -25,7 +25,6 @@ public class UnitController : MonoBehaviour
     protected WeaponHandler weaponHandler; // 장착된 무기
 
     protected bool isAttacking; // 공격 중 여부
-    protected float attackRange;
     protected float timeSinceLastAttack = float.MaxValue; // 마지막 공격 이후 경과 시간
 
     protected float timeSinceLastChange = float.MaxValue; // 마지막 체력 변경 이후 경과 시간
@@ -55,7 +54,7 @@ public class UnitController : MonoBehaviour
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        animationHandler = GetComponent<AnimationHandler>();
+        animationHandler = GetComponentInChildren<AnimationHandler>();
 
         // 프리팹이 지정되어 있다면 생성해서 장착 위치에 부착
         if (WeaponPrefab != null)
@@ -73,19 +72,21 @@ public class UnitController : MonoBehaviour
     {
         HandleAction();
 
-        // 자동 공격 확인용
-        if (isAttacking == true)
-        {
-            Debug.Log("isAttacking true");
-        }
-
         if (movementDirection.magnitude > 0)
         {
             Rotate(lookDirection);
         }
         HandleAttackDelay(); // 공격 입력 및 쿨타임 관리
 
-
+        // 무적 상태 시간 관리
+        if (timeSinceLastChange < healthChangeDelay)
+        {
+            timeSinceLastChange += Time.deltaTime;
+            if (timeSinceLastChange >= healthChangeDelay)
+            {
+                animationHandler.InvincibilityEnd();
+            }
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -168,11 +169,11 @@ public class UnitController : MonoBehaviour
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
         // 데미지일 경우 (음수)
-        if (change < 0)
-        {
-            animationHandler.Damage(); // 맞는 애니메이션 실행
+        //if (change < 0)
+        //{
+        //    animationHandler.Damage(); // 맞는 애니메이션 실행
 
-        }
+        //}
 
         // 체력이 0 이하가 되면 사망 처리
         if (CurrentHealth <= 0f)
@@ -230,6 +231,11 @@ public class UnitController : MonoBehaviour
         // 바라보는 방향이 있을 때만 공격
         if (lookDirection != Vector2.zero)
             weaponHandler?.Attack();
+    }
+
+    public void ForceAttackNow()
+    {
+        timeSinceLastAttack = float.MaxValue; // 다음 프레임에서 바로 공격하도록 강제
     }
 
     // 공격범위 시각화

@@ -16,10 +16,10 @@ public class RangeWeaponHandler : WeaponHandler
     [SerializeField] private float duration; // 총알이 살아있는 시간
     public float Duration { get { return duration; } }
 
-    [SerializeField] private float spread; // 총알 퍼짐 각도 범위
+    [SerializeField] private float spread = 0f; // 총알 퍼짐 각도 범위
     public float Spread { get { return spread; } }
 
-    [SerializeField] private int numberofProjectilesPerShot; // 한 번에 발사할 총알 수
+    private int numberofProjectilesPerShot = 1; // 한 번에 발사할 총알 수
     public int NumberofProjectilesPerShot { get { return numberofProjectilesPerShot; } }
 
     [SerializeField] private float multipleProjectilesAngel; // 총알들 간의 고정 각도 간격
@@ -27,6 +27,7 @@ public class RangeWeaponHandler : WeaponHandler
 
     [SerializeField] private Color projectileColor; // 총알 색상 (시각적 효과)
     public Color ProjectileColor { get { return projectileColor; } }
+    [SerializeField] private int projectileCount = 0;
 
     private ProjectileManager projectileManager; // 투사체를 발사하는 매니저 참조
     protected override void Start()
@@ -40,7 +41,7 @@ public class RangeWeaponHandler : WeaponHandler
         base.Attack();
 
         float projectilesAngleSpace = multipleProjectilesAngel; // 총알 간 각도 간격
-        int numberOfProjectilesPerShot = numberofProjectilesPerShot; // 발사할 총알 수
+        int numberOfProjectilesPerShot = numberofProjectilesPerShot + projectileCount; // 발사할 총알 수
 
         // 총알들을 좌우 대칭으로 퍼지게 하기 위한 시작 각도 계산
         float minAngle = -(numberOfProjectilesPerShot / 2f) * projectilesAngleSpace;
@@ -72,5 +73,15 @@ public class RangeWeaponHandler : WeaponHandler
     private static Vector2 RotateVector2(Vector2 v, float degree)
     {
         return Quaternion.Euler(0, 0, degree) * v;
+    }
+
+    public void AddProjectiles()
+    {
+        projectileCount++;
+
+        if (Controller != null)
+        {
+            Controller.ForceAttackNow();
+        }
     }
 }
