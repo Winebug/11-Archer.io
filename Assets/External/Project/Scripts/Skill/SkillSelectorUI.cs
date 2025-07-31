@@ -70,6 +70,15 @@ public class SkillSelectorUI : MonoBehaviour
     private List<Skill> GetRandomSkills(int count)
     {
         List<Skill> pool = new List<Skill>(allSkills);
+
+        foreach (Skill s in allSkills)
+        {
+            if (!SkillManager.Instance.IsSkillReachedAtMaxStack(s))
+            {
+                pool.Add(s);
+            }
+        }
+
         List<Skill> result = new List<Skill>();
 
         for (int i = 0; i < count && pool.Count > 0; i++)

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5c8a2d40c0fe4f0282d0cd185c9db43, type: 3}
-  m_Name: AttackDamageBoost
+  m_Script: {fileID: 11500000, guid: 96e3a9f1b84e74e759ec7e28b5d49dce, type: 3}
+  m_Name: DeadlyShot
   m_EditorClassIdentifier: 
   skillName: 
   description: 
-  icon: {fileID: 21300000, guid: 70908228fe196ac4a8b8a006306c2cc2, type: 3}
+  icon: {fileID: 0}
   skillType: 0
-  canStack: 1
-  cannotStackMoreThanOne: 0
-  maxSkillStacks: 99
+  canStack: 0
+  cannotStackMoreThanOne: 1
+  maxSkillStacks: 1

@@ -16,3 +16,6 @@ MonoBehaviour:
   description: 
   icon: {fileID: 21300000, guid: 48280ce187ad89b429f48a974768216d, type: 3}
   skillType: 0
+  canStack: 1
+  cannotStackMoreThanOne: 0
+  maxSkillStacks: 99

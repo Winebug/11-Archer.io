@@ -30,15 +30,23 @@ public class UnitController : MonoBehaviour
     protected float timeSinceLastChange = float.MaxValue; // 마지막 체력 변경 이후 경과 시간
 
     public float CurrentHealth { get; private set; } // 현재 체력 (외부 접근만 허용)
+    public bool IsBoss = false;
+    private bool hasDeadlyShotApplied = false;
+    public bool HasDeadlyShotApplied
+    {
+        get => hasDeadlyShotApplied;
+        set => hasDeadlyShotApplied = value;
+    }
 
 
     // 체력 (1 ~ 100 사이 값만 허용)
-    [Range(1, 100)][SerializeField] private int health = 10;
+    //[Range(1, 100)][SerializeField] private int health = 10;
     // 외부에서 접근 가능한 프로퍼티 (값 변경 시 자동으로 0~100 사이로 제한)
+    private int health = 100;
     public int Health
     {
         get => health;
-        set => health = Mathf.Clamp(value, 0, 100);
+        set => health = Mathf.Max(0, value);
     }
 
     // 이동 속도 (1f ~ 20f 사이 값만 허용)

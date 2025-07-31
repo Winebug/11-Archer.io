@@ -10,9 +10,10 @@ public class AttackSpeedBoostSkill : Skill
         if (weapon == null)
         {
             Debug.Log("장착중인 무기 없음.");
+            return;
         }
 
-        weapon.Delay = weapon.Delay - (weapon.Delay * 0.25f);
+        weapon.Delay -= Mathf.Max(0.1f, weapon.Delay - weapon.Delay * 0.25f); // 최소 딜레이 = 0.1
         Debug.Log("공격 속도 증가.");
     }
 }

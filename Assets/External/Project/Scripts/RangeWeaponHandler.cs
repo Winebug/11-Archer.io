@@ -27,9 +27,11 @@ public class RangeWeaponHandler : WeaponHandler
 
     [SerializeField] private Color projectileColor; // 총알 색상 (시각적 효과)
     public Color ProjectileColor { get { return projectileColor; } }
-    [SerializeField] private int projectileCount = 0;
+    private int projectileCount = 0;
+    public int ProjectileCount => projectileCount;
 
     private ProjectileManager projectileManager; // 투사체를 발사하는 매니저 참조
+    public GameObject shooter { get; set; }
     protected override void Start()
     {
         base.Start();
@@ -41,14 +43,15 @@ public class RangeWeaponHandler : WeaponHandler
         base.Attack();
 
         float projectilesAngleSpace = multipleProjectilesAngel; // 총알 간 각도 간격
-        int numberOfProjectilesPerShot = numberofProjectilesPerShot + projectileCount; // 발사할 총알 수
+        int totalProjectiles = numberofProjectilesPerShot + projectileCount;
+        //int numberOfProjectilesPerShot = numberofProjectilesPerShot + projectileCount; // 발사할 총알 수
 
         // 총알들을 좌우 대칭으로 퍼지게 하기 위한 시작 각도 계산
-        float minAngle = -(numberOfProjectilesPerShot / 2f) * projectilesAngleSpace;
+        float minAngle = -(totalProjectiles / 2f) * projectilesAngleSpace;
 
 
         // 각 총알마다 회전 각도 계산 후 발사
-        for (int i = 0; i < numberOfProjectilesPerShot; i++)
+        for (int i = 0; i < totalProjectiles; i++)
         {
             float angle = minAngle + projectilesAngleSpace * i; // 기본 각도
             float randomSpread = Random.Range(-spread, spread); // 랜덤 퍼짐 적용
@@ -56,6 +59,23 @@ public class RangeWeaponHandler : WeaponHandler
 
             // 실제 투사체 생성 (Controller.LookDirection = 캐릭터가 바라보는 방향)
             CreateProjectile(Controller.LookDirection, angle);
+        }
+
+        // 멀티샷 구현
+        if (shooter.TryGetComponent<Player>(out var player) &&
+            player.MultiShotCount > 0)
+        {
+            for (int i = 0; i < player.MultiShotCount; i++)
+            {
+                for (int j = 0; j < totalProjectiles; j++)
+                {
+                    float angle = minAngle + projectilesAngleSpace * j;
+                    float randomSpread = Random.Range(-spread, spread);
+                    angle += randomSpread;
+
+                    CreateProjectile(Controller.LookDirection, angle);
+                }
+            }
         }
     }
 
@@ -77,11 +97,11 @@ public class RangeWeaponHandler : WeaponHandler
 
     public void AddProjectiles()
     {
+        if (projectileCount >= 4) return;
+
         projectileCount++;
 
         if (Controller != null)
-        {
             Controller.ForceAttackNow();
-        }
     }
 }
