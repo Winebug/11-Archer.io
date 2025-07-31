@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : UnitController
 {
-    [SerializeField] float attakRange = 1;
-    
-    
+    [SerializeField] float attakRange = 0.1f;
+
+
     //강의에서는 Init로 플레이어 할당해주므로, 아마 수정 예정
     [SerializeField] protected Transform playerTemp;
     [SerializeField] private MonsterStat statData;
@@ -29,7 +29,6 @@ public class Enemy : UnitController
         {
             Health = statData.health;
             Speed = statData.moveSpeed;
-            Health = statData.health;
             weaponHandler = statData.weaponPrefab;
         }
     }
@@ -86,5 +85,18 @@ public class Enemy : UnitController
     {
         Debug.Log("Enemy Death");
         base.Death();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null && statData != null)
+            {
+                Debug.Log(statData.attackPower + "피해를 줌");
+                player.ChangeHealth(-statData.attackPower);
+            }
+        }
     }
 }
