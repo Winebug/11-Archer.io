@@ -44,8 +44,8 @@ public class Companion : UnitController
             // follow target에게 접근
             movementDirection = direction2;
 
-            // followTarget과 거리가 1이하이면 정지
-            if (distance2 < 1.5f)
+            // followTarget과 거리가 몇 이하이면 정지
+            if (distance2 < 2f)
                 movementDirection = Vector2.zero;
             return;
         }
@@ -53,16 +53,17 @@ public class Companion : UnitController
         // 타겟이 있고 FollowRange 안에 있을 때만 추적 시작
         if (targetTemp != null)
         {
-            Debug.Log("Target found");
+            
             float distance = DistanceBetween();
             Vector2 direction = FaceDirection();
 
+            lookDirection = direction;
+
+            // follow target에게 접근
+            movementDirection = direction;
+
             if (distance <= followRange)
             {
-                lookDirection = direction;
-                // follow target에게 접근
-                movementDirection = direction;
-
                 //적이 사거리에 들어오면, 공격
                 if (distance <= weaponHandler.AttackRange)
                 {
@@ -75,10 +76,9 @@ public class Companion : UnitController
                     if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
                     {
                         isAttacking = true;
-
                         Debug.Log($"{gameObject.name} {isAttacking}");
                     }
-
+                    lookDirection = direction;
                     movementDirection = Vector2.zero;
                     return;
                 }

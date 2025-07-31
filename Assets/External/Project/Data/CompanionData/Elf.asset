@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a862d78f24509449b21ac25b861ed90, type: 3}
-  m_Name: Big_Zombie
+  m_Script: {fileID: 11500000, guid: 0f8326b833167f046b4299c1191a0e45, type: 3}
+  m_Name: Elf
   m_EditorClassIdentifier: 
-  monsterName: Big_Zombie
-  health: 100
-  moveSpeed: 1
-  attackPower: 10
-  weaponPrefab: {fileID: 2154621582540706235, guid: 464db0b134fe2934b8000241e86f57d7, type: 3}
+  CompanionName: Elf
+  health: 10
+  moveSpeed: 0
+  attackPower: 1
+  weaponPrefab: {fileID: 3039104785448595261, guid: 109b3ec8c4d7720418a99228391c46b5, type: 3}
