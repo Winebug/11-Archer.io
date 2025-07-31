@@ -745,6 +745,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 38c59baa8e64b4149bcb9b56df3ee3bc, type: 2}
   - {fileID: 11400000, guid: 43d0297b329c945e48201dc99e96917d, type: 2}
   - {fileID: 11400000, guid: ce53366f0a5514a70bf48e948ccd01cc, type: 2}
+  - {fileID: 11400000, guid: 38e2d6d2f677d4ec1bcf6aa418608a9c, type: 2}
+  - {fileID: 11400000, guid: 75436a69bde8c435c943eb6ef389ff60, type: 2}
+  - {fileID: 11400000, guid: 395a81743e5934637b1c09c987a8e598, type: 2}
+  - {fileID: 11400000, guid: b5fabfb0e6fd04b3b9acdbd6cdcf2660, type: 2}
+  - {fileID: 11400000, guid: 39c0f8f1ac8a44f26a411c54035b2e4d, type: 2}
+  - {fileID: 11400000, guid: 17a9bf89392d24a8f991ad737f170407, type: 2}
+  - {fileID: 11400000, guid: 7d45fb70f718347f4bbdfc25ffb1aea6, type: 2}
+  - {fileID: 11400000, guid: ef7fe4c8c1e7b4d7b93dcae8b568b13d, type: 2}
+  - {fileID: 11400000, guid: 9c86400b7860b42918d9d8880f01fa25, type: 2}
 --- !u!1 &602342862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,11 +1294,12 @@ MonoBehaviour:
   weaponPivot: {fileID: 602342863}
   healthChangeDelay: 0.5
   WeaponPrefab: {fileID: 5261663675278192890, guid: a447f2818f08eca4aa17ff703aab1821, type: 3}
-  health: 10
+  IsBoss: 0
   speed: 3
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  hasInvincibilitySkill: 0
   skillSelectorUI: {fileID: 555119922}
 --- !u!114 &1479416939
 MonoBehaviour:

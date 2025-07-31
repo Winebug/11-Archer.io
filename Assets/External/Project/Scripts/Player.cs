@@ -41,6 +41,8 @@ public class Player : UnitController
     public float RicochetDamageMultiplier { get; set; } = 1f;
     public int MultiShotCount { get; set; } = 0;
     public float MultiShotDamageMultiplier { get; set; } = 1f;
+    public bool HasWallReflection { get; set; } = false;
+    public float WallReflectionDamageMultiplier { get; set; } = 1f;
 
     private SkillManager sm;
     protected override void Start()
