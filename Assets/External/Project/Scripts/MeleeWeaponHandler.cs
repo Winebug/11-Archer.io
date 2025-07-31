@@ -51,7 +51,7 @@ public class MeleeWeaponHandler : WeaponHandler
     {
         if (((1 << meleeHitTarget.gameObject.layer) & target) != 0 && !alredyHitTargets.Contains(meleeHitTarget))
         {
-
+            
 
             UnitController unit = meleeHitTarget.gameObject.GetComponent<UnitController>();
             if (unit != null)

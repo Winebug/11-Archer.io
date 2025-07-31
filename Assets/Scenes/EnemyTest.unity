@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big_Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 3123671593364264763, guid: 20c41b4096735454dae602749b7a2d5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5712813417330133775, guid: 20c41b4096735454dae602749b7a2d5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -430,6 +434,75 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20c41b4096735454dae602749b7a2d5b, type: 3}
+--- !u!1001 &7733419462293734532
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2803047456324451828, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_Name
+      value: OrcWarrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024013945704326094, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: ca8f0124e389a1a41b34daba8a1e1f0c, type: 2}
+    - target: {fileID: 6609226266096557723, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: playerTemp
+      value: 
+      objectReference: {fileID: 453226533}
+    - target: {fileID: 6609226266096557723, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: WeaponPrefab
+      value: 
+      objectReference: {fileID: 6163549590856308225, guid: 9dbc67871d355b74f96d8153d4fd6b74, type: 3}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310608176138239323, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 60753c39ed7c41849ac378238821c774, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -437,3 +510,4 @@ SceneRoots:
   - {fileID: 1460080242}
   - {fileID: 453226533}
   - {fileID: 1618948681}
+  - {fileID: 7733419462293734532}
