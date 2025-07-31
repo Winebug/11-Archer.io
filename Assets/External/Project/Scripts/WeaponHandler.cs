@@ -44,7 +44,14 @@ public class WeaponHandler : MonoBehaviour
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
         // 공격 속도에 따라 애니메이션 재생 속도 조절
-        animator.speed = 1.0f / delay;
+        if (animator != null)
+        {
+            animator.speed = 1.0f / delay;
+        }
+        else
+        {
+            Debug.LogWarning($"{name}의 자식에 Animator가 없습니다. 애니메이션 속도 설정을 건너뜁니다.");
+        }
 
         // 무기 크기 설정
         transform.localScale = Vector3.one * weaponSize;

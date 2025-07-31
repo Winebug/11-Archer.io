@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e554c5842579eb41bd039eda8bc5c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3143587879562591180, guid: 39a206285547ccf459f9c59bd5d2f222, type: 3}
+  bulletPrefab: {fileID: 3143587879562591180, guid: 00e2d3f58a6294d3ab34f7bfba3eb497, type: 3}
   bulletSpawnPoint: {fileID: 785714782835285485}
   bulletSpeed: 5
   target: {fileID: 0}
@@ -165,7 +165,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0322026, y: -0.16745347}

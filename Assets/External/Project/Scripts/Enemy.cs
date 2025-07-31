@@ -14,6 +14,16 @@ public class Enemy : UnitController
     protected override void Start()
     {
         base.Start();
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            playerTemp = playerObj.transform;
+        }
+
+        if (playerTemp == null)
+        {
+            Debug.LogWarning($"{name}: Player 레이어를 가진 오브젝트를 찾을 수 없습니다.");
+        }
 
         if (statData != null) //몬스터 기본스탯등을 불러와서 초기화
         {
