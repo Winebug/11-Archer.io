@@ -31,10 +31,7 @@ public class ProjectileController : MonoBehaviour
 
     private void Update()
     {
-        if (!isReady)
-        {
-            return;
-        }
+        if (!isReady) return;
 
         // 생존 시간 누적
         currentDuration += Time.deltaTime;
@@ -44,41 +41,62 @@ public class ProjectileController : MonoBehaviour
         {
             DestroyProjectile(transform.position, false);
         }
-
-        // 물리 이동 처리 (방향 * 속도)
-        _rigidbody.velocity = direction * rangeWeaponHandler.Speed;
+        _rigidbody.velocity = direction * rangeWeaponHandler.Speed; // 물리 이동 처리 (방향 * 속도)
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
+            Debug.Log($"Collision detected with layer: {LayerMask.LayerToName(collision.gameObject.layer)}, levelCollisionLayer: {levelCollisionLayer.value}");
+            // 벽 튕김 구현
             if (rangeWeaponHandler.shooter != null &&
                 rangeWeaponHandler.shooter.TryGetComponent<Player>(out var player) &&
                 player.HasWallReflection &&
                 wallBounceCount < 1)
             {
-                Vector2 collisionPoint = collision.ClosestPoint(transform.position);
-                Vector2 incoming = -direction; // 입사 방향 (반대 방향으로 계산)
-                
-                // 법선(normal) 계산: 충돌 지점에서 벽의 법선 근사 (Collider에서 정확한 normal을 얻기 위해 Contact 사용 추천, 하지만 간단히)
-                Vector2 normal = ((Vector2)transform.position - collisionPoint).normalized; // 근사 normal
-                
-                direction = Vector2.Reflect(incoming, normal).normalized; // 반사 방향 계산
-                wallBounceCount++; // 튕김 횟수 증가
-                damageValue *= player.WallReflectionDamageMultiplier; // 데미지 감소 적용
-                
-                // 위치 약간 조정하여 즉시 재충돌 방지
+                // Vector2 collisionPoint = collision.ClosestPoint(transform.position);
+                // Vector2 incoming = -direction;
+                // Vector2 normal = ((Vector2)transform.position - collisionPoint).normalized;
+                // direction = Vector2.Reflect(incoming, normal).normalized; // 반사 방향 계산
+                // wallBounceCount++; // 튕김 횟수 증가
+                // damageValue *= player.WallReflectionDamageMultiplier; // 데미지 감소 적용
+                // transform.position += (Vector3)(direction * 0.1f); // 위치 조정
+                // transform.right = direction;
+                // if (direction.x < 0)
+                //     pivot.localRotation = Quaternion.Euler(180, 0, 0);
+                // else
+                //     pivot.localRotation = Quaternion.Euler(0, 0, 0);
+
+                ContactPoint2D[] contacts = new ContactPoint2D[10]; // 최대 10개 접점
+                int contactCount = collision.GetContacts(contacts);
+                Vector2 normal = Vector2.zero;
+                if (contactCount > 0)
+                {
+                    normal = contacts[0].normal; // 첫 접점 normal 사용
+                }
+                else
+                {
+                    // 대체 근사 normal
+                    Vector2 collisionPoint = collision.ClosestPoint(transform.position);
+                    normal = ((Vector2)transform.position - collisionPoint).normalized;
+                }
+
+                // 안쪽 반사를 위해 normal 방향 반전 (추측: 맵 구조에 따라 필요)
+                normal = -normal; // 이 줄 추가 - 외부 대신 내부 반사
+
+                Vector2 incoming = direction; // 입사 방향 (현재 direction 사용, -direction 대신)
+                direction = Vector2.Reflect(incoming, normal).normalized;
+                wallBounceCount++;
+                damageValue *= player.WallReflectionDamageMultiplier;
                 transform.position += (Vector3)(direction * 0.1f);
-                
-                // 피벗 회전 업데이트 (Init처럼)
                 transform.right = direction;
                 if (direction.x < 0)
                     pivot.localRotation = Quaternion.Euler(180, 0, 0);
                 else
                     pivot.localRotation = Quaternion.Euler(0, 0, 0);
             }
-            
+
             else
                 DestroyProjectile(collision.ClosestPoint(transform.position) - direction * .2f, fxOnDestory);
         }
@@ -154,6 +172,7 @@ public class ProjectileController : MonoBehaviour
                     }
                 }
 
+                // 반동샷 구현
                 if (rangeWeaponHandler.shooter != null &&
                     rangeWeaponHandler.shooter.TryGetComponent<Player>(out Player ricochetPlayer) &&
                     ricochetPlayer.HasRicochetSkill &&
@@ -164,13 +183,9 @@ public class ProjectileController : MonoBehaviour
                     if (nextTarget != null)
                     {
                         Vector2 newDirection = (nextTarget.position - transform.position).normalized;
-                        GameObject ricochet = Instantiate(gameObject, transform.position, Quaternion.identity);
-                        var ricochetController = ricochet.GetComponent<ProjectileController>();
-                        ricochetController.bounceCount = this.bounceCount + 1;
-                        ricochetController.damageValue = this.damageValue * ricochetPlayer.RicochetDamageMultiplier;
-                        ricochetController.Init(newDirection, rangeWeaponHandler);
-
-                        Destroy(gameObject);
+                        bounceCount = this.bounceCount + 1;
+                        damageValue = this.damageValue * ricochetPlayer.RicochetDamageMultiplier;
+                        Init(newDirection, rangeWeaponHandler);
                         return;
                     }
                 }
@@ -182,7 +197,7 @@ public class ProjectileController : MonoBehaviour
 
     private Transform FindNextTarget(Transform excludeTarget)
     {
-        Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, 5f, rangeWeaponHandler.target);
+        Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, 10f, rangeWeaponHandler.target);
 
         Transform closest = null;
         float minDist = Mathf.Infinity;

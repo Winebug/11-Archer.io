@@ -64,11 +64,10 @@ public class UnitController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         animationHandler = GetComponentInChildren<AnimationHandler>();
 
-        // 프리팹이 지정되어 있다면 생성해서 장착 위치에 부착
         if (WeaponPrefab != null)
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         else
-            weaponHandler = GetComponentInChildren<WeaponHandler>(); // 이미 붙어 있는 무기 사용
+            weaponHandler = GetComponentInChildren<WeaponHandler>(); 
     }
 
     protected virtual void Start()

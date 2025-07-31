@@ -15,7 +15,7 @@ public class Skill : ScriptableObject
     // 스킬 효과 반영
     public virtual void Apply(Player player)
     {
-        Debug.Log($"[Skill] {skillName} applied");
+        Debug.Log($" {skillName} 발동.");
         WeaponHandler weapon = player.GetComponentInChildren<WeaponHandler>();
     }
 

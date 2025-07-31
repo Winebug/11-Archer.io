@@ -197,8 +197,7 @@ MonoBehaviour:
   projectileSpawnPosition: {fileID: 7851393083528967900}
   bulletIndex: 0
   bulletSize: 1
-  duration: 0.7
+  duration: 2
   spread: 2.5
   multipleProjectilesAngel: 0
   projectileColor: {r: 1, g: 1, b: 1, a: 1}
-  projectileCount: 0
