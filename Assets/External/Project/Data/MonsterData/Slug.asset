@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e87289eed9b0a4ed5980ca81a3fc19af, type: 3}
-  m_Name: CriticalBoost
+  m_Script: {fileID: 11500000, guid: 8a862d78f24509449b21ac25b861ed90, type: 3}
+  m_Name: Slug
   m_EditorClassIdentifier: 
-  skillName: 
-  description: 
-  icon: {fileID: 21300000, guid: 117c3a062d320734382fc5dc72e9c848, type: 3}
-  skillType: 0
+  monsterName: Slug
+  health: 30
+  moveSpeed: 1.5
+  attackPower: 10
+  weaponPrefab: {fileID: 2154621582540706235, guid: 464db0b134fe2934b8000241e86f57d7, type: 3}
