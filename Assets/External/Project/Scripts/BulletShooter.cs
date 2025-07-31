@@ -6,7 +6,22 @@ public class BulletShooter : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private float bulletSpeed = 5f;
     [SerializeField] private Transform target;
-
+    private void Start()
+    {
+        // target이 비어 있으면 자동으로 "Player" 레이어 또는 태그를 가진 오브젝트 찾아 할당
+        if (target == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                target = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogWarning($"{name}: Player 태그를 가진 오브젝트를 찾을 수 없습니다.");
+            }
+        }
+    }
     public void ShootBullet()
     {
         if (bulletPrefab == null || bulletSpawnPoint == null || target == null)
