@@ -22,8 +22,11 @@ public class Companion : UnitController
         GameObject playerObject = GameObject.FindWithTag("Player");
         followTarget = playerObject.transform;
 
-        GameObject enemyObject = GameObject.FindWithTag("Enemy");
-        targetTemp = enemyObject.transform;
+        if (GameObject.FindWithTag("Enemy") != null)
+        {
+            GameObject enemyObject = GameObject.FindWithTag("Enemy");
+            targetTemp = enemyObject.transform;
+        }
     }
 
     protected override void Start()

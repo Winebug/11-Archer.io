@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1492751793556919254}
   - component: {fileID: 1689292658600245135}
   m_Layer: 6
-  m_Name: MainSprite
+  m_Name: ElfSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 80
-  m_Sprite: {fileID: 21300000, guid: 88f6c8e9631a2db4d92d0fed3643e19f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5af30bb1736e6a340ab3824eb90d7f66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -196,8 +196,6 @@ MonoBehaviour:
   attakRange: 2
   searchRange: 10
   followRange: 3
-  targetTemp: {fileID: 0}
-  followTarget: {fileID: 0}
   statData: {fileID: 0}
 --- !u!50 &6198315671621671073
 Rigidbody2D:
