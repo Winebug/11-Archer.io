@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 
   description: 
-  icon: {fileID: 21300000, guid: 48280ce187ad89b429f48a974768216d, type: 3}
+  icon: {fileID: 21300000, guid: b3daf618c3480ca498f04db4cf0d44c2, type: 3}
   skillType: 0
+  canStack: 1
+  cannotStackMoreThanOne: 0
+  maxSkillStacks: 99
