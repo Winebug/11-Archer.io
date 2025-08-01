@@ -774,7 +774,7 @@ MonoBehaviour:
   weaponPivot: {fileID: 883213909864233583}
   healthChangeDelay: 0.5
   WeaponPrefab: {fileID: 223323353283478274, guid: 98e1fadcf98c62544bd34aa0043d523e, type: 3}
-  IsBoss: 0
+  IsBoss: 1
   speed: 3
   attakRange: 1
   playerTemp: {fileID: 0}
