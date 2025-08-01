@@ -24,7 +24,7 @@ public class MaskedOrcEnemy : Enemy
 
     protected override void Update()
     {
-        if (playerTemp == null)
+        if (playerTransform == null)
         {
             active = false;
             return;
