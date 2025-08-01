@@ -18,6 +18,7 @@ public class RoomManager : MonoBehaviour
 
     private int currentRoomIndex = 0;
     private GameObject currentRoom;
+    private bool canEnterNextRoom = false; // 문 앞에 있는지 여부
 
     public int CurrentRoomIndex => currentRoomIndex;
 
@@ -28,8 +29,8 @@ public class RoomManager : MonoBehaviour
 
     void Update()
     {
-        // 테스트용: Enter 키로 방 이동 (나중에 삭제 예정)
-        if (Input.GetKeyDown(KeyCode.Return))
+        // 문 앞에 있을 때만 다음 방 이동 가능
+        if (canEnterNextRoom && Input.GetKeyDown(KeyCode.Return))
         {
             GoToNextRoom();
         }
@@ -97,5 +98,24 @@ public class RoomManager : MonoBehaviour
     public void ShowClearScreen()
     {
         StartCoroutine(AnimateRoomText("CLEAR!"));
+    }
+
+    // 🔹 문 앞 Trigger 감지
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            canEnterNextRoom = true;
+            Debug.Log("문 앞에 도착! Enter키로 다음 방으로 이동 가능");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            canEnterNextRoom = false;
+            Debug.Log("문에서 멀어짐, 이동 불가");
+        }
     }
 }
