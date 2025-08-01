@@ -15,20 +15,6 @@ public class Companion : UnitController
     [SerializeField] private CompanionStat statData;
     public CompanionStat StatData => statData;
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-        GameObject playerObject = GameObject.FindWithTag("Player");
-        followTarget = playerObject.transform;
-
-        if (GameObject.FindWithTag("Enemy") != null)
-        {
-            GameObject enemyObject = GameObject.FindWithTag("Enemy");
-            targetTemp = enemyObject.transform;
-        }
-    }
-
     protected override void Start()
     {
         base.Start();
@@ -39,6 +25,15 @@ public class Companion : UnitController
             Speed = statData.moveSpeed;
             Health = statData.health;
             weaponHandler = statData.weaponPrefab;
+        }
+
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        followTarget = playerObject.transform;
+
+        if (GameObject.FindWithTag("Enemy") != null)
+        {
+            GameObject enemyObject = GameObject.FindWithTag("Enemy");
+            targetTemp = enemyObject.transform;
         }
     }
 

@@ -193,7 +193,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 3039104785448595261, guid: 109b3ec8c4d7720418a99228391c46b5, type: 3}
   IsBoss: 0
   speed: 3
-  attakRange: 2
+  attakRange: 5
   searchRange: 10
   followRange: 3
   statData: {fileID: 0}

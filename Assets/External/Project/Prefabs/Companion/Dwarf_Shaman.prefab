@@ -87,8 +87,8 @@ MonoBehaviour:
   IsBoss: 0
   speed: 3
   attakRange: 5
-  searchRange: 5
-  followRange: 10
+  searchRange: 10
+  followRange: 3
   statData: {fileID: 0}
 --- !u!50 &9164737721438837201
 Rigidbody2D:
