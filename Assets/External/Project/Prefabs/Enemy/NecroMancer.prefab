@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 883213909864233583}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3082017208868056196}
   - component: {fileID: 6863303646544683944}
   - component: {fileID: 1945996295926075962}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NecroMancer_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5397022133163771722}
   - component: {fileID: 1705365804451914887}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2060149304707758175}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BulltetSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 3337300131794573871}
   - component: {fileID: 2258293117294796139}
   - component: {fileID: 2498225040635885480}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NecroMancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

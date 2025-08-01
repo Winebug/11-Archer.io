@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 694543468524512355}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7608293440243529249}
   - component: {fileID: 1784646256527843934}
   - component: {fileID: 4004765489756480951}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 785714782835285485}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BulltetSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 182400856008622147}
   - component: {fileID: 6747343799337578107}
   - component: {fileID: 9009546663569789289}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1594925927767733106}
   - component: {fileID: 1787696465630562898}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
