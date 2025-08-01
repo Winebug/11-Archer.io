@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ab2c8f63f0a48d2b0fc907b48c4916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillSelectorUI: {fileID: 0}
 --- !u!1 &151318274
 GameObject:
   m_ObjectHideFlags: 0
