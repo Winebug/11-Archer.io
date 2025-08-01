@@ -43,6 +43,8 @@ public class Player : UnitController
     public float MultiShotDamageMultiplier { get; set; } = 1f;
     public bool HasWallReflection { get; set; } = false;
     public float WallReflectionDamageMultiplier { get; set; } = 1f;
+    //public delegate void SkillSelectionEvent(Player player);
+    //public event SkillSelectionEvent OnSkillSelectionTriggered;
 
     private SkillManager sm;
     protected override void Start()
@@ -51,6 +53,7 @@ public class Player : UnitController
         // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
         ShowSkillSelectorUI();
         wh = GetComponentInChildren<WeaponHandler>();
+        Debug.Log(CurrentHealth);
     }
 
     [SerializeField] private SkillSelectorUI skillSelectorUI;
@@ -167,4 +170,10 @@ public class Player : UnitController
         hasInvincibilitySkill = true;
         invincibleTimer = 0f;
     }
+
+    // public void OnLevelUp()
+    // {
+    //     //레벨업 할때, 스킬 ui 이벤트 발생
+    //     OnSkillSelectionTriggered?.Invoke(this);
+    // }
 }
