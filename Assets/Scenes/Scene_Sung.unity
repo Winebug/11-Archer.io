@@ -951,9 +951,18 @@ MonoBehaviour:
   - {fileID: 151318276}
   - {fileID: 240439553}
   allSkills:
+  - {fileID: 11400000, guid: 6aa09500ec68d4e299c9f5a84fd0b724, type: 2}
+  - {fileID: 11400000, guid: 38c59baa8e64b4149bcb9b56df3ee3bc, type: 2}
+  - {fileID: 11400000, guid: 43d0297b329c945e48201dc99e96917d, type: 2}
+  - {fileID: 11400000, guid: ce53366f0a5514a70bf48e948ccd01cc, type: 2}
+  - {fileID: 11400000, guid: 38e2d6d2f677d4ec1bcf6aa418608a9c, type: 2}
+  - {fileID: 11400000, guid: 75436a69bde8c435c943eb6ef389ff60, type: 2}
+  - {fileID: 11400000, guid: b5fabfb0e6fd04b3b9acdbd6cdcf2660, type: 2}
+  - {fileID: 11400000, guid: 39c0f8f1ac8a44f26a411c54035b2e4d, type: 2}
+  - {fileID: 11400000, guid: 395a81743e5934637b1c09c987a8e598, type: 2}
+  - {fileID: 11400000, guid: 7d45fb70f718347f4bbdfc25ffb1aea6, type: 2}
   - {fileID: 11400000, guid: ef7fe4c8c1e7b4d7b93dcae8b568b13d, type: 2}
-  - {fileID: 11400000, guid: ef7fe4c8c1e7b4d7b93dcae8b568b13d, type: 2}
-  - {fileID: 11400000, guid: ef7fe4c8c1e7b4d7b93dcae8b568b13d, type: 2}
+  - {fileID: 11400000, guid: 9c86400b7860b42918d9d8880f01fa25, type: 2}
 --- !u!1 &585385990
 GameObject:
   m_ObjectHideFlags: 0

@@ -86,14 +86,14 @@ public class UnitController : MonoBehaviour
         HandleAttackDelay(); // 공격 입력 및 쿨타임 관리
 
         // 무적 상태 시간 관리
-        if (timeSinceLastChange < healthChangeDelay)
-        {
-            timeSinceLastChange += Time.deltaTime;
-            if (timeSinceLastChange >= healthChangeDelay)
-            {
-                animationHandler.InvincibilityEnd();
-            }
-        }
+        // if (timeSinceLastChange < healthChangeDelay)
+        // {
+        //     timeSinceLastChange += Time.deltaTime;
+        //     if (timeSinceLastChange >= healthChangeDelay)
+        //     {
+        //         animationHandler.InvincibilityEnd();
+        //     }
+        // }
     }
 
     protected virtual void FixedUpdate()
