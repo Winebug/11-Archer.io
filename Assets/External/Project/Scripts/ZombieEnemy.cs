@@ -6,6 +6,7 @@ public class ZombieEnemy : Enemy
 {
     private Animator animator;
     private static readonly int IsInside = Animator.StringToHash("IsInside");
+    private static readonly int IsAttack = Animator.StringToHash("IsAttack");
     protected override void Start()
     {
         base.Start();
@@ -28,6 +29,7 @@ public class ZombieEnemy : Enemy
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             animator?.SetBool(IsInside, true);
+            animator?.SetBool(IsAttack, true);
         }
     }
 
@@ -36,6 +38,7 @@ public class ZombieEnemy : Enemy
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             animator?.SetBool(IsInside, false);
+            animator?.SetBool(IsAttack, false);
         }
     }
 }
