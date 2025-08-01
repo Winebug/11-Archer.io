@@ -38,5 +38,15 @@ public class BulletShooter : MonoBehaviour
         {
             rb.velocity = direction * bulletSpeed;
         }
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        Enemy owner = GetComponentInParent<Enemy>();
+        if (bulletScript != null && owner != null)
+        {
+            bulletScript.SetOwner(owner);
+        }
+        else
+        {
+            Debug.LogWarning("BulletShooter: Bullet 또는 Enemy owner 설정 실패");
+        }
     }
 }
