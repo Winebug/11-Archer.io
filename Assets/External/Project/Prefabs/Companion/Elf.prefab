@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1139741003065162205}
   - component: {fileID: 1492751793556919254}
+  - component: {fileID: 1689292658600245135}
   m_Layer: 6
   m_Name: MainSprite
   m_TagString: Untagged
@@ -84,6 +85,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1689292658600245135
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921517200665248330}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b3c210cbe7a8014691851deefd683ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7997593301516214063
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +150,7 @@ GameObject:
   - component: {fileID: 6198315671621671073}
   - component: {fileID: 5071044690766576908}
   - component: {fileID: 2957677105572067384}
+  - component: {fileID: 3329124579250220489}
   m_Layer: 6
   m_Name: Elf
   m_TagString: Untagged
@@ -282,3 +305,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &3329124579250220489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9107161731020505667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07be3c65ee309545b06ee90895d3e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
