@@ -6,6 +6,9 @@ using UnityEngine.UIElements.Experimental;
 
 public class Player : UnitController
 {
+    private GameManager gameManager;
+    private Camera playerCamera;
+
     [SerializeField] private LayerMask enemyLayer; // 공격 대상 레이어
     private WeaponHandler wh;
     private int dodge = 0;
@@ -85,6 +88,12 @@ public class Player : UnitController
         }
     }
 
+    public void Init(GameManager gameManager)
+    {
+        this.gameManager = gameManager; // 게임 매니저 연결
+        playerCamera = Camera.main; // 메인 카메라 참조 획득
+    }
+
     private IEnumerator ApplyInvincibility()
     {
         isInvincible = true;
@@ -98,6 +107,7 @@ public class Player : UnitController
 
     protected override void HandleAction()
     {
+        Debug.Log("Player HandleAction called111111");
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
