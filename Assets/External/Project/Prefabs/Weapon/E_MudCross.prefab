@@ -183,22 +183,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa4b87faa899ab740ae38985bb55b501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
-  weaponSize: 1
-  power: 1
+  delay: 1.5
+  weaponSize: 0.5
+  power: 10
   speed: 1
   attackRange: 100
   target:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   isOnKnockback: 0
   knockbackPower: 0.1
   knockbackTime: 0.5
-  projectileSpawnPosition: {fileID: 0}
-  bulletIndex: 0
+  projectileSpawnPosition: {fileID: 7851393083528967900}
+  bulletIndex: 2
   bulletSize: 1
-  duration: 0
+  duration: 5
   spread: 0
-  numberofProjectilesPerShot: 0
-  multipleProjectilesAngel: 0
-  projectileColor: {r: 0, g: 0, b: 0, a: 1}
+  numberofProjectilesPerShot: 4
+  multipleProjectilesAngel: 90
+  projectileColor: {r: 1, g: 1, b: 1, a: 1}
+  projectileCount: 0

@@ -6,20 +6,22 @@ public class MuddyEnemy : Enemy
 {
     bool active = true;
     bool isHiding = true;
+    Animator animator;
+    private static readonly int IsHiding = Animator.StringToHash("IsHiding");
 
     Collider2D selfCollider;
 
     protected override void Awake()
     {
         base.Awake();
-
+        animator = GetComponentInChildren<Animator>();
         selfCollider = GetComponentInChildren<Collider2D>();
     }
 
     protected override void Start()
     {
         base.Start();
-
+        lookDirection = Vector3.up;
         StartCoroutine(MoleMovemet());
 
     }
@@ -31,11 +33,17 @@ public class MuddyEnemy : Enemy
             active = false;
             return;
         }
+        base.Update();
     }
 
     protected override void FixedUpdate()
     {
         
+    }
+
+    protected override void HandleAction()
+    {
+
     }
 
 
@@ -51,10 +59,13 @@ public class MuddyEnemy : Enemy
             //2초 후 공격
             yield return new WaitForSeconds(2f);
             isAttacking = true;
+            Debug.Log("isAttacking");
 
             //3초 후 숨기
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             isAttacking = false;
+            animator.SetBool(IsHiding, true);
+            yield return new WaitForSeconds(1f);
             HideAndSeek();
 
             yield return new WaitForSeconds(3f);
@@ -104,6 +115,7 @@ public class MuddyEnemy : Enemy
         {
             selfCollider.enabled = true;
             characterRenderer.enabled = true;
+            animator.SetBool(IsHiding, false);
         }
         else
         {

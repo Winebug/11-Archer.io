@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
@@ -34,8 +35,10 @@ public class WeaponHandler : MonoBehaviour
 
     public UnitController Controller { get; private set; } // 이 무기를 사용하는 캐릭터 컨트롤러
 
-    private Animator animator;
+    protected Animator animator;
     private SpriteRenderer weaponRenderer;
+
+    HashSet<int> validTriggerHashes = new HashSet<int>();
 
     protected virtual void Awake()
     {
@@ -44,7 +47,14 @@ public class WeaponHandler : MonoBehaviour
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
         // 공격 속도에 따라 애니메이션 재생 속도 조절
-        animator.speed = 1.0f / delay;
+        if (animator != null)
+        {
+            animator.speed = 1.0f / delay;
+        }
+        else
+        {
+            Debug.LogWarning($"{name}의 자식에 Animator가 없습니다. 애니메이션 속도 설정을 건너뜁니다.");
+        }
 
         // 무기 크기 설정
         transform.localScale = Vector3.one * weaponSize;
@@ -52,7 +62,7 @@ public class WeaponHandler : MonoBehaviour
 
     protected virtual void Start()
     {
-
+        CacheAllTriggerHashes(animator);
     }
 
     public virtual void Attack()
@@ -67,7 +77,12 @@ public class WeaponHandler : MonoBehaviour
             //애니메이터없을경우 예외처리
             return;
         }
-        animator.SetTrigger(IsAttack);
+
+        if (validTriggerHashes.Contains(IsAttack))
+        {
+            animator.SetTrigger(IsAttack);
+        }
+        
     }
 
     public virtual void Rotate(bool isLeft)
@@ -75,6 +90,17 @@ public class WeaponHandler : MonoBehaviour
         if (weaponRenderer != null)
         {
             weaponRenderer.flipY = isLeft;
+        }
+    }
+
+    void CacheAllTriggerHashes(Animator animator)
+    {
+        foreach (var param in animator.parameters)
+        {
+            if (param.type == AnimatorControllerParameterType.Trigger)
+            {
+                validTriggerHashes.Add(Animator.StringToHash(param.name));
+            }
         }
     }
 }
