@@ -75,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 120
-  m_Sprite: {fileID: 21300000, guid: 38d1684d407f3204abdd7acd2e4de965, type: 3}
+  m_SortingOrder: 90
+  m_Sprite: {fileID: 21300000, guid: 9467f18d3de492e439a4d48058dcb6ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -150,7 +150,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.375, y: 0.8125}
+    oldSize: {x: 0.625, y: 1.5}
     newSize: {x: 0.375, y: 0.8125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 3980406539445741277}
   - component: {fileID: 6888803655810922865}
   m_Layer: 0
-  m_Name: C_Dager_EquipWeapon
+  m_Name: C_Hammer_EquipWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

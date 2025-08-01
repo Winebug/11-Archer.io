@@ -6,13 +6,26 @@ using UnityEngine;
 public class Companion : UnitController
 {
     [SerializeField] float attakRange = 1;
+    [SerializeField] float searchRange = 1;
     [SerializeField] float followRange = 1;
 
     //강의에서는 Init로 플레이어 할당해주므로, 아마 수정 예정
-    [SerializeField] protected Transform targetTemp;
-    [SerializeField] protected Transform followTarget;
+    protected Transform targetTemp;
+    protected Transform followTarget;
     [SerializeField] private CompanionStat statData;
     public CompanionStat StatData => statData;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        followTarget = playerObject.transform;
+
+        GameObject enemyObject = GameObject.FindWithTag("Enemy");
+        targetTemp = enemyObject.transform;
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -33,11 +46,14 @@ public class Companion : UnitController
 
         isAttacking = false;
 
+        float distance = DistanceBetween();
+        Vector2 direction = FaceDirection();
+
         float distance2 = DistanceBetween2();
         Vector2 direction2 = FaceDirection2();
 
-        // 타겟이 없다 and FollowTarget이 FollowRange 범위내 or 플레이어랑 3이상 떨어졌을경우
-        if (targetTemp == null && distance2 <= followRange || distance2 > 3)
+        // 타겟이 없다 and FollowTarget이 searchRange 범위내 or 플레이어랑 followRange 이상 떨어졌을경우
+        if (targetTemp == null && distance2 <= searchRange || distance2 > followRange)
         {
             lookDirection = direction2;
 
@@ -47,49 +63,49 @@ public class Companion : UnitController
             // followTarget과 거리가 몇 이하이면 정지
             if (distance2 < 2f)
                 movementDirection = Vector2.zero;
+
+            if (targetTemp != null)
+                lookDirection = direction;
             return;
         }
 
-        // 타겟이 있고 FollowRange 안에 있을 때만 추적 시작
-        if (targetTemp != null)
+        // 타겟이 있고 searchRange 안에 있을 때만 추적 시작
+        if (targetTemp != null && distance <= searchRange)
         {
-            
-            float distance = DistanceBetween();
-            Vector2 direction = FaceDirection();
-
             lookDirection = direction;
 
             // follow target에게 접근
             movementDirection = direction;
 
-            if (distance <= followRange)
+            //적이 사거리에 들어오면, 공격
+            if (distance <= weaponHandler.AttackRange)
             {
-                //적이 사거리에 들어오면, 공격
-                if (distance <= weaponHandler.AttackRange)
+                int layerMaskTarget = weaponHandler.target;
+
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
+                    (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
+
+                // 레이어 마스크가 일치하는지 확인 후 공격
+                if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
                 {
-                    int layerMaskTarget = weaponHandler.target;
-
-                    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
-                        (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
-
-                    // 레이어 마스크가 일치하는지 확인 후 공격
-                    if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
-                    {
-                        isAttacking = true;
-                        Debug.Log($"{gameObject.name} {isAttacking}");
-                    }
-                    lookDirection = direction;
-                    movementDirection = Vector2.zero;
-                    return;
+                    isAttacking = true;
+                    Debug.Log($"{gameObject.name} {isAttacking}");
                 }
-            }
+                lookDirection = direction;
+                movementDirection = Vector2.zero;
+                return;
+                }
+            
         }
     }
 
     // 적과의 거리
     float DistanceBetween()
     {
-        return Vector3.Distance(this.transform.position, targetTemp.position);
+        if (targetTemp != null)
+            return Vector3.Distance(this.transform.position, targetTemp.position);
+
+        return 0;
     }
 
     // 플레이어와의 거리
@@ -101,7 +117,10 @@ public class Companion : UnitController
     // 적 방향
     protected Vector2 FaceDirection()
     {
-        return (targetTemp.position - this.transform.position).normalized;
+        if (targetTemp != null)
+            return (targetTemp.position - this.transform.position).normalized;
+
+        return Vector2.zero;
     }
 
     // 플레이어 방향
@@ -117,6 +136,6 @@ public class Companion : UnitController
         Gizmos.DrawWireSphere(transform.position, attakRange);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, followRange);
+        Gizmos.DrawWireSphere(transform.position, searchRange);
     }
 }
