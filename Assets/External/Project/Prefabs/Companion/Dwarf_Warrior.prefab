@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4738810074008834567}
   - component: {fileID: 4998840358876679020}
   m_Layer: 0
-  m_Name: Dwarf
+  m_Name: Dwarf_Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,11 +55,9 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 6888803655810922865, guid: a8c92595a428d9343bad2cf821bf9259, type: 3}
   IsBoss: 0
   speed: 3
-  attakRange: 1
+  attakRange: 1.5
   searchRange: 5
-  followRange: 5
-  targetTemp: {fileID: 0}
-  followTarget: {fileID: 0}
+  followRange: 4
   statData: {fileID: 0}
 --- !u!50 &5662325357070423826
 Rigidbody2D:
@@ -178,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4330575257684854724}
   - component: {fileID: 3655762299603714307}
+  - component: {fileID: 8063954360365437459}
   m_Layer: 0
   m_Name: MainSprite
   m_TagString: Untagged
@@ -252,6 +251,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &8063954360365437459
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959434887315218477}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44a18fd348717a94ebf7ecb0602546bc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3859586444567619837
 GameObject:
   m_ObjectHideFlags: 0

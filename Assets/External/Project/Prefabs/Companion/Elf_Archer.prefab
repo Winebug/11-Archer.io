@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 2957677105572067384}
   - component: {fileID: 3329124579250220489}
   m_Layer: 6
-  m_Name: Elf
+  m_Name: Elf_Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
