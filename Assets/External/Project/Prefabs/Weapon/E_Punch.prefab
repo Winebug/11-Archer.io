@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5535329126211305758}
   - component: {fileID: 2384458979615032259}
   - component: {fileID: 2887049539466405611}
+  - component: {fileID: 4823894511731211103}
   m_Layer: 0
-  m_Name: Puch_Sprite
+  m_Name: Punch_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,6 +181,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 24.209347, y: 26.085464}
   m_EdgeRadius: 0
+--- !u!114 &4823894511731211103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655833243274065362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d67ab75c0e66f4dab0459edd8b6e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7587215793274302345
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 515629907191635578}
-  - component: {fileID: 1677196833375638602}
+  - component: {fileID: 413512805840196857}
   m_Layer: 0
   m_Name: E_Punch
   m_TagString: Untagged
@@ -213,7 +226,7 @@ Transform:
   - {fileID: 1179969878774975962}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1677196833375638602
+--- !u!114 &413512805840196857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,7 +235,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7587215793274302345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e18d6451347dcc47b3b7dd777c20107, type: 3}
+  m_Script: {fileID: 11500000, guid: 99326220ebff9464e8586cc8725b037b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
@@ -232,8 +245,8 @@ MonoBehaviour:
   attackRange: 10
   target:
     serializedVersion: 2
-    m_Bits: 0
-  isOnKnockback: 1
-  knockbackPower: 1
+    m_Bits: 64
+  isOnKnockback: 0
+  knockbackPower: 0.1
   knockbackTime: 0.5
   shouldRotate: 0
