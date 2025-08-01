@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : UnitController
 {
-    [SerializeField] float attakRange = 1;
-    
-    
+    [SerializeField] float attakRange = 0.1f;
+
+
     //강의에서는 Init로 플레이어 할당해주므로, 아마 수정 예정
     [SerializeField] protected Transform playerTemp;
     [SerializeField] private MonsterStat statData;
@@ -14,13 +14,25 @@ public class Enemy : UnitController
     protected override void Start()
     {
         base.Start();
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            playerTemp = playerObj.transform;
+        }
+
+        if (playerTemp == null)
+        {
+            Debug.LogWarning($"{name}: Player 레이어를 가진 오브젝트를 찾을 수 없습니다.");
+        }
 
         if (statData != null) //몬스터 기본스탯등을 불러와서 초기화
         {
-            Health = statData.health;
+            ResetHealthStat(statData.health);
             Speed = statData.moveSpeed;
-            Health = statData.health;
-            weaponHandler = statData.weaponPrefab;
+            if (weaponHandler ==  null) 
+                weaponHandler = statData.weaponPrefab;
+            if (weaponHandler != null)
+                weaponHandler.Power *= statData.attackPower;
         }
     }
     protected override void HandleAction()
@@ -76,5 +88,18 @@ public class Enemy : UnitController
     {
         Debug.Log("Enemy Death");
         base.Death();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player player = other.GetComponent<Player>();
+            if (player != null && statData != null)
+            {
+                Debug.Log(statData.attackPower + "피해를 줌");
+                player.ChangeHealth(-statData.attackPower);
+            }
+        }
     }
 }

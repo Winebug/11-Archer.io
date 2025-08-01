@@ -6,6 +6,7 @@ public class MeleeWeaponHandler : WeaponHandler
 {
     Collider2D weaponCollider;
     List<Collider2D> alredyHitTargets;
+    [SerializeField] bool shouldRotate = false;
 
 
     protected override void Start()
@@ -27,6 +28,11 @@ public class MeleeWeaponHandler : WeaponHandler
 
     public override void Rotate(bool isLeft)
     {
+        if (shouldRotate)
+        {
+            return;
+        }
+
         if (isLeft)
             transform.eulerAngles = new Vector3(0, 180, 0);
         else
@@ -41,24 +47,21 @@ public class MeleeWeaponHandler : WeaponHandler
         weaponCollider.enabled = true;
     }
 
-    public void meleeProcess(Collider2D meleeHitTarget)
+    public virtual void meleeProcess(Collider2D meleeHitTarget)
     {
         if (((1 << meleeHitTarget.gameObject.layer) & target) != 0 && !alredyHitTargets.Contains(meleeHitTarget))
         {
-            Debug.Log("공격 성공");
-
-            UnitController unit = GetComponent<UnitController>();
-            if (unit != null)
-            {
-                //unit.ChangeHealth
-
-                if(IsOnKnockback)
-                    unit.ApplyKnockback(transform, KnockbackPower, KnockbackTime);
-            }
             
 
+            UnitController unit = meleeHitTarget.gameObject.GetComponent<UnitController>();
+            if (unit != null)
+            {
+                unit.ChangeHealth(-Power);
+                Debug.Log("공격 성공");
+                if (IsOnKnockback)
+                    unit.ApplyKnockback(transform, KnockbackPower, KnockbackTime);
+            }
 
-            // 데미지 계산
 
             alredyHitTargets.Add(meleeHitTarget);
         }

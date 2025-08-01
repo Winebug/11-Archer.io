@@ -170,11 +170,14 @@ public class UnitController : MonoBehaviour
 
         timeSinceLastChange = 0f; // 다시 무적 시작
 
+        Debug.Log($"{gameObject.name}: 현재 체력 {CurrentHealth}에서 {change}만큼 체력이 변할 예정입니다");
+
         // 체력 적용
         CurrentHealth += change;
         CurrentHealth = CurrentHealth > Health ? Health : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
+        Debug.Log($"{gameObject.name}: 현재 체력{CurrentHealth}");
         // 데미지일 경우 (음수)
         //if (change < 0)
         //{
@@ -249,5 +252,11 @@ public class UnitController : MonoBehaviour
     protected virtual void ShowAttackRange()
     {
 
+    }
+
+    public void ResetHealthStat(int modifiedHealth)
+    {
+        health = modifiedHealth;
+        CurrentHealth = health;
     }
 }

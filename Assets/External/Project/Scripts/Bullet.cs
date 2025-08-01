@@ -4,6 +4,12 @@ public class Bullet : MonoBehaviour
 {
     private Enemy ownerEnemy;
 
+    private void Start()
+    {
+        // 2초 후에 총알 자동 삭제
+        Destroy(gameObject, 2f);
+    }
+    
     // Enemy 소유자를 할당받는 함수
     public void SetOwner(Enemy enemy)
     {
