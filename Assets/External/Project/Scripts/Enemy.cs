@@ -29,7 +29,8 @@ public class Enemy : UnitController
         {
             Health = statData.health;
             Speed = statData.moveSpeed;
-            weaponHandler = statData.weaponPrefab;
+            if (weaponHandler ==  null) 
+                weaponHandler = statData.weaponPrefab;
         }
     }
     protected override void HandleAction()
