@@ -1,56 +1,92 @@
 using UnityEngine;
-using System.Collections.Generic;
+using TMPro;
+using System.Collections;
 
 public class RoomManager : MonoBehaviour
 {
-    [Header("방 프리팹 설정")]
-    public GameObject FirstRoom;   // 첫 방 전용
-    public GameObject Level;  // 이후 방 전용
+    [Header("방 Prefabs")]
+    public GameObject[] roomPrefabs;
 
-    [Header("방 생성 설정")]
-    public Vector3 nextRoomOffset = new Vector3(0, 20, 0);
-    public float spawnInterval = 10f;
-    public int maxRooms = 10;
+    [Header("생성 위치")]
+    public Transform spawnPosition;
+    public Vector3 roomOffset = new Vector3(0, 20, 0);
 
-    private Vector3 nextSpawnPos = Vector3.zero;
-    private List<GameObject> rooms = new List<GameObject>();
-    private float timer = 0f;
-    private int roomCount = 0;
+    [Header("UI")]
+    public TextMeshProUGUI roomText;
+    public float textMoveDistance = 500f;
+    public float textMoveDuration = 1.0f; // 기존보다 느리게
 
-    void Update()
+    private int currentRoomIndex = 0;
+    private GameObject currentRoom;
+
+    public int CurrentRoomIndex => currentRoomIndex;
+
+    void Start()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= spawnInterval && roomCount < maxRooms)
-        {
-            SpawnRoom();
-            timer = 0f;
-        }
+        SpawnRoom();
     }
 
-    public void SpawnRoom()
+    private void SpawnRoom()
     {
-        GameObject newRoom;
+        Vector3 fixedSpawnPos = new Vector3(-12.23f, spawnPosition.position.y + (roomOffset.y * currentRoomIndex), 0);
+        currentRoom = Instantiate(roomPrefabs[currentRoomIndex], fixedSpawnPos, Quaternion.identity);
 
-        // roomCount를 먼저 올려놓고 판단
-        roomCount++;
+        StartCoroutine(AnimateRoomText($"Room {currentRoomIndex + 1}"));
+    }
 
-        if (roomCount == 1)
+    public void GoToNextRoom()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Destroy(currentRoom);
+
+        currentRoomIndex++;
+        if (player != null)
         {
-            Debug.Log(">>> 첫 번째 방 생성");
-            newRoom = Instantiate(FirstRoom, nextSpawnPos, Quaternion.identity);
+            player.transform.position = spawnPosition.position + new Vector3(0, roomOffset.y * currentRoomIndex, 0);
+        }
+        if (currentRoomIndex < roomPrefabs.Length)
+        {
+            SpawnRoom();
         }
         else
         {
-            Debug.Log($">>> {roomCount}번째 방 생성 (Spawner 실행)");
-            newRoom = Instantiate(Level, nextSpawnPos, Quaternion.identity);
+            ShowClearScreen();
+        }
+    }
 
-            ObstacleSpawner spawner = newRoom.GetComponentInChildren<ObstacleSpawner>();
-            if (spawner != null)
-                spawner.SpawnObstacles();
+    private IEnumerator AnimateRoomText(string text)
+    {
+        // 중앙에서 등장 (Fade In)
+        roomText.text = text;
+        roomText.alpha = 0f;
+        roomText.rectTransform.anchoredPosition = new Vector2(-textMoveDistance, roomText.rectTransform.anchoredPosition.y);
+
+        float elapsed = 0f;
+        while (elapsed < textMoveDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0, 1, elapsed / textMoveDuration); // Ease In
+            roomText.rectTransform.anchoredPosition = Vector2.Lerp(new Vector2(-textMoveDistance, roomText.rectTransform.anchoredPosition.y),
+                                                                   new Vector2(0, roomText.rectTransform.anchoredPosition.y), t);
+            roomText.alpha = Mathf.Lerp(0f, 1f, t);
+            yield return null;
         }
 
-        rooms.Add(newRoom);
-        nextSpawnPos += nextRoomOffset;
+        // 중앙에서 오른쪽으로 사라짐 (Fade Out)
+        elapsed = 0f;
+        while (elapsed < textMoveDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0, 1, elapsed / textMoveDuration); // Ease Out
+            roomText.rectTransform.anchoredPosition = Vector2.Lerp(new Vector2(0, roomText.rectTransform.anchoredPosition.y),
+                                                                   new Vector2(textMoveDistance, roomText.rectTransform.anchoredPosition.y), t);
+            roomText.alpha = Mathf.Lerp(1f, 0f, t);
+            yield return null;
+        }
+    }
+
+    public void ShowClearScreen()
+    {
+        StartCoroutine(AnimateRoomText("CLEAR!"));
     }
 }

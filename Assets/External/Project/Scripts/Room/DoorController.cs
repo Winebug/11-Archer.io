@@ -5,6 +5,14 @@ public class DoorController : MonoBehaviour
     public bool isOpen = false;
     public Animator animator;
 
+    private RoomManager roomManager;
+
+    private void Start()
+    {
+        // RoomManager 캐싱
+        roomManager = FindObjectOfType<RoomManager>();
+    }
+
     // Door 열기
     public void OpenDoor()
     {
@@ -14,19 +22,23 @@ public class DoorController : MonoBehaviour
         if (animator != null)
             animator.SetBool("Open", true);
 
-        // Collider를 Trigger로 변경 → Player 통과 가능
         GetComponent<Collider2D>().isTrigger = true;
     }
 
-    // Player가 닿으면 RoomManager의 SpawnRoom 호출
+    // Player가 닿으면 RoomManager의 GoToNextRoom 호출
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isOpen && collision.CompareTag("Player"))
+        if (isOpen && collision.CompareTag("Player") && roomManager != null)
         {
-            // RoomManager 찾아서 다음 방 생성
-            RoomManager roomManager = FindObjectOfType<RoomManager>();
-            if (roomManager != null)
-                roomManager.SpawnRoom();
+            if (roomManager.CurrentRoomIndex < roomManager.roomPrefabs.Length - 1)
+            {
+                roomManager.GoToNextRoom();
+            }
+            else
+            {
+                Debug.Log("BossRoom 이후 Door → Clear 연출 실행");
+                roomManager.ShowClearScreen(); // BossRoom 클리어 처리
+            }
         }
     }
 }
