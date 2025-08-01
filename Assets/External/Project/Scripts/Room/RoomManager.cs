@@ -26,6 +26,15 @@ public class RoomManager : MonoBehaviour
         SpawnRoom();
     }
 
+    void Update()
+    {
+        // 테스트용: Enter 키로 방 이동 (나중에 삭제 예정)
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            GoToNextRoom();
+        }
+    }
+
     private void SpawnRoom()
     {
         Vector3 fixedSpawnPos = new Vector3(-12.23f, spawnPosition.position.y + (roomOffset.y * currentRoomIndex), 0);
