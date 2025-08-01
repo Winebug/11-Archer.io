@@ -28,7 +28,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    void SpawnRoom()
+    public void SpawnRoom()
     {
         GameObject newRoom;
 
