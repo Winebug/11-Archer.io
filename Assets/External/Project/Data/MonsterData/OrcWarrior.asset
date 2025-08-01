@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a862d78f24509449b21ac25b861ed90, type: 3}
-  m_Name: Ogre
+  m_Name: OrcWarrior
   m_EditorClassIdentifier: 
-  monsterName: Ogre
-  health: 75
-  moveSpeed: 1.5
-  attackPower: 5
+  monsterName: OrcWarroir
+  health: 10
+  moveSpeed: 2
+  attackPower: 2
   weaponPrefab: {fileID: 0}
