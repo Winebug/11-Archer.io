@@ -8,7 +8,7 @@ public class SkillSelectorUI : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private GameObject panel;                // 전체 스킬 선택 패널
     [SerializeField] private Button[] skillButtons;           // 선택할 버튼 (3개)
-    [SerializeField] private List<Skill> allSkills;           // 선택 풀 (에디터에서 등록)
+    [SerializeField] private List<Skill> allSkills;           // 선택 풀
 
     private List<Skill> currentChoices = new List<Skill>();   // 현재 선택된 3개
     private Player player;                                    // 스킬을 적용할 대상 (플레이어)
@@ -70,6 +70,15 @@ public class SkillSelectorUI : MonoBehaviour
     private List<Skill> GetRandomSkills(int count)
     {
         List<Skill> pool = new List<Skill>(allSkills);
+
+        foreach (Skill s in allSkills)
+        {
+            if (!SkillManager.Instance.IsSkillReachedAtMaxStack(s))
+            {
+                pool.Add(s);
+            }
+        }
+
         List<Skill> result = new List<Skill>();
 
         for (int i = 0; i < count && pool.Count > 0; i++)
