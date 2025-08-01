@@ -59,7 +59,7 @@ public class MeleeWeaponHandler : WeaponHandler
 
 
             // 데미지 계산
-
+            Debug.Log("공격력: " + Power); 
             alredyHitTargets.Add(meleeHitTarget);
         }
     }

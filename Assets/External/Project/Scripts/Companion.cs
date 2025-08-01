@@ -89,7 +89,6 @@ public class Companion : UnitController
                 if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
                 {
                     isAttacking = true;
-                    Debug.Log($"{gameObject.name} {isAttacking}");
                 }
                 lookDirection = direction;
                 movementDirection = Vector2.zero;

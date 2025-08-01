@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Big_Zombie
   m_EditorClassIdentifier: 
   monsterName: Big_Zombie
-  health: 100
+  health: 20
   moveSpeed: 1
   attackPower: 10
   weaponPrefab: {fileID: 2154621582540706235, guid: 464db0b134fe2934b8000241e86f57d7, type: 3}

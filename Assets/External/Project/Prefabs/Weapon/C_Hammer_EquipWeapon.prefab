@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1915494185084309442}
   - component: {fileID: 8173647103147712757}
-  - component: {fileID: 3836389886222690812}
-  - component: {fileID: 25704961311918320}
-  - component: {fileID: 8525326055308584543}
+  - component: {fileID: 995279454236454921}
+  - component: {fileID: 1506540264475963716}
+  - component: {fileID: 5854233028571001323}
   m_Layer: 0
   m_Name: WeaponSprite
   m_TagString: Untagged
@@ -87,7 +87,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &3836389886222690812
+--- !u!95 &995279454236454921
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7931693981770949238}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1da107c86789e7a41b6da0b3d90073e4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &1506540264475963716
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -102,7 +123,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -113,8 +134,8 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &25704961311918320
+  m_Constraints: 0
+--- !u!61 &5854233028571001323
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,20 +178,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.375, y: 0.8125}
+  m_Size: {x: 0.625, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &8525326055308584543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7931693981770949238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a17b60aef2bb75f42a20587f78732570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8126546801691804620
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3980406539445741277}
   - component: {fileID: 6888803655810922865}
+  - component: {fileID: 4304907394847310209}
   m_Layer: 0
   m_Name: C_Hammer_EquipWeapon
   m_TagString: Untagged
@@ -218,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 1
   weaponSize: 1
-  power: 1
+  power: 10
   speed: 1
   attackRange: 1
   target:
@@ -227,3 +237,15 @@ MonoBehaviour:
   isOnKnockback: 0
   knockbackPower: 0.1
   knockbackTime: 0.5
+--- !u!114 &4304907394847310209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8126546801691804620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17b60aef2bb75f42a20587f78732570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
