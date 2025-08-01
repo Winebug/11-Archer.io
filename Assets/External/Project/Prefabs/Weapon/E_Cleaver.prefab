@@ -249,3 +249,4 @@ MonoBehaviour:
   isOnKnockback: 1
   knockbackPower: 2
   knockbackTime: 0.5
+  shouldRotate: 0

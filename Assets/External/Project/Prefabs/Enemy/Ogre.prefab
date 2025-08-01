@@ -88,7 +88,7 @@ MonoBehaviour:
   speed: 3
   attakRange: 1.8
   playerTemp: {fileID: 0}
-  statData: {fileID: 0}
+  statData: {fileID: 11400000, guid: cefb9c6d867d77f4da60302a24bc81ed, type: 2}
 --- !u!50 &5540218901931156638
 Rigidbody2D:
   serializedVersion: 4

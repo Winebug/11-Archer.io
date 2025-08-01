@@ -27,10 +27,12 @@ public class Enemy : UnitController
 
         if (statData != null) //몬스터 기본스탯등을 불러와서 초기화
         {
-            Health = statData.health;
+            ResetHealthStat(statData.health);
             Speed = statData.moveSpeed;
             if (weaponHandler ==  null) 
                 weaponHandler = statData.weaponPrefab;
+            if (weaponHandler != null)
+                weaponHandler.Power *= statData.attackPower;
         }
     }
     protected override void HandleAction()
