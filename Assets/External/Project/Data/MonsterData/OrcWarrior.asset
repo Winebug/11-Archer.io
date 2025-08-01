@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a862d78f24509449b21ac25b861ed90, type: 3}
-  m_Name: Necromancer
+  m_Name: OrcWarrior
   m_EditorClassIdentifier: 
-  monsterName: NercroMancer
-  health: 500
-  moveSpeed: 3.1
-  attackPower: 20
-  weaponPrefab: {fileID: 223323353283478274, guid: 98e1fadcf98c62544bd34aa0043d523e, type: 3}
+  monsterName: OrcWarroir
+  health: 10
+  moveSpeed: 2
+  attackPower: 2
+  weaponPrefab: {fileID: 0}

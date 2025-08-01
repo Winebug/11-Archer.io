@@ -5,7 +5,7 @@ public class MonsterStat : ScriptableObject
 {
     public string monsterName;
 
-    [Range(1, 100)] public int health;
+    public int health;
     [Range(1f, 20f)] public float moveSpeed;
     public float attackPower;
 
