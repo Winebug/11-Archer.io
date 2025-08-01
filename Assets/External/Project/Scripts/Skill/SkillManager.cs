@@ -7,6 +7,7 @@ public class SkillManager : MonoBehaviour
     private HashSet<Skill> skillHashSet = new(); // 한번만 적용 가능한 스킬들 목록
     private Dictionary<Skill, int> skillDictionary = new(); // 누적 스킬들 목록
     private List<Skill> skills = new List<Skill>(); // 현재 플레이어가 획득한 스킬 목록
+    [SerializeField] private SkillSelectorUI skillSelectorUI;
 
     // 싱글톤
     private void Awake()
@@ -66,4 +67,20 @@ public class SkillManager : MonoBehaviour
 
         return false;
     }
+
+    // 나중에 구현
+    // private void OnEnable()
+    // {
+    //     FindObjectOfType<Player>().OnSkillSelectionTriggered += ShowSkillSelector;        
+    // }
+
+    // private void OnDisable()
+    // {
+    //     FindObjectOfType<Player>().OnSkillSelectionTriggered -= ShowSkillSelector;    
+    // }
+    // private void ShowSkillSelector(Player player)
+    // {
+    //     skillSelectorUI.Initialize(player);
+    //     skillSelectorUI.Show();
+    // }
 }

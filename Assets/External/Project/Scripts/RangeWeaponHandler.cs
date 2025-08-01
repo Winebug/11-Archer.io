@@ -19,7 +19,7 @@ public class RangeWeaponHandler : WeaponHandler
     [SerializeField] private float spread = 0f; // 총알 퍼짐 각도 범위
     public float Spread { get { return spread; } }
 
-    private int numberofProjectilesPerShot = 1; // 한 번에 발사할 총알 수
+    [SerializeField] int numberofProjectilesPerShot = 1; // 한 번에 발사할 총알 수
     public int NumberofProjectilesPerShot { get { return numberofProjectilesPerShot; } }
 
     [SerializeField] private float multipleProjectilesAngel; // 총알들 간의 고정 각도 간격
@@ -56,7 +56,7 @@ public class RangeWeaponHandler : WeaponHandler
             float angle = minAngle + projectilesAngleSpace * i; // 기본 각도
             float randomSpread = Random.Range(-spread, spread); // 랜덤 퍼짐 적용
             angle += randomSpread;
-
+            
             // 실제 투사체 생성 (Controller.LookDirection = 캐릭터가 바라보는 방향)
             CreateProjectile(Controller.LookDirection, angle);
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4437580171818991381}
   - component: {fileID: 8819322004856284080}
   - component: {fileID: 888909564001532330}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,10 +128,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 109296857525162484}
-  - component: {fileID: 8966450352291845564}
   - component: {fileID: 8343173671428719356}
   - component: {fileID: 8828352455232785304}
-  m_Layer: 0
+  - component: {fileID: 7273710770570310642}
+  m_Layer: 7
   m_Name: Standard_Zombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,27 +155,6 @@ Transform:
   - {fileID: 8888104567457601084}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8966450352291845564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560736691224379981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 744a99e343a9224488b4972fe2024905, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterRenderer: {fileID: 8819322004856284080}
-  weaponPivot: {fileID: 8888104567457601084}
-  healthChangeDelay: 0.5
-  WeaponPrefab: {fileID: 0}
-  health: 10
-  speed: 3
-  attakRange: 1
-  playerTemp: {fileID: 0}
-  statData: {fileID: 11400000, guid: 59d548c7f00a88f499de19810f8ffbc1, type: 2}
 --- !u!50 &8343173671428719356
 Rigidbody2D:
   serializedVersion: 4
@@ -248,6 +227,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.74237925, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7273710770570310642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560736691224379981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4152d8459f9b94eb109748a89854a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRenderer: {fileID: 8819322004856284080}
+  weaponPivot: {fileID: 8888104567457601084}
+  healthChangeDelay: 0.5
+  WeaponPrefab: {fileID: 0}
+  health: 10
+  speed: 3
+  attakRange: 0.1
+  playerTemp: {fileID: 0}
+  statData: {fileID: 11400000, guid: 59d548c7f00a88f499de19810f8ffbc1, type: 2}
 --- !u!1 &4867133873240201073
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8888104567457601084}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
