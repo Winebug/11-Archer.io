@@ -7,8 +7,13 @@ public class AddProjectileSkill : Skill
     {
         var weapon = player.GetComponentInChildren<RangeWeaponHandler>();
 
-        if (weapon == null) return;
+        if (weapon == null) 
+        {
+            Debug.Log("RangeWeaponHandler 없음.");
+            return;
+        }
 
-        Debug.Log("화살 추가.");
+        weapon.AddProjectiles();
+        Debug.Log("발사체 추가.");
     }
 }
