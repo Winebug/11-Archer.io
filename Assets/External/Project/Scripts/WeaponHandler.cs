@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
@@ -37,6 +38,8 @@ public class WeaponHandler : MonoBehaviour
     protected Animator animator;
     private SpriteRenderer weaponRenderer;
 
+    HashSet<int> validTriggerHashes = new HashSet<int>();
+
     protected virtual void Awake()
     {
         Controller = GetComponentInParent<UnitController>();
@@ -59,7 +62,7 @@ public class WeaponHandler : MonoBehaviour
 
     protected virtual void Start()
     {
-
+        CacheAllTriggerHashes(animator);
     }
 
     public virtual void Attack()
@@ -74,7 +77,12 @@ public class WeaponHandler : MonoBehaviour
             //애니메이터없을경우 예외처리
             return;
         }
-        animator.SetTrigger(IsAttack);
+
+        if (validTriggerHashes.Contains(IsAttack))
+        {
+            animator.SetTrigger(IsAttack);
+        }
+        
     }
 
     public virtual void Rotate(bool isLeft)
@@ -82,6 +90,17 @@ public class WeaponHandler : MonoBehaviour
         if (weaponRenderer != null)
         {
             weaponRenderer.flipY = isLeft;
+        }
+    }
+
+    void CacheAllTriggerHashes(Animator animator)
+    {
+        foreach (var param in animator.parameters)
+        {
+            if (param.type == AnimatorControllerParameterType.Trigger)
+            {
+                validTriggerHashes.Add(Animator.StringToHash(param.name));
+            }
         }
     }
 }
