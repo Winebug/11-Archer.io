@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ZombieEnemy : Enemy
 {
-    private Animator animator;
+    private Animator[] animators;
     private static readonly int IsInside = Animator.StringToHash("IsInside");
+    private static readonly int IsAttack = Animator.StringToHash("IsAttack");
     protected override void Start()
     {
         base.Start();
-        animator = GetComponentInChildren<Animator>();
+        animators = GetComponentsInChildren<Animator>();
 
     }
 
@@ -17,7 +18,7 @@ public class ZombieEnemy : Enemy
     {
         base.Update();
 
-        if (animator != null && animator.GetBool(IsInside))
+        if (animators[0] != null && animators[0].GetBool(IsInside))
         {
             movementDirection = Vector2.zero;
         }
@@ -27,7 +28,8 @@ public class ZombieEnemy : Enemy
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            animator?.SetBool(IsInside, true);
+            animators[0]?.SetBool(IsInside, true);
+            animators[1]?.SetBool(IsAttack, true);
         }
     }
 
@@ -35,7 +37,8 @@ public class ZombieEnemy : Enemy
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            animator?.SetBool(IsInside, false);
+            animators[0]?.SetBool(IsInside, false);
+            animators[1]?.SetBool(IsAttack, false);
         }
     }
 }

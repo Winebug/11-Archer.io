@@ -20,7 +20,9 @@ public class ProjectileManager : MonoBehaviour
 
         // 지정된 위치에 투사체 생성
         GameObject obj = Instantiate(origin, startPostiion, Quaternion.identity);
-        
+
+        rangeWeaponHandler.shooter = rangeWeaponHandler.Controller.gameObject;
+
         // 투사체에 초기 정보 전달 (방향, 무기 데이터)
         ProjectileController projectileController = obj.GetComponent<ProjectileController>();
         projectileController.Init(direction, rangeWeaponHandler);

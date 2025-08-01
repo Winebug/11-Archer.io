@@ -9,13 +9,14 @@ public class MuddyEnemy : Enemy
     Animator animator;
     private static readonly int IsHiding = Animator.StringToHash("IsHiding");
 
-    Collider2D selfCollider;
+    Collider2D col;
+    [SerializeField] LayerMask obstacleLayer;
 
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponentInChildren<Animator>();
-        selfCollider = GetComponentInChildren<Collider2D>();
+        col = GetComponent<Collider2D>();
     }
 
     protected override void Start()
@@ -79,24 +80,27 @@ public class MuddyEnemy : Enemy
         if (playerTemp == null)
             return;
         
-        for (int i = 0; i < 10; i++)
+ 
+
+        for (int i = 0; i < 20; i++)
         {
             Vector2 target = RandomDonutPosition(playerTemp.position, 3f, 5f);
-
             i++;
+
 
             //벽과 장애물에 순간이동 안되게 하는 코드, obstacleLayer에 벽과 장애물 설정 필요
 
-            //if (!Physics2D.OverlapCircle(target, 0.5f, obstacleLayer))
-            //{
+            if (!Physics2D.OverlapCircle(target, 0.5f, obstacleLayer))
+            {
                 transform.position = target;
                 return;
-            //}
+            }
 
-            
+
+
         }
 
-
+        return;
     }
 
     Vector2 RandomDonutPosition(Vector2 center, float minRadius, float maxRadius)
@@ -113,13 +117,13 @@ public class MuddyEnemy : Enemy
         
         if (isHiding)
         {
-            selfCollider.enabled = true;
+            col.enabled = true;
             characterRenderer.enabled = true;
             animator.SetBool(IsHiding, false);
         }
         else
         {
-            selfCollider.enabled = false;
+            col.enabled = false;
             characterRenderer.enabled = false;
         }
         isHiding = !isHiding;
