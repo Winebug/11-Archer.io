@@ -13,9 +13,18 @@ public class DustParticleControl : MonoBehaviour
         {
             dustParticleSystem.Stop(); // 이전 재생을 멈추고
             dustParticleSystem.Play(); // 새로 재생
+
+            // eyeParticleSystem이 재생중이 아니라면 새로 재생
+            if (!eyeParticleSystem.isPlaying)
+            {
+                eyeParticleSystem.Play(); // 새로 재생 
+            }
         }
 
-        Debug.Log("Create Dust Particles");
-        eyeParticleSystem.Play();
+        // eyeParticleSystem이 재생중이 아니라면 새로 재생
+        if (!eyeParticleSystem.isPlaying)
+        {
+            eyeParticleSystem.Play(); // 새로 재생 
+        }
     }
 }
