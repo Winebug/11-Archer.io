@@ -6,9 +6,7 @@ public class Enemy : UnitController
 {
     [SerializeField] float attakRange = 0.1f;
 
-
-    //강의에서는 Init로 플레이어 할당해주므로, 아마 수정 예정
-    [SerializeField] protected Transform playerTemp;
+    protected Transform playerTransform;
     [SerializeField] private MonsterStat statData;
     public MonsterStat StatData => statData;
     protected override void Start()
@@ -17,10 +15,10 @@ public class Enemy : UnitController
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
-            playerTemp = playerObj.transform;
+            playerTransform = playerObj.transform;
         }
 
-        if (playerTemp == null)
+        if (playerTransform == null)
         {
             Debug.LogWarning($"{name}: Player 레이어를 가진 오브젝트를 찾을 수 없습니다.");
         }
@@ -39,7 +37,7 @@ public class Enemy : UnitController
     {
 
         // 타겟(플레이어)가 없으면 움직이지 않음
-        if (playerTemp == null)
+        if (playerTransform == null)
         {
 
             return;
@@ -76,12 +74,12 @@ public class Enemy : UnitController
 
     float DistanceBetween()
     {
-        return Vector3.Distance(this.transform.position, playerTemp.position);
+        return Vector3.Distance(this.transform.position, playerTransform.position);
     }
 
     protected Vector2 FaceDirection()
     {
-        return (playerTemp.position - this.transform.position).normalized;
+        return (playerTransform.position - this.transform.position).normalized;
     }
 
     public override void Death()
