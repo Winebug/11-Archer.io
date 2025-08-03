@@ -15935,6 +15935,7 @@ MonoBehaviour:
   projectilePrefabs:
   - {fileID: 8078500702608004191, guid: 02ec42b7d58980a479d3e1142b94396e, type: 3}
   - {fileID: 7033494341717765489, guid: 4c3935a43903d874c911ccacf7bb0fa2, type: 3}
+  impactParticleSystem: {fileID: 219203690}
 --- !u!4 &1606638939
 Transform:
   m_ObjectHideFlags: 0
@@ -16511,8 +16512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e57ffa25d19f0438b2e7b67932edac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffectVolume: 0
-  soundEffectPitchVariance: 0
+  soundEffectVolume: 0.232
+  soundEffectPitchVariance: 0.232
   musicVolume: 0.144
   bgmArray:
   - {fileID: 8300000, guid: 09c9687e7a5a40c4885966839a6e6c2d, type: 3}
