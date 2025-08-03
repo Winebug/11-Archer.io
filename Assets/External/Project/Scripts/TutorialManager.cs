@@ -8,6 +8,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject dummy;
     [SerializeField] GameObject howToMoveUI;
     [SerializeField] GameObject howToAttackUI;
+    [SerializeField] GameObject endTutorialUI;
 
     int coinObtainderNum = 0;
     bool tutorialEnd = false;
@@ -25,7 +26,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (dummy == null && !tutorialEnd)
         {
-            tutorialEnd = true;
+            EndTutorial();
         }
     }
 
@@ -61,5 +62,11 @@ public class TutorialManager : MonoBehaviour
         dummy.SetActive(true);
     }
 
+    void EndTutorial()
+    {
+        tutorialEnd = true;
+        howToAttackUI.SetActive(false);
+        endTutorialUI.SetActive(true);
+    }
 
 }
