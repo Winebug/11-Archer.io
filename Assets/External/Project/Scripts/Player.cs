@@ -51,7 +51,8 @@ public class Player : UnitController
     {
         base.Start();
         // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
-        ShowSkillSelectorUI();
+        if (skillSelectorUI != null)
+            ShowSkillSelectorUI();
         wh = GetComponentInChildren<WeaponHandler>();
         Debug.Log(CurrentHealth);
     }
