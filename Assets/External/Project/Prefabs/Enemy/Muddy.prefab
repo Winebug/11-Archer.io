@@ -432,9 +432,9 @@ MonoBehaviour:
   healthChangeDelay: 0.5
   WeaponPrefab: {fileID: 5261663675278192890, guid: a335fc2b874614e40b752c92b02bc4c8, type: 3}
   IsBoss: 0
+  damageClip: {fileID: 8300000, guid: 4ad7c6f02850e48459a800c064a98289, type: 3}
   speed: 3
   attakRange: 1
-  playerTemp: {fileID: 0}
   statData: {fileID: 11400000, guid: 727763b21e4f6c941b738eb9d4383054, type: 2}
   obstacleLayer:
     serializedVersion: 2

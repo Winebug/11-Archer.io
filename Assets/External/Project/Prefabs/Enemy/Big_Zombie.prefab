@@ -232,9 +232,9 @@ MonoBehaviour:
   healthChangeDelay: 0.5
   WeaponPrefab: {fileID: 413512805840196857, guid: 464db0b134fe2934b8000241e86f57d7, type: 3}
   IsBoss: 0
+  damageClip: {fileID: 8300000, guid: 4ad7c6f02850e48459a800c064a98289, type: 3}
   speed: 3
   attakRange: 0.1
-  playerTemp: {fileID: 0}
   statData: {fileID: 11400000, guid: c974e5ecc9ce42144bdf92f1dc2d1409, type: 2}
 --- !u!1 &3629638856580032684
 GameObject:

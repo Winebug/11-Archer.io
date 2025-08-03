@@ -34,6 +34,9 @@ public class UnitController : MonoBehaviour
     private Animator animator;
     private static readonly int IsDamage = Animator.StringToHash("IsDamage");
     private bool hasDeadlyShotApplied = false;
+
+    public AudioClip damageClip;
+
     public bool HasDeadlyShotApplied
     {
         get => hasDeadlyShotApplied;
@@ -181,12 +184,21 @@ public class UnitController : MonoBehaviour
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
         Debug.Log($"{gameObject.name}: 현재 체력{CurrentHealth}");
-        // 데미지일 경우 (음수)
-        //if (change < 0)
-        //{
-        //    animationHandler.Damage(); // 맞는 애니메이션 실행
+        
+        //데미지일 경우(음수)
+        if (change < 0)
+        {
+            // 피격 애니메이션이 있을 경우 재생
+            if (animationHandler != null)
+            {
+                animationHandler.Damage(); // 피격 애니메이션 실행
+            }
 
-        //}
+            // 사운드가 설정되어 있을 경우 재생
+            if (damageClip != null)
+                SoundManager.PlayClip(damageClip);
+
+        }
 
         // 체력이 0 이하가 되면 사망 처리
         if (CurrentHealth <= 0f)
