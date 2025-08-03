@@ -15,6 +15,14 @@ public class Companion : UnitController
     [SerializeField] private CompanionStat statData;
     public CompanionStat StatData => statData;
 
+    GameManager gameManager;
+
+    public void Init(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
+
+
     protected override void Start()
     {
         base.Start();
@@ -134,5 +142,19 @@ public class Companion : UnitController
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, searchRange);
+    }
+
+    public void StartWave(int waveCount)
+    {
+        // 0 이하일 경우 적 생성 없이 바로 웨이브 종료 처리
+        if (waveCount <= 0)
+        {
+            gameManager.EndOfWave(); // GameManager에 웨이브 종료 알림
+            return;
+        }
+
+        //if (waveRoutine != null)
+        //    StopCoroutine(waveRoutine);
+        //waveRoutine = StartCoroutine(SpawnWave(waveCount));
     }
 }
