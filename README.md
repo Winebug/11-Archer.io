@@ -1,28 +1,22 @@
-
+# **Game Title**
 <img width="2816" height="1536" alt="던전이미지" src="https://github.com/user-attachments/assets/9c86fe99-f8f3-4844-95ef-2f7cff45cb01" />
 
----
-
-<br>
+# **Flow Chart** (아래 Chart는 수정될 수 있음)
 
 <img width="7848" height="2422" alt="image" src="https://github.com/user-attachments/assets/bab016a2-b5ea-4ad3-85f6-4ae25acc3f8d" />
 
-
-(위 전개는 수정될 수 있음)
-
----
-
+# **Diagram**
 <img width="9968" height="6946" alt="image" src="https://github.com/user-attachments/assets/48a3f57b-5897-45cd-9505-b7dc1c1ef733" />
 
----
+# **Team**
+<img width="1728" height="2040" alt="image" src="https://github.com/user-attachments/assets/55b6cded-4a2c-421a-9990-795db67fc4ad" />
 
-<img width="3440" height="3554" alt="image" src="https://github.com/user-attachments/assets/401eade3-222a-4b84-97ef-5b1f0c96d305" />
+# **게임 소개**
 
----
-
-### **궁수의 전설**
-
-- 장르 : 탑다운 / 로그라이크 / 슈팅
+- **장르**
+    - 탑다운
+    - 로그라이크
+    - 슈팅
 
 - **랜덤 방 생성**
     - 방의 구조, 적 배치, 아이템 위치를 무작위로 생성
@@ -66,7 +60,7 @@
  
 ---
 
-### **Commit Convention**
+# **Commit Convention**
 
 Feat:	새로운 기능 추가  
 Fix:	버그 수정 또는 typo  
