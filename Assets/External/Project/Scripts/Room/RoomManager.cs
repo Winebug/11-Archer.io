@@ -3,9 +3,8 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
-
-    public Transform player;                // Player Transform
-    public Transform[] roomStartPositions;   // 각 Room 시작 위치 (Room1, Room2…)
+    public Transform player;
+    public float roomGapY = 20f;
 
     private void Awake()
     {
@@ -14,17 +13,26 @@ public class RoomManager : MonoBehaviour
 
     public void OnRoomCleared(int clearedRoomIndex)
     {
-        int nextRoomIndex = clearedRoomIndex + 1;
-
-        if (nextRoomIndex < roomStartPositions.Length)
-        {
-            MovePlayerToRoom(nextRoomIndex);
-        }
+        MovePlayerToNextRoom();
     }
 
-    private void MovePlayerToRoom(int roomIndex)
+    private void MovePlayerToNextRoom()
     {
-        // Player 위치를 Room 시작 지점으로 순간 이동
-        player.position = roomStartPositions[roomIndex].position;
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            Vector2 newPos = rb.position;
+            newPos.y += roomGapY;
+            rb.MovePosition(newPos); // Rigidbody로 안전하게 이동
+            Debug.Log($"✅ Rigidbody로 Player 이동: {newPos}");
+        }
+        else
+        {
+            // 혹시 Rigidbody가 없으면 Transform으로 이동
+            Vector3 newPosition = player.position;
+            newPosition.y += roomGapY;
+            player.position = newPosition;
+            Debug.Log($"✅ Transform으로 Player 이동: {player.position}");
+        }
     }
 }
