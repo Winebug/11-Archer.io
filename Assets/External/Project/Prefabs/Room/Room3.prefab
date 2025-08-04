@@ -94,6 +94,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 6609226266096557723, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
+  - {fileID: 6248347839798144051, guid: f2c8d9ea7d144804f83cb3a57828d411, type: 3}
+  - {fileID: 7376978154654308244, guid: 8f3e2aa2e66af81468fe8ba06397dad0, type: 3}
   spawnCount: 3
   spawnAreaSize: {x: 7, y: 10}
   room: {fileID: 6338717485793403801}
@@ -2630,7 +2632,7 @@ GameObject:
   - component: {fileID: 3336491871160889351}
   - component: {fileID: 1888723643293225224}
   - component: {fileID: 5736937209255126467}
-  - component: {fileID: 9087840578677908956}
+  - component: {fileID: 2269646882362032154}
   - component: {fileID: 8329038650441769546}
   m_Layer: 0
   m_Name: Door
@@ -2789,7 +2791,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &9087840578677908956
+--- !u!114 &2269646882362032154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2798,10 +2800,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6801988525179587679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a508b8ac4614a45a60b9fd5a11c5f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d99a271560e4724687b5ba0fed97ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 6338717485793403801}
+  player: {fileID: 0}
+  roomGapY: 20
+  room: {fileID: 0}
   isOpen: 0
   moveDistanceY: 10
 --- !u!61 &8329038650441769546
