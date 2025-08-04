@@ -88,11 +88,11 @@ public class StartSceneUI : MonoBehaviour
         if (canvas != null)
         {
             Transform canvasTransform = canvas.transform;
-            Transform pausePanelTransform = canvasTransform.Find("Panel_Setting");
+            Transform panelSettingTransform = canvasTransform.Find("Panel_Setting");
 
-            if (pausePanelTransform != null)
+            if (panelSettingTransform != null)
             {
-                panelSetting = pausePanelTransform.gameObject;
+                panelSetting = panelSettingTransform.gameObject;
                 panelSetting.SetActive(false);
             }
         }

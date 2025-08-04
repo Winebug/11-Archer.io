@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements.Experimental;
 
 public class Player : UnitController
@@ -63,7 +64,11 @@ public class Player : UnitController
         //     ShowSkillSelectorUI();
         wh = GetComponentInChildren<WeaponHandler>();
         Debug.Log(CurrentHealth);
-        skillSelectorUI.Initialize(this);
+        if (skillSelectorUI != null)
+            skillSelectorUI.Initialize(this);
+        else
+            if ("Tutorial" != SceneManager.GetActiveScene().name)
+            Debug.LogWarning("스킬을 불러올 수 없습니다");
     }
 
     [SerializeField] private SkillSelectorUI skillSelectorUI;
