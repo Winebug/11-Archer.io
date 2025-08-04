@@ -71,8 +71,6 @@ public class KeyBindingManager : MonoBehaviour
 
                     foreach (var pair in keyBindings)
                     {
-                        string keyList = string.Join(", ", pair.Value);
-                        Debug.Log($"[KeyBinding] {pair.Key} => {keyList}");
                         if (pair.Value.Count > 0)
                         {
                             KeyCode key = pair.Value[0];
