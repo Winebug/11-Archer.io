@@ -7,7 +7,7 @@ public class Room : MonoBehaviour
     private List<Enemy> enemies = new List<Enemy>();
     public Door door; // 현재 Room의 Door 참조
 
-    void OnEnable()
+    void Start()
     {
         enemies.Clear();
         Enemy[] foundEnemies = GetComponentsInChildren<Enemy>(true);
