@@ -70,6 +70,8 @@ public class CompanionManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("트리거에 충돌: " + collision.gameObject.name);
+
         // 플레이어가 이 트리거에 들어오면 동료를 소환
         if (collision.CompareTag("Player"))
         {

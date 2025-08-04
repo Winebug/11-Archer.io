@@ -6022,8 +6022,8 @@ GameObject:
   - component: {fileID: 1861786823593239717}
   - component: {fileID: 987673793277745734}
   - component: {fileID: 2926991394775902352}
-  - component: {fileID: 4665928801087802802}
   - component: {fileID: 6040523807160545374}
+  - component: {fileID: 8527970279851668855}
   m_Layer: 0
   m_Name: CompanionSpawn
   m_TagString: Untagged
@@ -6201,21 +6201,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &4665928801087802802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9084062307793919025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a508b8ac4614a45a60b9fd5a11c5f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  room: {fileID: -2978413790072655619}
-  isOpen: 0
-  moveDistanceY: 80
 --- !u!114 &6040523807160545374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6228,6 +6213,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0202706b4ab9dc649b24536b49f25762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  companionPrefabs: []
-  spawnAreas: []
+  companionPrefabs:
+  - {fileID: 6721918568878996250, guid: fbbff555af0185c4a87824998d936a09, type: 3}
+  - {fileID: 9107161731020505667, guid: b7eb74aa371c80c4c9e0e8a7b1b1ab46, type: 3}
+  - {fileID: 929184840089175027, guid: 57a47de28909b684fb58add3ef8040a5, type: 3}
+  spawnAreas:
+  - serializedVersion: 2
+    x: -9
+    y: 76
+    width: 1
+    height: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
+--- !u!19719996 &8527970279851668855
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9084062307793919025}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
