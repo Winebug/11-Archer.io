@@ -31,7 +31,7 @@ public class UnitController : MonoBehaviour
 
     public float CurrentHealth { get; private set; } // 현재 체력 (외부 접근만 허용)
     public bool IsBoss = false;
-    private Animator animator;
+    protected Animator animator;
     private static readonly int IsDamage = Animator.StringToHash("IsDamage");
     private bool hasDeadlyShotApplied = false;
 

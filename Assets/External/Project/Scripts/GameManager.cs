@@ -20,8 +20,10 @@ public class GameManager : MonoBehaviour
 
         // 플레이어 찾고 초기화
         player = FindObjectOfType<Player>();
-        player.Init(this);
-
+        if (player != null)
+            player.Init(this);
+        else
+            Debug.LogWarning("플레이어를 찾을 수 없습니다");
         // 컴패니언 매니저 초기화
         companionManager = GetComponentInChildren<CompanionManager>();
         companionManager.Init(this);
