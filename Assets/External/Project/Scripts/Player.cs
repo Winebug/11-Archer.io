@@ -50,9 +50,14 @@ public class Player : UnitController
     //public event SkillSelectionEvent OnSkillSelectionTriggered;
 
     private SkillManager sm;
+
+    //플레이어 키 설정
+    private KeyBindingManager keyBindingManager;
+    
     protected override void Start()
     {
         base.Start();
+        keyBindingManager = FindObjectOfType<KeyBindingManager>();
         // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
         if (skillSelectorUI != null)
             ShowSkillSelectorUI();
@@ -108,11 +113,18 @@ public class Player : UnitController
 
     protected override void HandleAction()
     {
-        Debug.Log("Player HandleAction called111111");
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        Vector2 direction = Vector2.zero;
 
-        movementDirection = new Vector2(horizontal, vertical).normalized; // 벡터 정규화
+        if (keyBindingManager != null)
+        {
+            direction = keyBindingManager.GetMovementInput();
+        }
+        else
+        {
+            Debug.Log("keyBindingManager가 없음");
+        }
+
+        movementDirection = direction.normalized;
 
         isAttacking = true; // 상시 공격 상태
 
@@ -187,4 +199,14 @@ public class Player : UnitController
     //     //레벨업 할때, 스킬 ui 이벤트 발생
     //     OnSkillSelectionTriggered?.Invoke(this);
     // }
+    private bool IsAnyKeyPressed(List<KeyCode> keys)
+    {
+        foreach (KeyCode key in keys)
+        {
+            if (Input.GetKey(key))
+                return true;
+        }
+        return false;
+    }
+    
 }

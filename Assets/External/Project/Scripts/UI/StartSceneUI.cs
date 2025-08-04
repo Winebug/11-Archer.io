@@ -8,6 +8,7 @@ public class StartSceneUI : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private Button settingButton;
     [SerializeField] private Slider soundSlider;
+    [SerializeField] private GameObject panelSetting;
 
     private void Start()
     {
@@ -38,6 +39,6 @@ public class StartSceneUI : MonoBehaviour
     }
     private void OnSettingClicked()
     {
-        Debug.Log("세팅은 아직 미구현");
+        panelSetting.SetActive(true);
     }
 }
