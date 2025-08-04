@@ -30,15 +30,28 @@ public class UnitController : MonoBehaviour
     protected float timeSinceLastChange = float.MaxValue; // 마지막 체력 변경 이후 경과 시간
 
     public float CurrentHealth { get; private set; } // 현재 체력 (외부 접근만 허용)
+    public bool IsBoss = false;
+    private Animator animator;
+    private static readonly int IsDamage = Animator.StringToHash("IsDamage");
+    private bool hasDeadlyShotApplied = false;
+
+    public AudioClip damageClip;
+
+    public bool HasDeadlyShotApplied
+    {
+        get => hasDeadlyShotApplied;
+        set => hasDeadlyShotApplied = value;
+    }
 
 
     // 체력 (1 ~ 100 사이 값만 허용)
-    [Range(1, 100)][SerializeField] private int health = 10;
+    //[Range(1, 100)][SerializeField] private int health = 10;
     // 외부에서 접근 가능한 프로퍼티 (값 변경 시 자동으로 0~100 사이로 제한)
+    private int health = 100;
     public int Health
     {
         get => health;
-        set => health = Mathf.Clamp(value, 0, 100);
+        set => health = Mathf.Max(0, value);
     }
 
     // 이동 속도 (1f ~ 20f 사이 값만 허용)
@@ -56,16 +69,16 @@ public class UnitController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         animationHandler = GetComponentInChildren<AnimationHandler>();
 
-        // 프리팹이 지정되어 있다면 생성해서 장착 위치에 부착
         if (WeaponPrefab != null)
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         else
-            weaponHandler = GetComponentInChildren<WeaponHandler>(); // 이미 붙어 있는 무기 사용
+            weaponHandler = GetComponentInChildren<WeaponHandler>(); 
     }
 
     protected virtual void Start()
     {
         CurrentHealth = Health;
+        animator = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Update()
@@ -164,19 +177,28 @@ public class UnitController : MonoBehaviour
         timeSinceLastChange = 0f; // 다시 무적 시작
 
         Debug.Log($"{gameObject.name}: 현재 체력 {CurrentHealth}에서 {change}만큼 체력이 변할 예정입니다");
-
+        animator?.SetBool(IsDamage, true);
         // 체력 적용
         CurrentHealth += change;
         CurrentHealth = CurrentHealth > Health ? Health : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
         Debug.Log($"{gameObject.name}: 현재 체력{CurrentHealth}");
-        // 데미지일 경우 (음수)
-        //if (change < 0)
-        //{
-        //    animationHandler.Damage(); // 맞는 애니메이션 실행
+        
+        //데미지일 경우(음수)
+        if (change < 0)
+        {
+            // 피격 애니메이션이 있을 경우 재생
+            if (animationHandler != null)
+            {
+                animationHandler.Damage(); // 피격 애니메이션 실행
+            }
 
-        //}
+            // 사운드가 설정되어 있을 경우 재생
+            if (damageClip != null)
+                SoundManager.PlayClip(damageClip);
+
+        }
 
         // 체력이 0 이하가 되면 사망 처리
         if (CurrentHealth <= 0f)

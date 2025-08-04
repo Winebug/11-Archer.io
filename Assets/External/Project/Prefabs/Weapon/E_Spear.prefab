@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 4613581014234309147}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1da107c86789e7a41b6da0b3d90073e4, type: 2}
+  m_Controller: {fileID: 9100000, guid: c7c850ecfa5463d41b8daccb6b3afa11, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -249,4 +249,5 @@ MonoBehaviour:
   isOnKnockback: 1
   knockbackPower: 10
   knockbackTime: 2
+  attackSoundClip: {fileID: 8300000, guid: 240809817f534b841a37d65fa350b77f, type: 3}
   shouldRotate: 1

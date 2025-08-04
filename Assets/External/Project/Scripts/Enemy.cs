@@ -6,49 +6,52 @@ public class Enemy : UnitController
 {
     [SerializeField] float attakRange = 0.1f;
 
-    [SerializeField] protected Transform playerTemp;
+    protected Transform playerTransform;
     [SerializeField] private MonsterStat statData;
     public MonsterStat StatData => statData;
-
-    // 🔹 Enemy가 속한 Room 참조
-    public Room room;
-
     protected override void Start()
     {
         base.Start();
-
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
-            playerTemp = playerObj.transform;
-        }
-        else
-        {
-            Debug.LogWarning($"{name}: Player 태그를 가진 오브젝트를 찾을 수 없습니다.");
+            playerTransform = playerObj.transform;
         }
 
-        if (statData != null)
+        if (playerTransform == null)
+        {
+            Debug.LogWarning($"{name}: Player 레이어를 가진 오브젝트를 찾을 수 없습니다.");
+        }
+
+        if (statData != null) //몬스터 기본스탯등을 불러와서 초기화
         {
             ResetHealthStat(statData.health);
             Speed = statData.moveSpeed;
-            if (weaponHandler == null)
+            if (weaponHandler ==  null) 
                 weaponHandler = statData.weaponPrefab;
             if (weaponHandler != null)
                 weaponHandler.Power *= statData.attackPower;
         }
     }
-
     protected override void HandleAction()
     {
-        if (playerTemp == null) return;
+
+        // 타겟(플레이어)가 없으면 움직이지 않음
+        if (playerTransform == null)
+        {
+
+            return;
+        }
 
         float distance = DistanceBetween();
         Vector2 direction = FaceDirection();
 
         isAttacking = false;
+
         lookDirection = direction;
 
-        // 공격 범위 체크
+        //플레이어가 사거리에 들어오면, 공격
+
         if (distance < attakRange)
         {
             int layerMaskTarget = weaponHandler.target;
@@ -64,39 +67,26 @@ public class Enemy : UnitController
             return;
         }
 
-        // 플레이어 쫓기
+        // 플레이어에게 접근
         movementDirection = direction;
+
     }
 
     float DistanceBetween()
     {
-        return Vector3.Distance(transform.position, playerTemp.position);
+        return Vector3.Distance(this.transform.position, playerTransform.position);
     }
 
     protected Vector2 FaceDirection()
     {
-        return (playerTemp.position - transform.position).normalized;
-    }
-    public void SetRoom(Room r)
-    {
-        room = r;
+        return (playerTransform.position - this.transform.position).normalized;
     }
 
     public override void Death()
     {
+        Debug.Log("Enemy Death");
         base.Death();
-        Debug.Log($"{name} 죽음 → Room에 보고");
-
-        if (room != null)
-        {
-            room.OnEnemyDeath(this);
-        }
-        else
-        {
-            Debug.LogWarning($"{name}의 Room 참조가 없음!");
-        }
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -105,7 +95,7 @@ public class Enemy : UnitController
             Player player = other.GetComponent<Player>();
             if (player != null && statData != null)
             {
-                Debug.Log($"{statData.attackPower} 피해를 플레이어에게 줌");
+                Debug.Log(statData.attackPower + "피해를 줌");
                 player.ChangeHealth(-statData.attackPower);
             }
         }

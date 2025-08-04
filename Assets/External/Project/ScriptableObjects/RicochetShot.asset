@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a202dae8e87e4b1f975e4ec280d2ee5, type: 3}
+  m_Name: RicochetShot
+  m_EditorClassIdentifier: 
+  skillName: 
+  description: 
+  icon: {fileID: 1289712419, guid: ba129df76cdc84397ba9c9d53a604c64, type: 3}
+  skillType: 0
+  canStack: 0
+  cannotStackMoreThanOne: 1
+  maxSkillStacks: 1
