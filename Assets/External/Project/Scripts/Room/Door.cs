@@ -5,6 +5,7 @@ public class Door : MonoBehaviour
     public Room room; // 이 Door가 속한 Room 참조
     public bool isOpen = false;
     public float moveDistanceY = 10f;
+    
 
     void Update()
     {

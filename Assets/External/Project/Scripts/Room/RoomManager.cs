@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
@@ -5,17 +6,22 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance;
     public Transform player;
     public float roomGapY = 20f;
+    [SerializeField] private SkillSelectorUI sui;
 
     private void Awake()
     {
         Instance = this;
     }
-
-    public void OnRoomCleared(int clearedRoomIndex)
-    {
-        MovePlayerToNextRoom();
-    }
-
+    // void Start()
+    // {
+    //     sui.Show();
+    // }
+    // onroomcleared 동작 확인.
+    // public void OnRoomCleared(int clearedRoomIndex)
+    // {
+    //     MovePlayerToNextRoom();
+    // }
+    
     private void MovePlayerToNextRoom()
     {
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();

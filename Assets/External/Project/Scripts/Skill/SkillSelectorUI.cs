@@ -20,6 +20,7 @@ public class SkillSelectorUI : MonoBehaviour
 
     public void Show()
     {
+        Debug.Log("Show");
         if (skillButtons == null || skillButtons.Length < 3)
         {
             Debug.LogError("Skill Buttons 배열이 제대로 설정되지 않았습니다.");
@@ -42,7 +43,7 @@ public class SkillSelectorUI : MonoBehaviour
             int index = i;
             Skill skill = currentChoices[index];
             Image image = skillButtons[index].transform.Find("Icon")?.GetComponent<Image>();
-            
+
             if (image != null && skill.icon != null)
             {
                 image.sprite = skill.icon;
@@ -62,7 +63,7 @@ public class SkillSelectorUI : MonoBehaviour
     private void OnSkillSelected(Skill skill)
     {
         SkillManager.Instance.AcquireSkill(skill, player);
-
+        
         panel.SetActive(false);
         Time.timeScale = 1f; // 게임 재개
     }
