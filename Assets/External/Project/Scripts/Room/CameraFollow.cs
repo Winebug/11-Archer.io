@@ -12,10 +12,10 @@ public class CameraFollow : MonoBehaviour
     public float maxY;             // 동적으로 조정 가능
 
     [Header("BossRoom X 범위")]
-    public float bossMinX = -15f;  // 보스룸 왼쪽 한계
+    public float bossMinX = -25f;  // 보스룸 왼쪽 한계
     public float bossMaxX = 15f;   // 보스룸 오른쪽 한계
 
-    private float fixedX = -12.23f; // 🔙 원래대로 X 고정값 롤백
+    private float fixedX = -12.23f; // 원래대로 X 고정값 롤백
     private bool isBossRoom = false;
 
     void LateUpdate()
