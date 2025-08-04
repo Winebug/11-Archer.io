@@ -208,7 +208,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 61849ad46dfa1484c8bd94a43b37ee42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -363,73 +363,6 @@ MonoBehaviour:
   target: {fileID: 9132832256838732767}
   hpbarPos: {fileID: 2992337787167233828}
   mainCamera: {fileID: 0}
---- !u!1 &4677125116962955299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5397022133163771722}
-  - component: {fileID: 1705365804451914887}
-  m_Layer: 7
-  m_Name: AttackRange
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5397022133163771722
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4677125116962955299}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9132832256838732767}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1705365804451914887
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4677125116962955299}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 4
 --- !u!1 &5660046457943983038
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +599,6 @@ Transform:
   m_Children:
   - {fileID: 7176582563064239933}
   - {fileID: 883213909864233583}
-  - {fileID: 5397022133163771722}
   - {fileID: 7894327262595477835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -754,7 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e554c5842579eb41bd039eda8bc5c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3143587879562591180, guid: 00e2d3f58a6294d3ab34f7bfba3eb497, type: 3}
+  bulletPrefab: {fileID: 7517903943659025439, guid: 4ac32a9497ddbbd40a19bbf0578228d2, type: 3}
   bulletSpawnPoint: {fileID: 2060149304707758175}
   bulletSpeed: 5
   target: {fileID: 0}
@@ -791,6 +723,10 @@ MonoBehaviour:
   - {fileID: 2803047456324451828, guid: 60753c39ed7c41849ac378238821c774, type: 3}
   summonCooldown: 10
   magicCirclePrefab: {fileID: 4788877869406320519, guid: 65c627eaa5a048b4a934580442025054, type: 3}
+  detectionRadius: 5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8589150267396546434
 GameObject:
   m_ObjectHideFlags: 0

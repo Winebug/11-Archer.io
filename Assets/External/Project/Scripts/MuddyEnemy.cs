@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MuddyEnemy : Enemy
 {
+    //IndexOutOfRangeException: Index was outside the bounds of the array.
+    //이 경고가 뜨면 ProjectileManager의 ProjectilePrefab에다가 Projectile MudBall 추가해주세요 
+
     public Vector2 roomOrigin;
     Vector2 roomHalfSize = new Vector2(2f, 4f);
 
@@ -19,13 +22,13 @@ public class MuddyEnemy : Enemy
     {
         base.Awake();
         col = GetComponent<Collider2D>();
-
     }
 
     protected override void Start()
     {
         base.Start();
         lookDirection = Vector3.up;
+        roomOrigin = transform.root.position;
         if (roomOrigin == Vector2.zero)
             Debug.LogWarning("Muddy가 방의 좌표를 불러오지 못했습니다");
         StartCoroutine(MoleMovemet());

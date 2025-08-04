@@ -5,8 +5,10 @@ public class SlugEnemy : Enemy
     [SerializeField] private BulletShooter bulletShooter;
     [SerializeField] private float fireCooldown = 2f;//총알 날라가는 쿨타임
     private float fireTimer = 2f;
-    private Animator animator;
     private static readonly int IsInside = Animator.StringToHash("IsInside");
+    [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private LayerMask playerLayer;
+    private bool isPlayerInside = false;
 
     protected override void Start()
     {
@@ -22,12 +24,14 @@ public class SlugEnemy : Enemy
     protected override void Update()
     {
         base.Update();
-
-        fireTimer += Time.deltaTime;
-
-        if (animator != null && animator.GetBool(IsInside))
+        bool playerDetected = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer);
+        if (playerDetected)
         {
-            movementDirection = Vector2.zero;
+            if (isPlayerInside)
+            {
+                animator?.SetBool(IsInside, true);
+                isPlayerInside = false;
+            }
 
             if (fireTimer >= fireCooldown)
             {
@@ -35,21 +39,16 @@ public class SlugEnemy : Enemy
                 fireTimer = 0f;
             }
         }
+        else
+        {
+            if (isPlayerInside)
+            {
+                animator?.SetBool(IsInside, false);
+                isPlayerInside = false;
+            }
+        }
+
+        fireTimer += Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            animator?.SetBool(IsInside, true);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            animator?.SetBool(IsInside, false);
-        }
-    }
 }

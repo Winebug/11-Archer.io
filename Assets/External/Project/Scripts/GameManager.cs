@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 게임 전체를 관리하는 메인 매니저 클래스
 public class GameManager : MonoBehaviour
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
     public Player player { get; private set; } // 플레이어 컨트롤러 (읽기 전용 프로퍼티)
     private UnitController _unitController;
 
-    [SerializeField] private int currentWaveIndex = 0; // 현재 웨이브 번호
+    [SerializeField] private GameObject stageClearPanel;
 
     // 컴패니언 생성 및 관리하는 매니저
     private CompanionManager companionManager;
@@ -61,5 +62,18 @@ public class GameManager : MonoBehaviour
         {
             StartGame();
         }
+    }
+    public void StageClear()
+    {
+        if (stageClearPanel != null) {
+            stageClearPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+            Debug.LogWarning("Stage Clear Panel이 연결되지 않았습니다.");
+    }
+    public void OnReturnClicked()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }

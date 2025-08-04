@@ -64,6 +64,10 @@ public class WeaponHandler : MonoBehaviour
 
     protected virtual void Start()
     {
+        if (animator == null)
+        {
+            return;
+        }
         CacheAllTriggerHashes(animator);
     }
 

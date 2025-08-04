@@ -53,16 +53,17 @@ public class Player : UnitController
 
     //플레이어 키 설정
     private KeyBindingManager keyBindingManager;
-    
+
     protected override void Start()
     {
         base.Start();
         keyBindingManager = FindObjectOfType<KeyBindingManager>();
         // sm = SkillManager.Instance; // 스킬매니저 싱글톤을 sm 변수에 저장
-        if (skillSelectorUI != null)
-            ShowSkillSelectorUI();
+        // if (skillSelectorUI != null)
+        //     ShowSkillSelectorUI();
         wh = GetComponentInChildren<WeaponHandler>();
         Debug.Log(CurrentHealth);
+        skillSelectorUI.Initialize(this);
     }
 
     [SerializeField] private SkillSelectorUI skillSelectorUI;
@@ -182,10 +183,9 @@ public class Player : UnitController
     }
 
     // temp 메서드. 나중에 스킬 습득 조건 발동에 맞춰 변경 예정
-    private void ShowSkillSelectorUI()
+    public void ShowSkillSelectorUI()
     {
-        //skillSelectorUI.Initialize(this);
-        //skillSelectorUI.Show();
+        skillSelectorUI.Initialize(this);
     }
 
     public void EnableInvincibility()
