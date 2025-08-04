@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a508b8ac4614a45a60b9fd5a11c5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: -2055314347234406007, guid: 69588aae58a477f4ab4bee2174e2c05c, type: 3}
+  room: {fileID: 1411504321}
   isOpen: 0
   moveDistanceY: 10
 --- !u!1001 &1000491369
@@ -534,6 +534,17 @@ PrefabInstance:
       insertIndex: 4
       addedObject: {fileID: 879320019}
   m_SourcePrefab: {fileID: 100100000, guid: 69588aae58a477f4ab4bee2174e2c05c, type: 3}
+--- !u!114 &1411504321 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2055314347234406007, guid: 69588aae58a477f4ab4bee2174e2c05c, type: 3}
+  m_PrefabInstance: {fileID: 1411504320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9774ec9232f5d44cba092f75f1cf46b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1509191405
 GameObject:
   m_ObjectHideFlags: 0
