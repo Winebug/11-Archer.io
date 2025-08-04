@@ -7,6 +7,7 @@ public class StartSceneUI : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button settingButton;
+    [SerializeField] private Button tutorialButton;
     [SerializeField] private Slider soundSlider;
     [SerializeField] private GameObject panelSetting;
 
@@ -16,6 +17,7 @@ public class StartSceneUI : MonoBehaviour
         startButton.onClick.AddListener(OnStartClicked);
         exitButton.onClick.AddListener(OnExitClicked);
         settingButton.onClick.AddListener(OnSettingClicked);
+        tutorialButton.onClick.AddListener(OnTutorialClicked);
 
         // 슬라이더 초기값과 이벤트 등록
         soundSlider.value = UIManager.Instance.Volume;
@@ -42,5 +44,8 @@ public class StartSceneUI : MonoBehaviour
         panelSetting.SetActive(true);
     }
 
-
+    private void OnTutorialClicked()
+    {
+        SceneManager.LoadScene("Tutorial"); //나중에 씬이름 변경시 이 코드도 변경
+    }
 }
