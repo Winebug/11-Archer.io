@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public Player player { get; private set; } // 플레이어 컨트롤러 (읽기 전용 프로퍼티)
     private UnitController _unitController;
 
-    [SerializeField] private int currentWaveIndex = 0; // 현재 웨이브 번호
     [SerializeField] private GameObject stageClearPanel;
 
     // 컴패니언 생성 및 관리하는 매니저

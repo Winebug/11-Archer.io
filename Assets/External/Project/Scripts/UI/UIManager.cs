@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
