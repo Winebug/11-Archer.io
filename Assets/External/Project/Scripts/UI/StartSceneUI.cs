@@ -41,4 +41,6 @@ public class StartSceneUI : MonoBehaviour
     {
         panelSetting.SetActive(true);
     }
+
+
 }
