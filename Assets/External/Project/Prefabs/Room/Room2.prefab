@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomIndex: 1
+  door: {fileID: 0}
 --- !u!1 &3625839676331764593
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,7 +3225,6 @@ GameObject:
   - component: {fileID: 5461514975741972466}
   - component: {fileID: 7234440300573248530}
   - component: {fileID: 4196879558851341075}
-  - component: {fileID: 5577985062543179455}
   - component: {fileID: 3412029133677196960}
   m_Layer: 0
   m_Name: Door
@@ -3383,20 +3383,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &5577985062543179455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6526775940540699901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cc195b6be161564895c3374f9a87280, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOpen: 0
-  animator: {fileID: 0}
 --- !u!61 &3412029133677196960
 BoxCollider2D:
   m_ObjectHideFlags: 0
