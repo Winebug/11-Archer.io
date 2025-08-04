@@ -1223,7 +1223,7 @@ Transform:
   m_GameObject: {fileID: 2011540861413399765}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -20, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1243,6 +1243,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 6609226266096557723, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
+  - {fileID: 6248347839798144051, guid: f2c8d9ea7d144804f83cb3a57828d411, type: 3}
+  - {fileID: 7273710770570310642, guid: ac12d42c45841fa42a6c43467f167aac, type: 3}
   spawnCount: 3
   spawnAreaSize: {x: 7, y: 10}
   room: {fileID: -1899364968089437964}

@@ -94,6 +94,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 6609226266096557723, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
+  - {fileID: 6248347839798144051, guid: f2c8d9ea7d144804f83cb3a57828d411, type: 3}
+  - {fileID: 7376978154654308244, guid: 8f3e2aa2e66af81468fe8ba06397dad0, type: 3}
   spawnCount: 3
   spawnAreaSize: {x: 7, y: 10}
   room: {fileID: 6338717485793403801}

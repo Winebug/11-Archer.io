@@ -548,6 +548,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room1
       objectReference: {fileID: 0}
+    - target: {fileID: 8156238735841837774, guid: 69588aae58a477f4ab4bee2174e2c05c, type: 3}
+      propertyPath: enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156238735841837774, guid: 69588aae58a477f4ab4bee2174e2c05c, type: 3}
+      propertyPath: enemyPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1784646256527843934, guid: 5f12d3025b2130242a7874cf29a27584, type: 3}
+    - target: {fileID: 8156238735841837774, guid: 69588aae58a477f4ab4bee2174e2c05c, type: 3}
+      propertyPath: enemyPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 2498225040635885480, guid: 9d88c6b662a7a0645ac08205c120139e, type: 3}
+    - target: {fileID: 8156238735841837774, guid: 69588aae58a477f4ab4bee2174e2c05c, type: 3}
+      propertyPath: enemyPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 6248347839798144051, guid: f2c8d9ea7d144804f83cb3a57828d411, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15712,7 +15728,7 @@ Transform:
   m_GameObject: {fileID: 8375423405120741616}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.23, y: 0, z: 0}
+  m_LocalPosition: {x: -12.23, y: -5.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
