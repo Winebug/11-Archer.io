@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,6 +28,7 @@ public class CompanionManager : MonoBehaviour
     // 컴패니언 하나를 위치에 생성
     public void SpawnCompanion()
     {
+        Debug.Log("컴패니언 생성 요청");
         if (companionPrefabs.Count == 0 || spawnAreas.Count == 0)
         {
             Debug.LogWarning("Companion Prefabs 또는 Spawn Areas가 설정되지 않았습니다.");
@@ -64,5 +66,16 @@ public class CompanionManager : MonoBehaviour
             Vector3 size = new Vector3(area.width, area.height);
             Gizmos.DrawCube(center, size);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // 플레이어가 이 트리거에 들어오면 동료를 소환
+        if (collision.CompareTag("Player"))
+        {
+            SpawnCompanion();
+        }
+
+        Destroy(gameObject); // 트리거가 활성화되면 자기 자신을 파괴
     }
 }
