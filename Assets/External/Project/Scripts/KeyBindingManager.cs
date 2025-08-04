@@ -256,12 +256,8 @@ public class KeyBindingManager : MonoBehaviour
             {
                 return true;
             }
-
             assignedKeys[key] = row.actionName;
         }
-
         return false;
     }
-
-
 }
