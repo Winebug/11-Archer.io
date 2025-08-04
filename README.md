@@ -16,10 +16,6 @@
 
 ---
 
-<img width="13390" height="2754" alt="image" src="https://github.com/user-attachments/assets/2ffb4aca-a4c4-4402-8f7c-06598eed59af" />
-
----
-
 <img width="3440" height="3554" alt="image" src="https://github.com/user-attachments/assets/401eade3-222a-4b84-97ef-5b1f0c96d305" />
 
 ---
@@ -39,6 +35,9 @@
     - 적의 종류
         - 근접 공격 적
         - 원거리 공격 적
+
+<img width="13390" height="2754" alt="image" src="https://github.com/user-attachments/assets/2ffb4aca-a4c4-4402-8f7c-06598eed59af" />
+
 - **스킬과 업그레이드 시스템**
     - 방 클리어 시 무작위 스킬 선택(예: 공격 속도 증가, 체력 회복)
     - 스킬 조합으로 플레이어의 전략적 선택 제공
