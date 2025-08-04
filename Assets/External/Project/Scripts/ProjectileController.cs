@@ -21,6 +21,8 @@ public class ProjectileController : MonoBehaviour
     private int wallBounceCount = 0;
     private float damageValue;
 
+    private ProjectileManager projectileManager;
+
     // 초기 컴포넌트 참조 설정
     private void Awake()
     {
@@ -185,7 +187,7 @@ public class ProjectileController : MonoBehaviour
                         Vector2 newDirection = (nextTarget.position - transform.position).normalized;
                         bounceCount = this.bounceCount + 1;
                         damageValue = this.damageValue * ricochetPlayer.RicochetDamageMultiplier;
-                        Init(newDirection, rangeWeaponHandler);
+                        Init(newDirection, rangeWeaponHandler, projectileManager);
                         return;
                     }
                 }
@@ -218,8 +220,10 @@ public class ProjectileController : MonoBehaviour
     }
 
 
-    public void Init(Vector2 direction, RangeWeaponHandler weaponHandler)
+    public void Init(Vector2 direction, RangeWeaponHandler weaponHandler, ProjectileManager projectileManager)
     {
+        this.projectileManager = projectileManager;
+
         rangeWeaponHandler = weaponHandler;
 
         this.direction = direction;
@@ -260,6 +264,12 @@ public class ProjectileController : MonoBehaviour
     // 투사체 파괴 함수
     private void DestroyProjectile(Vector3 position, bool createFx)
     {
+        if (createFx)
+        {
+            // 총알이 충돌했을 때, 해당 위치에 이펙트 파티클을 생성하는 함수
+            projectileManager.CreateImpactParticlesAtPosition(position, rangeWeaponHandler);
+        }
+
         Destroy(this.gameObject);
     }
 }

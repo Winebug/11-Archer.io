@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MaskedOrc
   m_EditorClassIdentifier: 
   monsterName: MaskedOrc
-  health: 10
+  health: 30
   moveSpeed: 3
   attackPower: 3
   weaponPrefab: {fileID: 0}

@@ -6,7 +6,9 @@ public class MaskedOrcEnemy : Enemy
 {
     Rigidbody2D rb;
     bool active = true;
+    bool localIsMoving = false;
     public bool isCharging = false;
+
 
     protected override void Awake()
     {
@@ -24,7 +26,7 @@ public class MaskedOrcEnemy : Enemy
 
     protected override void Update()
     {
-        if (playerTemp == null)
+        if (playerTransform == null)
         {
             active = false;
             return;
@@ -37,6 +39,15 @@ public class MaskedOrcEnemy : Enemy
         if (isCharging)
         {
             Charging();
+        }
+        if (localIsMoving)
+        {
+            if (animationHandler != null)
+                animationHandler.Move(movementDirection);
+        }
+        else
+        {
+            animationHandler.ForcedStopMove();
         }
     }
 
@@ -59,17 +70,19 @@ public class MaskedOrcEnemy : Enemy
             yield return new WaitForSeconds(3f);
 
             //돌진 준비 
+            localIsMoving = true;
             ReadyCharge();
 
             //2초 후 빠른 속도로 돌진
             yield return new WaitForSeconds(2f);
+            
             isCharging = true;
             isAttacking = true;
 
             //충돌까지 코루틴 대기
             yield return new WaitWhile(() => isCharging);
-            //충돌하면 3초 동안 어질어질
-            Spinning();
+            localIsMoving = false;
+            //충돌하면 2초 동작 x
             yield return new WaitForSeconds(2f);
 
 
@@ -88,10 +101,6 @@ public class MaskedOrcEnemy : Enemy
         rb.AddForce(direction);
     }
 
-    void Spinning()
-    {
-
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -20,7 +20,6 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("플레이어 공격당함");
             Player player = other.GetComponent<Player>();
             if (player != null && ownerEnemy != null && ownerEnemy.StatData != null)
             {

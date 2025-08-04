@@ -152,9 +152,12 @@ public class Companion : UnitController
             gameManager.EndOfWave(); // GameManager에 웨이브 종료 알림
             return;
         }
+    }
 
-        //if (waveRoutine != null)
-        //    StopCoroutine(waveRoutine);
-        //waveRoutine = StartCoroutine(SpawnWave(waveCount));
+    // End of Wave 시 컴패니언 디스트로이
+    public override void Death()
+    {
+        Debug.Log("Companion left.");
+        base.Death();
     }
 }

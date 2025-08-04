@@ -40,4 +40,9 @@ public class AnimationHandler : MonoBehaviour
         // 무적 시간 종료 시 호출
         animator.SetBool(IsDamage, false);
     }
+
+    public void ForcedStopMove()
+    {
+        animator.SetBool(IsMoving, false);
+    }
 }

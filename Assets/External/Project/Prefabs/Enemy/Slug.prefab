@@ -241,9 +241,9 @@ MonoBehaviour:
   healthChangeDelay: 0.5
   WeaponPrefab: {fileID: 0}
   IsBoss: 0
+  damageClip: {fileID: 8300000, guid: 4ad7c6f02850e48459a800c064a98289, type: 3}
   speed: 3
   attakRange: 1
-  playerTemp: {fileID: 0}
   statData: {fileID: 11400000, guid: 6fa7563ebc1c8bb44b0a258bff13e6c0, type: 2}
   bulletShooter: {fileID: 7608293440243529249}
   fireCooldown: 2
@@ -276,7 +276,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0322026, y: -0.16745347}

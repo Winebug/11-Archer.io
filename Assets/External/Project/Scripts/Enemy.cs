@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Enemy : UnitController
 {
+    private Room currentRoom;
+
+    public void SetRoom(Room room)
+    {
+        currentRoom = room;
+        Debug.Log($"{gameObject.name}은(는) {room.name}에 속했습니다.");
+    }
+
     [SerializeField] float attakRange = 0.1f;
 
-
-    //강의에서는 Init로 플레이어 할당해주므로, 아마 수정 예정
-    [SerializeField] protected Transform playerTemp;
+    protected Transform playerTransform;
     [SerializeField] private MonsterStat statData;
+    private float followRange = 10f;
     public MonsterStat StatData => statData;
     protected override void Start()
     {
@@ -17,10 +24,10 @@ public class Enemy : UnitController
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
-            playerTemp = playerObj.transform;
+            playerTransform = playerObj.transform;
         }
 
-        if (playerTemp == null)
+        if (playerTransform == null)
         {
             Debug.LogWarning($"{name}: Player 레이어를 가진 오브젝트를 찾을 수 없습니다.");
         }
@@ -39,7 +46,7 @@ public class Enemy : UnitController
     {
 
         // 타겟(플레이어)가 없으면 움직이지 않음
-        if (playerTemp == null)
+        if (playerTransform == null)
         {
 
             return;
@@ -50,38 +57,42 @@ public class Enemy : UnitController
 
         isAttacking = false;
 
-        lookDirection = direction;
-
-        //플레이어가 사거리에 들어오면, 공격
-
-        if (distance < attakRange)
+        if (distance < followRange)
         {
-            int layerMaskTarget = weaponHandler.target;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
-                (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
 
-            if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
+            lookDirection = direction;
+
+            //플레이어가 사거리에 들어오면, 공격
+
+            if (distance < attakRange)
             {
-                isAttacking = true;
+                int layerMaskTarget = weaponHandler.target;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
+                    (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
+
+                if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
+                {
+                    isAttacking = true;
+                }
+
+                movementDirection = Vector2.zero;
+                return;
             }
 
-            movementDirection = Vector2.zero;
-            return;
+            // 플레이어에게 접근
+            movementDirection = direction;
         }
-
-        // 플레이어에게 접근
-        movementDirection = direction;
 
     }
 
     float DistanceBetween()
     {
-        return Vector3.Distance(this.transform.position, playerTemp.position);
+        return Vector3.Distance(this.transform.position, playerTransform.position);
     }
 
     protected Vector2 FaceDirection()
     {
-        return (playerTemp.position - this.transform.position).normalized;
+        return (playerTransform.position - this.transform.position).normalized;
     }
 
     public override void Death()

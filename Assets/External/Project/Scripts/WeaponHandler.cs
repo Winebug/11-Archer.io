@@ -40,6 +40,8 @@ public class WeaponHandler : MonoBehaviour
 
     HashSet<int> validTriggerHashes = new HashSet<int>();
 
+    public AudioClip attackSoundClip;
+
     protected virtual void Awake()
     {
         Controller = GetComponentInParent<UnitController>();
@@ -68,6 +70,10 @@ public class WeaponHandler : MonoBehaviour
     public virtual void Attack()
     {
         AttackAnimation();
+
+        // 사운드가 설정되어 있을 경우 재생
+        //if (attackSoundClip != null)
+          //  SoundManager.PlayClip(attackSoundClip);
     }
 
     public void AttackAnimation()

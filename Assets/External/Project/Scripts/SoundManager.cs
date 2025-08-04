@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource musicAudioSource; // 배경 음악용 AudioSource
 
     // BGM 배열
-    [SerializeField] private AudioClip[] BGM;
+    [SerializeField] private AudioClip[] bgmArray;
 
     public AudioClip musicClip; // 기본 배경 음악 클립
 
@@ -28,8 +28,11 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        // BGM 배열에서 랜덤 선택
+        AudioClip randomBGM = bgmArray[Random.Range(0, bgmArray.Length)];
+
         // 기본 배경 음악 시작
-        ChangeBackGroundMusic(musicClip);
+        ChangeBackGroundMusic(randomBGM);
     }
 
     // 배경 음악을 다른 클립으로 교체하는 함수
@@ -44,8 +47,8 @@ public class SoundManager : MonoBehaviour
     public static void PlayClip(AudioClip clip)
     {
         // SoundSource 프리팹 인스턴스 생성 후 재생
-        SoundSource obj = Instantiate(instance.soundSourcePrefab);
-        SoundSource soundSource = obj.GetComponent<SoundSource>();
-        soundSource.Play(clip, instance.soundEffectVolume, instance.soundEffectPitchVariance);
+        //SoundSource obj = Instantiate(instance.soundSourcePrefab);
+        //SoundSource soundSource = obj.GetComponent<SoundSource>();
+       // soundSource.Play(clip, instance.soundEffectVolume, instance.soundEffectPitchVariance);
     }
 }
