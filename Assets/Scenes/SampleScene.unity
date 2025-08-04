@@ -7162,7 +7162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ae2f4891b637d4398b8df6d5e64ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWaveIndex: 0
   stageClearPanel: {fileID: 0}
 --- !u!224 &7106745576180017869
 RectTransform:
