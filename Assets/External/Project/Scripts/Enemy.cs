@@ -16,6 +16,7 @@ public class Enemy : UnitController
 
     protected Transform playerTransform;
     [SerializeField] private MonsterStat statData;
+    private float followRange = 10f;
     public MonsterStat StatData => statData;
     protected override void Start()
     {
@@ -56,27 +57,31 @@ public class Enemy : UnitController
 
         isAttacking = false;
 
-        lookDirection = direction;
-
-        //플레이어가 사거리에 들어오면, 공격
-
-        if (distance < attakRange)
+        if (distance < followRange)
         {
-            int layerMaskTarget = weaponHandler.target;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
-                (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
 
-            if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
+            lookDirection = direction;
+
+            //플레이어가 사거리에 들어오면, 공격
+
+            if (distance < attakRange)
             {
-                isAttacking = true;
+                int layerMaskTarget = weaponHandler.target;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, weaponHandler.AttackRange * 1.5f,
+                    (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
+
+                if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
+                {
+                    isAttacking = true;
+                }
+
+                movementDirection = Vector2.zero;
+                return;
             }
 
-            movementDirection = Vector2.zero;
-            return;
+            // 플레이어에게 접근
+            movementDirection = direction;
         }
-
-        // 플레이어에게 접근
-        movementDirection = direction;
 
     }
 

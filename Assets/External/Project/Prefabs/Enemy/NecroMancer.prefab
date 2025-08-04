@@ -208,7 +208,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 61849ad46dfa1484c8bd94a43b37ee42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -699,10 +699,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.11562729, y: -0.46250916}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -713,7 +713,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.1048813, y: 1.9250183}
   m_EdgeRadius: 0
 --- !u!50 &3337300131794573871
 Rigidbody2D:
@@ -741,7 +741,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2258293117294796139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,8 +784,11 @@ MonoBehaviour:
   summonPrefabs:
   - {fileID: 4907850044781758706, guid: f2c8d9ea7d144804f83cb3a57828d411, type: 3}
   - {fileID: 1560736691224379981, guid: ac12d42c45841fa42a6c43467f167aac, type: 3}
-  - {fileID: 3123671593364264763, guid: 20c41b4096735454dae602749b7a2d5b, type: 3}
+  - {fileID: 2803047456324451828, guid: 8f3e2aa2e66af81468fe8ba06397dad0, type: 3}
   - {fileID: 3302388366905966433, guid: 5f12d3025b2130242a7874cf29a27584, type: 3}
+  - {fileID: 2803047456324451828, guid: 5047471bf28a9b64998ca6268608a790, type: 3}
+  - {fileID: 2803047456324451828, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
+  - {fileID: 2803047456324451828, guid: 60753c39ed7c41849ac378238821c774, type: 3}
   summonCooldown: 10
   magicCirclePrefab: {fileID: 4788877869406320519, guid: 65c627eaa5a048b4a934580442025054, type: 3}
 --- !u!1 &8589150267396546434
