@@ -90,4 +90,17 @@ public class NecroMancer : Enemy
 
         StartCoroutine(SummonWithMagicCircle(summonPrefabs[index], spawnPos));
     }
+    public override void Death()
+    {
+        base.Death();
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.StageClear();
+        }
+        else
+        {
+            Debug.LogWarning("GameManager 인스턴스를 찾을 수 없습니다.");
+        }
+    }
 }
