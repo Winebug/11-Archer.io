@@ -1,56 +1,38 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class RoomManager : MonoBehaviour
 {
-    [Header("방 프리팹 설정")]
-    public GameObject FirstRoom;   // 첫 방 전용
-    public GameObject Level;  // 이후 방 전용
+    public static RoomManager Instance;
+    public Transform player;
+    public float roomGapY = 20f;
 
-    [Header("방 생성 설정")]
-    public Vector3 nextRoomOffset = new Vector3(0, 20, 0);
-    public float spawnInterval = 10f;
-    public int maxRooms = 10;
-
-    private Vector3 nextSpawnPos = Vector3.zero;
-    private List<GameObject> rooms = new List<GameObject>();
-    private float timer = 0f;
-    private int roomCount = 0;
-
-    void Update()
+    private void Awake()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= spawnInterval && roomCount < maxRooms)
-        {
-            SpawnRoom();
-            timer = 0f;
-        }
+        Instance = this;
     }
 
-    void SpawnRoom()
+    public void OnRoomCleared(int clearedRoomIndex)
     {
-        GameObject newRoom;
+        MovePlayerToNextRoom();
+    }
 
-        // roomCount를 먼저 올려놓고 판단
-        roomCount++;
-
-        if (roomCount == 1)
+    private void MovePlayerToNextRoom()
+    {
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        if (rb != null)
         {
-            Debug.Log(">>> 첫 번째 방 생성");
-            newRoom = Instantiate(FirstRoom, nextSpawnPos, Quaternion.identity);
+            Vector2 newPos = rb.position;
+            newPos.y += roomGapY;
+            rb.MovePosition(newPos); // Rigidbody로 안전하게 이동
+            Debug.Log($"✅ Rigidbody로 Player 이동: {newPos}");
         }
         else
         {
-            Debug.Log($">>> {roomCount}번째 방 생성 (Spawner 실행)");
-            newRoom = Instantiate(Level, nextSpawnPos, Quaternion.identity);
-
-            ObstacleSpawner spawner = newRoom.GetComponentInChildren<ObstacleSpawner>();
-            if (spawner != null)
-                spawner.SpawnObstacles();
+            // 혹시 Rigidbody가 없으면 Transform으로 이동
+            Vector3 newPosition = player.position;
+            newPosition.y += roomGapY;
+            player.position = newPosition;
+            Debug.Log($"✅ Transform으로 Player 이동: {player.position}");
         }
-
-        rooms.Add(newRoom);
-        nextSpawnPos += nextRoomOffset;
     }
 }

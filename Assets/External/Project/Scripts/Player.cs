@@ -184,8 +184,8 @@ public class Player : UnitController
     // temp 메서드. 나중에 스킬 습득 조건 발동에 맞춰 변경 예정
     private void ShowSkillSelectorUI()
     {
-        skillSelectorUI.Initialize(this);
-        skillSelectorUI.Show();
+        //skillSelectorUI.Initialize(this);
+        //skillSelectorUI.Show();
     }
 
     public void EnableInvincibility()
