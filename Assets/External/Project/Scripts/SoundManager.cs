@@ -47,8 +47,8 @@ public class SoundManager : MonoBehaviour
     public static void PlayClip(AudioClip clip)
     {
         // SoundSource 프리팹 인스턴스 생성 후 재생
-        SoundSource obj = Instantiate(instance.soundSourcePrefab);
-        SoundSource soundSource = obj.GetComponent<SoundSource>();
-        soundSource.Play(clip, instance.soundEffectVolume, instance.soundEffectPitchVariance);
+        //SoundSource obj = Instantiate(instance.soundSourcePrefab);
+        //SoundSource soundSource = obj.GetComponent<SoundSource>();
+       // soundSource.Play(clip, instance.soundEffectVolume, instance.soundEffectPitchVariance);
     }
 }

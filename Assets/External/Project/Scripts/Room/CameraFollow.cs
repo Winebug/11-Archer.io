@@ -12,10 +12,10 @@ public class CameraFollow : MonoBehaviour
     public float maxY;             // 동적으로 조정 가능
 
     [Header("BossRoom X 범위")]
-    public float bossMinX = -10f;  // 보스룸 왼쪽 한계
-    public float bossMaxX = 10f;   // 보스룸 오른쪽 한계
+    public float bossMinX = -15f;  // 보스룸 왼쪽 한계
+    public float bossMaxX = 15f;   // 보스룸 오른쪽 한계
 
-    private float fixedX = 0f;     // X를 0 기준으로 고정
+    private float fixedX = -12.23f; // 🔙 원래대로 X 고정값 롤백
     private bool isBossRoom = false;
 
     void LateUpdate()
@@ -29,13 +29,13 @@ public class CameraFollow : MonoBehaviour
 
         if (isBossRoom)
         {
-            // BossRoom: X를 Clamp 범위에서 움직임
+            // BossRoom: X도 Clamp 범위에서 움직임
             float clampedX = Mathf.Clamp(smoothedPosition.x, bossMinX, bossMaxX);
             transform.position = new Vector3(clampedX, clampedY, transform.position.z);
         }
         else
         {
-            // 일반 방: X를 0으로 고정
+            // 일반 방: X를 고정 (-12.23)
             transform.position = new Vector3(fixedX, clampedY, transform.position.z);
         }
     }

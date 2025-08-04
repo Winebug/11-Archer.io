@@ -1,25 +1,29 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Room : MonoBehaviour
 {
     public int roomIndex;
+    private List<Enemy> enemies = new List<Enemy>();
 
-    void Start()
+    void OnEnable()
     {
-        EnemySpawner spawner = GetComponentInChildren<EnemySpawner>();
-        if (spawner != null)
+        // Room 활성화될 때 Enemy 다시 등록
+        enemies.Clear();
+        Enemy[] foundEnemies = GetComponentsInChildren<Enemy>(true);
+        foreach (var enemy in foundEnemies)
         {
-            spawner.room = this; // EnemySpawner가 Room을 알도록 전달
+            enemy.SetRoom(this);
+            enemies.Add(enemy);
         }
     }
 
     public void OnEnemyDeath(Enemy enemy)
     {
-        Debug.Log($"Room {roomIndex}에서 {enemy.name} 사망");
-        if (GetComponentsInChildren<Enemy>().Length == 0)
+        enemies.Remove(enemy);
+        if (enemies.Count == 0)
         {
-            Debug.Log($"Room {roomIndex} 클리어 → 다음 방 이동");
-            RoomManager.Instance.OnRoomCleared(this);
+            RoomManager.Instance.OnRoomCleared(roomIndex);
         }
     }
 }

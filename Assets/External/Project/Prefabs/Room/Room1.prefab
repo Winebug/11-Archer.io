@@ -1022,9 +1022,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 2803047456324451828, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
-  spawnAreaSize: {x: 7, y: 10}
+  - {fileID: 6609226266096557723, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
   spawnCount: 3
+  spawnAreaSize: {x: 7, y: 10}
+  room: {fileID: -2055314347234406007}
 --- !u!1 &3316331711210733208
 GameObject:
   m_ObjectHideFlags: 0
