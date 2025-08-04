@@ -103,11 +103,4 @@ public class NecroMancer : Enemy
             Debug.LogWarning("GameManager 인스턴스를 찾을 수 없습니다.");
         }
     }
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    }
-#endif
 }

@@ -6,6 +6,7 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance;
     public Transform player;
     public float roomGapY = 20f;
+
     public Room room;
     public bool isOpen = false;
     public float moveDistanceY = 10f;
@@ -27,7 +28,10 @@ public class RoomManager : MonoBehaviour
             }
         }
     }
-
+    void Start()
+    {
+        SkillSelectorUI.Instance.Show();
+    }
     void Update()
     {
         // Room이 연결되어 있고 적이 전부 제거되면 자동으로 열림
@@ -53,31 +57,33 @@ public class RoomManager : MonoBehaviour
                 rb.MovePosition(newPos);
                 Debug.Log("Player 다음 Room으로 이동!");
             }
+            SkillSelectorUI.Instance.Show();
         }
     }
 
-    public void OnRoomCleared(int clearedRoomIndex)
-    {
-        MovePlayerToNextRoom();
-    }
+    // public void OnRoomCleared(int clearedRoomIndex)
+    // {
+    //     Debug.Log("OnRoomCleared");
+    //     MovePlayerToNextRoom();
+    // }
 
-    private void MovePlayerToNextRoom()
-    {
-        Rigidbody2D rb = player.GetComponent<Rigidbody2D> ();
-        if (rb != null)
-        {
-            Vector2 newPos = rb.position;
-            newPos.y += roomGapY;
-            rb.MovePosition(newPos); // Rigidbody로 안전하게 이동
-            Debug.Log($"Rigidbody로 Player 이동: {newPos}");
-        }
-        else
-        {
-            // 혹시 Rigidbody가 없으면 Transform으로 이동
-            Vector3 newPosition = player.position;
-            newPosition.y += roomGapY;
-            player.position = newPosition;
-            Debug.Log($"Transform으로 Player 이동: {player.position}");
-        }
-    }
+    // private void MovePlayerToNextRoom()
+    // {
+    //     Rigidbody2D rb = player.GetComponent<Rigidbody2D> ();
+    //     if (rb != null)
+    //     {
+    //         Vector2 newPos = rb.position;
+    //         newPos.y += roomGapY;
+    //         rb.MovePosition(newPos); // Rigidbody로 안전하게 이동
+    //         Debug.Log($"Rigidbody로 Player 이동: {newPos}");
+    //     }
+    //     else
+    //     {
+    //         // 혹시 Rigidbody가 없으면 Transform으로 이동
+    //         Vector3 newPosition = player.position;
+    //         newPosition.y += roomGapY;
+    //         player.position = newPosition;
+    //         Debug.Log($"Transform으로 Player 이동: {player.position}");
+    //     }
+    // }
 }
