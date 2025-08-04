@@ -6,14 +6,17 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 5f;
     public Vector3 offset;
 
-    [Header("카메라 범위")]
-    public float minY = 0f;        // 첫 방 시작 Y
-    public float roomHeight = 20f; // 방 간격
-    public float maxY;             // 동적으로 변경됨
+    [Header("카메라 범위 Y")]
+    public float minY = 0f;        // 첫 방 Y 시작
+    public float roomHeight = 20f; // 방 높이
+    public float maxY;             // 동적으로 조정 가능
 
-    private float fixedX = -12.23f;
+    [Header("BossRoom X 범위")]
+    public float bossMinX = -10f;  // 보스룸 왼쪽 한계
+    public float bossMaxX = 10f;   // 보스룸 오른쪽 한계
 
-    private int currentRoomIndex = 0; // 현재 방 인덱스 (0부터 시작)
+    private float fixedX = 0f;     // X를 0 기준으로 고정
+    private bool isBossRoom = false;
 
     void LateUpdate()
     {
@@ -22,14 +25,23 @@ public class CameraFollow : MonoBehaviour
         Vector3 desiredPosition = target.position + offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
 
-        // X는 고정, Y는 Clamp
         float clampedY = Mathf.Clamp(smoothedPosition.y, minY, maxY);
-        transform.position = new Vector3(fixedX, clampedY, transform.position.z);
-    }
-    public void EnterRoom(int roomIndex)
-    {
-        currentRoomIndex = roomIndex;
-        maxY = minY + (currentRoomIndex + 1) * roomHeight;
+
+        if (isBossRoom)
+        {
+            // BossRoom: X를 Clamp 범위에서 움직임
+            float clampedX = Mathf.Clamp(smoothedPosition.x, bossMinX, bossMaxX);
+            transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+        }
+        else
+        {
+            // 일반 방: X를 0으로 고정
+            transform.position = new Vector3(fixedX, clampedY, transform.position.z);
+        }
     }
 
+    public void SetBossRoom(bool value)
+    {
+        isBossRoom = value;
+    }
 }

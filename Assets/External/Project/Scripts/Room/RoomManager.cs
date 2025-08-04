@@ -1,121 +1,84 @@
 using UnityEngine;
-using TMPro;
 using System.Collections;
 
 public class RoomManager : MonoBehaviour
 {
-    [Header("방 Prefabs")]
+    public static RoomManager Instance;
+
+    [Header("방 Prefab 리스트 (Room1~BossRoom1 순서대로 등록)")]
     public GameObject[] roomPrefabs;
-
-    [Header("생성 위치")]
-    public Transform spawnPosition;
     public Vector3 roomOffset = new Vector3(0, 20, 0);
-
-    [Header("UI")]
-    public TextMeshProUGUI roomText;
-    public float textMoveDistance = 500f;
-    public float textMoveDuration = 1.0f; // 기존보다 느리게
 
     private int currentRoomIndex = 0;
     private GameObject currentRoom;
-    private bool canEnterNextRoom = false; // 문 앞에 있는지 여부
 
-    public int CurrentRoomIndex => currentRoomIndex;
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
+    public void RegisterEnemy(GameObject enemy)
+    {
+        Debug.Log($"Enemy 등록됨: {enemy.name}");
+    }
     void Start()
     {
-        SpawnRoom();
+        SpawnRoom(0); // 첫 방 생성
     }
 
-    void Update()
+    public void OnRoomCleared(Room clearedRoom)
     {
-        // 문 앞에 있을 때만 다음 방 이동 가능
-        if (canEnterNextRoom && Input.GetKeyDown(KeyCode.Return))
+        // 현재 방이 클리어된 경우만 다음 방으로 이동
+        if (clearedRoom.roomIndex == currentRoomIndex)
         {
-            GoToNextRoom();
+            Debug.Log($"Room {clearedRoom.roomIndex} 클리어됨 → 다음 방 이동");
+            StartCoroutine(GoToNextRoomCoroutine());
         }
     }
 
-    private void SpawnRoom()
+    public void SpawnRoom(int index)
     {
-        Vector3 fixedSpawnPos = new Vector3(-12.23f, spawnPosition.position.y + (roomOffset.y * currentRoomIndex), 0);
-        currentRoom = Instantiate(roomPrefabs[currentRoomIndex], fixedSpawnPos, Quaternion.identity);
+        Vector3 spawnPos;
 
-        StartCoroutine(AnimateRoomText($"Room {currentRoomIndex + 1}"));
-    }
-
-    public void GoToNextRoom()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Destroy(currentRoom);
-
-        currentRoomIndex++;
-        if (player != null)
+        // 첫 방이면 시작 위치 고정
+        if (index == 0)
         {
-            player.transform.position = spawnPosition.position + new Vector3(0, roomOffset.y * currentRoomIndex, 0);
-        }
-        if (currentRoomIndex < roomPrefabs.Length)
-        {
-            SpawnRoom();
+            spawnPos = Vector3.zero;
         }
         else
         {
-            ShowClearScreen();
-        }
-    }
-
-    private IEnumerator AnimateRoomText(string text)
-    {
-        // 중앙에서 등장 (Fade In)
-        roomText.text = text;
-        roomText.alpha = 0f;
-        roomText.rectTransform.anchoredPosition = new Vector2(-textMoveDistance, roomText.rectTransform.anchoredPosition.y);
-
-        float elapsed = 0f;
-        while (elapsed < textMoveDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0, 1, elapsed / textMoveDuration); // Ease In
-            roomText.rectTransform.anchoredPosition = Vector2.Lerp(new Vector2(-textMoveDistance, roomText.rectTransform.anchoredPosition.y),
-                                                                   new Vector2(0, roomText.rectTransform.anchoredPosition.y), t);
-            roomText.alpha = Mathf.Lerp(0f, 1f, t);
-            yield return null;
+            // 이전 방의 Y 위치 + 오프셋
+            spawnPos = currentRoom != null
+                ? currentRoom.transform.position + roomOffset
+                : Vector3.zero;
         }
 
-        // 중앙에서 오른쪽으로 사라짐 (Fade Out)
-        elapsed = 0f;
-        while (elapsed < textMoveDuration)
+        // 새 방 생성
+        GameObject newRoom = Instantiate(roomPrefabs[index], spawnPos, Quaternion.identity);
+        currentRoom = newRoom;
+        currentRoomIndex = index;
+    }
+
+    private IEnumerator GoToNextRoomCoroutine()
+    {
+        // 현재 방 삭제
+        if (currentRoom != null)
         {
-            elapsed += Time.deltaTime;
-            float t = Mathf.SmoothStep(0, 1, elapsed / textMoveDuration); // Ease Out
-            roomText.rectTransform.anchoredPosition = Vector2.Lerp(new Vector2(0, roomText.rectTransform.anchoredPosition.y),
-                                                                   new Vector2(textMoveDistance, roomText.rectTransform.anchoredPosition.y), t);
-            roomText.alpha = Mathf.Lerp(1f, 0f, t);
-            yield return null;
+            Destroy(currentRoom);
         }
-    }
 
-    public void ShowClearScreen()
-    {
-        StartCoroutine(AnimateRoomText("CLEAR!"));
-    }
+        yield return null; // 다음 프레임까지 대기 후 생성
 
-    // 🔹 문 앞 Trigger 감지
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        // 다음 방 인덱스 증가
+        currentRoomIndex++;
+        if (currentRoomIndex < roomPrefabs.Length)
         {
-            canEnterNextRoom = true;
-            Debug.Log("문 앞에 도착! Enter키로 다음 방으로 이동 가능");
+            SpawnRoom(currentRoomIndex);
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        else
         {
-            canEnterNextRoom = false;
-            Debug.Log("문에서 멀어짐, 이동 불가");
+            Debug.Log("모든 방 클리어!");
         }
     }
 }
