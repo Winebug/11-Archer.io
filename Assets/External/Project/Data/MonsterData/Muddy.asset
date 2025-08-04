@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Muddy
   m_EditorClassIdentifier: 
   monsterName: MaskedOrc
-  health: 100
+  health: 20
   moveSpeed: 3
   attackPower: 3
   weaponPrefab: {fileID: 0}
