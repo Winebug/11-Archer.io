@@ -775,9 +775,9 @@ MonoBehaviour:
   healthChangeDelay: 0.5
   WeaponPrefab: {fileID: 223323353283478274, guid: 98e1fadcf98c62544bd34aa0043d523e, type: 3}
   IsBoss: 1
+  damageClip: {fileID: 8300000, guid: 4ad7c6f02850e48459a800c064a98289, type: 3}
   speed: 3
   attakRange: 1
-  playerTemp: {fileID: 0}
   statData: {fileID: 11400000, guid: 3a7db4e9a1128dd41b8fd9a99601ff14, type: 2}
   bulletShooter: {fileID: 2258293117294796139}
   fireCooldown: 2

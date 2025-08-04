@@ -251,9 +251,9 @@ MonoBehaviour:
   healthChangeDelay: 0.5
   WeaponPrefab: {fileID: 8621501774489494204, guid: 9272e240ad2783e44b65958449dd4c0a, type: 3}
   IsBoss: 0
+  damageClip: {fileID: 8300000, guid: 4ad7c6f02850e48459a800c064a98289, type: 3}
   speed: 3
   attakRange: 1
-  playerTemp: {fileID: 0}
   statData: {fileID: 0}
   isCharging: 0
 --- !u!61 &8845096226516337379
@@ -802,7 +802,7 @@ Animator:
   m_GameObject: {fileID: 8477563625554799130}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6d3af41258873dc4fb45cbf59abfe45b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

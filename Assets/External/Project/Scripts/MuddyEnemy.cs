@@ -29,7 +29,7 @@ public class MuddyEnemy : Enemy
 
     protected override void Update()
     {
-        if (playerTemp == null)
+        if (playerTransform == null)
         {
             active = false;
             return;
@@ -77,14 +77,14 @@ public class MuddyEnemy : Enemy
 
     void Teleport()
     {
-        if (playerTemp == null)
+        if (playerTransform == null)
             return;
         
  
 
         for (int i = 0; i < 20; i++)
         {
-            Vector2 target = RandomDonutPosition(playerTemp.position, 3f, 5f);
+            Vector2 target = RandomDonutPosition(playerTransform.position, 3f, 5f);
             i++;
 
 

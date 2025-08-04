@@ -249,4 +249,5 @@ MonoBehaviour:
   isOnKnockback: 1
   knockbackPower: 2
   knockbackTime: 0.5
+  attackSoundClip: {fileID: 8300000, guid: 1265ab6a4cff41947bd9bdf73173a70d, type: 3}
   shouldRotate: 0

@@ -31,7 +31,12 @@ public class UnitController : MonoBehaviour
 
     public float CurrentHealth { get; private set; } // 현재 체력 (외부 접근만 허용)
     public bool IsBoss = false;
+    private Animator animator;
+    private static readonly int IsDamage = Animator.StringToHash("IsDamage");
     private bool hasDeadlyShotApplied = false;
+
+    public AudioClip damageClip;
+
     public bool HasDeadlyShotApplied
     {
         get => hasDeadlyShotApplied;
@@ -73,6 +78,7 @@ public class UnitController : MonoBehaviour
     protected virtual void Start()
     {
         CurrentHealth = Health;
+        animator = GetComponentInChildren<Animator>();
     }
 
     protected virtual void Update()
@@ -171,19 +177,28 @@ public class UnitController : MonoBehaviour
         timeSinceLastChange = 0f; // 다시 무적 시작
 
         Debug.Log($"{gameObject.name}: 현재 체력 {CurrentHealth}에서 {change}만큼 체력이 변할 예정입니다");
-
+        animator?.SetBool(IsDamage, true);
         // 체력 적용
         CurrentHealth += change;
         CurrentHealth = CurrentHealth > Health ? Health : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
 
         Debug.Log($"{gameObject.name}: 현재 체력{CurrentHealth}");
-        // 데미지일 경우 (음수)
-        //if (change < 0)
-        //{
-        //    animationHandler.Damage(); // 맞는 애니메이션 실행
+        
+        //데미지일 경우(음수)
+        if (change < 0)
+        {
+            // 피격 애니메이션이 있을 경우 재생
+            if (animationHandler != null)
+            {
+                animationHandler.Damage(); // 피격 애니메이션 실행
+            }
 
-        //}
+            // 사운드가 설정되어 있을 경우 재생
+            if (damageClip != null)
+                SoundManager.PlayClip(damageClip);
+
+        }
 
         // 체력이 0 이하가 되면 사망 처리
         if (CurrentHealth <= 0f)
