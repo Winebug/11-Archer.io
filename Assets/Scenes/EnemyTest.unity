@@ -124,6 +124,7 @@ NavMeshSettings:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &347120733
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +182,8 @@ MonoBehaviour:
   gizmoColor: {r: 0.20374076, g: 0.46226418, b: 0.20278569, a: 0.47058824}
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 --- !u!1 &453226531
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,17 +195,23 @@ GameObject:
   - component: {fileID: 453226533}
   - component: {fileID: 453226532}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - component: {fileID: 453226534}
   - component: {fileID: 453226535}
   m_Layer: 6
   m_Name: DummyPlayer
   m_TagString: Player
 =======
+=======
+>>>>>>> Stashed changes
   - component: {fileID: 453226535}
   - component: {fileID: 453226534}
   m_Layer: 6
   m_Name: DummyPlayer
   m_TagString: Untagged
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +280,11 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.92, y: 3.02, z: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LocalScale: {x: 0.5, y: 1, z: 1}
+=======
+  m_LocalScale: {x: 1, y: 1, z: 1}
+>>>>>>> Stashed changes
 =======
   m_LocalScale: {x: 1, y: 1, z: 1}
 >>>>>>> Stashed changes
@@ -351,6 +364,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 --- !u!1 &579926457
 GameObject:
@@ -1244,6 +1258,8 @@ CanvasRenderer:
   m_CullTransparentMesh: 1
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1460080239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,6 +1353,7 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1636433598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,6 +1433,9 @@ CanvasRenderer:
 =======
 --- !u!1001 &2532244413397244139
 >>>>>>> Stashed changes
+=======
+--- !u!1001 &2532244413397244139
+>>>>>>> Stashed changes
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1423,6 +1443,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     - target: {fileID: 2803047456324451828, guid: 60753c39ed7c41849ac378238821c774, type: 3}
       propertyPath: m_Name
@@ -1485,6 +1506,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
 =======
+=======
+>>>>>>> Stashed changes
     - target: {fileID: 1975912490431742845, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -1549,13 +1572,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_SourcePrefab: {fileID: 100100000, guid: 60753c39ed7c41849ac378238821c774, type: 3}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
+>>>>>>> Stashed changes
 =======
   m_SourcePrefab: {fileID: 100100000, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
 >>>>>>> Stashed changes
@@ -1564,6 +1594,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1460080242}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   - {fileID: 453226533}
   - {fileID: 7733419462293734532}
@@ -1574,6 +1605,10 @@ SceneRoots:
   - {fileID: 1082604052}
   - {fileID: 808618444}
   - {fileID: 1109263715}
+=======
+  - {fileID: 2532244413397244139}
+  - {fileID: 453226533}
+>>>>>>> Stashed changes
 =======
   - {fileID: 2532244413397244139}
   - {fileID: 453226533}
