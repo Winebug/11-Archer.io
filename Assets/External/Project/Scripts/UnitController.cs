@@ -228,8 +228,8 @@ public class UnitController : MonoBehaviour
             component.enabled = false;
         }
 
-        // 2초 후 오브젝트 파괴
-        Destroy(gameObject, 2f);
+        // 1초 후 오브젝트 파괴
+        Destroy(gameObject, 1f);
     }
 
     private void HandleAttackDelay()

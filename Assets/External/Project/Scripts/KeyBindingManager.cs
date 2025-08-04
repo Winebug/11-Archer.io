@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
-
+using System.Collections;
 public class KeyBindingManager : MonoBehaviour
 {
     [System.Serializable]
@@ -45,12 +46,25 @@ public class KeyBindingManager : MonoBehaviour
             {
                 row.keyCodes = new List<KeyCode> { savedCode };
             }
-
-            row.keyButton.onClick.AddListener(() => OnClickKeyButton(row));
-            UpdateKeyText(row);
+            else
+            {
+                if (row.keyCodes == null || row.keyCodes.Count == 0)
+                {
+                    row.keyCodes = new List<KeyCode> { KeyCode.None };
+                }
+            }
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
     // 키 입력 대기 중일 때 입력된 키를 바인딩
     private void Update()
     {
@@ -263,5 +277,47 @@ public class KeyBindingManager : MonoBehaviour
         return false;
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(WaitAndLinkUI());
+    }
 
+    private IEnumerator WaitAndLinkUI()
+    {
+        yield return null;
+
+        GameObject canvas = GameObject.FindWithTag("Canvas");
+
+        Transform settingPanelTransform = FindInChildrenIncludingInactive(canvas.transform, "Panel_Setting");
+
+
+        foreach (var row in keyRows)
+        {
+            string rowName = $"Row_{row.actionName}";
+            Transform rowTransform = settingPanelTransform.Find(rowName);
+
+
+            row.keyButton = rowTransform.Find($"{row.actionName}Btn")?.GetComponent<Button>();
+            row.keyText = rowTransform
+            .Find($"{row.actionName}Btn/{row.actionName}BtnTxt")
+            ?.GetComponent<Text>();
+
+            if (row.keyButton != null)
+            {
+                row.keyButton.onClick.RemoveAllListeners();
+                row.keyButton.onClick.AddListener(() => OnClickKeyButton(row));
+            }
+
+            UpdateKeyText(row);
+        }
+    }
+    private Transform FindInChildrenIncludingInactive(Transform parent, string name)
+    {
+        foreach (Transform child in parent.GetComponentsInChildren<Transform>(true))
+        {
+            if (child.name == name)
+                return child;
+        }
+        return null;
+    }
 }

@@ -192,6 +192,7 @@ MonoBehaviour:
   healthChangeDelay: 0.5
   WeaponPrefab: {fileID: 3039104785448595261, guid: 109b3ec8c4d7720418a99228391c46b5, type: 3}
   IsBoss: 0
+  damageClip: {fileID: 0}
   speed: 3
   attakRange: 5
   searchRange: 10
@@ -298,7 +299,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
