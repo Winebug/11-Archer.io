@@ -1,5 +1,5 @@
 # **Game Title**
-<img width="779" height="439" alt="게임인트로" src="https://github.com/user-attachments/assets/db87feab-5ceb-41dc-a9bd-63e920c38242" />
+<img width="831" height="467" alt="게임인트로" src="https://github.com/user-attachments/assets/bb31ede3-4b2f-45db-8790-d81418aa6f91" />
 
 # **Flow Chart** (아래 Chart는 수정될 수 있음)
 
@@ -51,7 +51,7 @@
     - 게임 시작 전 **Play**, **Settings**, **Exit** 버튼을 포함한 시작 화면 제작
     - 간단한 배경과 게임 로고 추가
  
-![인트로설정](https://github.com/user-attachments/assets/c0f30bc0-cee8-4077-838f-ac53eddb55e1)
+![인트로설정](https://github.com/user-attachments/assets/a1bb9564-a9a8-445d-b08f-8ce6de78d71d)
 
 - **타이틀 및 스테이지 클리어 화면**
     - 게임 시작 시 타이틀 화면 표시
