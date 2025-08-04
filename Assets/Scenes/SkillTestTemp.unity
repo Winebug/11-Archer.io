@@ -16557,7 +16557,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   hasInvincibilitySkill: 0
-  skillSelectorUI: {fileID: 0}
+  skillSelectorUI: {fileID: 9146302689920160897}
 --- !u!4 &7112091376266611221
 Transform:
   m_ObjectHideFlags: 0
