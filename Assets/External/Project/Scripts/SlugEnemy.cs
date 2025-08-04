@@ -5,7 +5,6 @@ public class SlugEnemy : Enemy
     [SerializeField] private BulletShooter bulletShooter;
     [SerializeField] private float fireCooldown = 2f;//총알 날라가는 쿨타임
     private float fireTimer = 2f;
-    private Animator animator;
     private static readonly int IsInside = Animator.StringToHash("IsInside");
 
     protected override void Start()
