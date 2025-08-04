@@ -47,6 +47,7 @@ public class StartSceneUI : MonoBehaviour
 
     private void OnTutorialClicked()
     {
+        UIManager.Instance.StopBGM();
         SceneManager.LoadScene("Tutorial"); //나중에 씬이름 변경시 이 코드도 변경
     }
 }

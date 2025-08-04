@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private UnitController _unitController;
 
     [SerializeField] private int currentWaveIndex = 0; // 현재 웨이브 번호
+    [SerializeField] private GameObject stageClearPanel;
 
     // 컴패니언 생성 및 관리하는 매니저
     private CompanionManager companionManager;
@@ -61,5 +62,12 @@ public class GameManager : MonoBehaviour
         {
             StartGame();
         }
+    }
+    public void StageClear()
+    {
+        if (stageClearPanel != null)
+            stageClearPanel.SetActive(true);
+        else
+            Debug.LogWarning("Stage Clear Panel이 연결되지 않았습니다.");
     }
 }
