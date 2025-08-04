@@ -5,6 +5,7 @@ using TMPro;
 
 public class SkillSelectorUI : MonoBehaviour
 {
+    public static SkillSelectorUI Instance;
     [Header("UI Elements")]
     [SerializeField] private GameObject panel;                // 전체 스킬 선택 패널
     [SerializeField] private Button[] skillButtons;           // 선택할 버튼 (3개)
@@ -13,6 +14,12 @@ public class SkillSelectorUI : MonoBehaviour
     private List<Skill> currentChoices = new List<Skill>();   // 현재 선택된 3개
     private Player player;                                    // 스킬을 적용할 대상 (플레이어)
 
+    private void Awake()
+    {
+        if (Instance != null) Destroy(gameObject);
+
+        else Instance = this;
+    }
     public void Initialize(Player playerRef)
     {
         player = playerRef;

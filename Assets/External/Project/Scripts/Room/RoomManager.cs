@@ -28,7 +28,10 @@ public class RoomManager : MonoBehaviour
             }
         }
     }
-
+    void Start()
+    {
+        
+    }
     void Update()
     {
         // Room이 연결되어 있고 적이 전부 제거되면 자동으로 열림
@@ -59,7 +62,9 @@ public class RoomManager : MonoBehaviour
 
     public void OnRoomCleared(int clearedRoomIndex)
     {
+        Debug.Log("OnRoomCleared");
         MovePlayerToNextRoom();
+        sui.Show();
     }
 
     private void MovePlayerToNextRoom()
