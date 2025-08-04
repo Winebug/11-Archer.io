@@ -4283,6 +4283,7 @@ MonoBehaviour:
   spawnCount: 1
   spawnAreaSize: {x: 7, y: 10}
   room: {fileID: -2978413790072655619}
+  isBoss: 1
 --- !u!1 &8057527144146197641
 GameObject:
   m_ObjectHideFlags: 0
