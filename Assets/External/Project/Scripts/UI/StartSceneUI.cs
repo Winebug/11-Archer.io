@@ -10,7 +10,6 @@ public class StartSceneUI : MonoBehaviour
     [SerializeField] private Button tutorialButton;
     [SerializeField] private Slider soundSlider;
     [SerializeField] private GameObject panelSetting;
-
     private void Start()
     {
         // 버튼 이벤트
@@ -27,8 +26,8 @@ public class StartSceneUI : MonoBehaviour
     private void OnStartClicked()
     {
         UIManager.Instance.StopBGM();
-        SceneManager.LoadScene("SampleScene"); //나중에 씬이름 변경시 이 코드도 변경
-        
+        //SceneManager.LoadScene("SampleScene"); //나중에 씬이름 변경시 이 코드도 변경
+        SceneManager.LoadScene("SkillTestTemp2"); //나중에 씬이름 변경시 이 코드도 변경
     }
 
     private void OnExitClicked()

@@ -6,9 +6,11 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance;
     public Transform player;
     public float roomGapY = 20f;
+
     public Room room;
     public bool isOpen = false;
     public float moveDistanceY = 10f;
+    [SerializeField] private SkillSelectorUI sui;
 
     private void Awake()
     {
@@ -26,7 +28,10 @@ public class RoomManager : MonoBehaviour
             }
         }
     }
-
+    void Start()
+    {
+        
+    }
     void Update()
     {
         // Room이 연결되어 있고 적이 전부 제거되면 자동으로 열림
@@ -57,7 +62,9 @@ public class RoomManager : MonoBehaviour
 
     public void OnRoomCleared(int clearedRoomIndex)
     {
+        Debug.Log("OnRoomCleared");
         MovePlayerToNextRoom();
+        sui.Show();
     }
 
     private void MovePlayerToNextRoom()
