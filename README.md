@@ -1,5 +1,5 @@
 # **Game Title**
-<img width="2816" height="1536" alt="던전이미지" src="https://github.com/user-attachments/assets/9c86fe99-f8f3-4844-95ef-2f7cff45cb01" />
+<img width="779" height="439" alt="게임인트로" src="https://github.com/user-attachments/assets/db87feab-5ceb-41dc-a9bd-63e920c38242" />
 
 # **Flow Chart** (아래 Chart는 수정될 수 있음)
 
@@ -49,6 +49,8 @@
     - 게임 시작 전 **Play**, **Settings**, **Exit** 버튼을 포함한 시작 화면 제작
     - 간단한 배경과 게임 로고 추가
  
+![인트로설정](https://github.com/user-attachments/assets/c0f30bc0-cee8-4077-838f-ac53eddb55e1)
+
 - **타이틀 및 스테이지 클리어 화면**
     - 게임 시작 시 타이틀 화면 표시
     - 스테이지를 클리어하면 클리어 시간, 점수, 다음 스테이지로의 버튼 제공
