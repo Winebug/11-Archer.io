@@ -9,6 +9,18 @@ public class RoomManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogWarning("플레이어 오브젝트가 없음.");
+            }
+        }
     }
 
     public void OnRoomCleared(int clearedRoomIndex)

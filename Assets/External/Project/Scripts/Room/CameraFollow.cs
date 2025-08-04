@@ -17,6 +17,21 @@ public class CameraFollow : MonoBehaviour
 
     private float fixedX = -12.23f; // 🔙 원래대로 X 고정값 롤백
     private bool isBossRoom = false;
+    private void Start()
+    {
+        if (target == null)
+        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
+            {
+                target = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogWarning("플레이어 오브젝트가 없음.");
+            }
+        }
+    }
 
     void LateUpdate()
     {
