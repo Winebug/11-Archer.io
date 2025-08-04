@@ -60,15 +60,70 @@ public class KeyBindingManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(code))
                 {
+                    // 텍스트는 입력한 키로 표시
                     currentListeningRow.keyCodes = new List<KeyCode> { code };
                     UpdateKeyText(currentListeningRow);
                     keyBindings[currentListeningRow.actionName] = new List<KeyCode> { code };
+
+                    // 중복 키들을 찾기
+                    Dictionary<string, KeyCode> assignedKeys = new();
+                    HashSet<string> duplicatedActions = new();
+
+                    foreach (var pair in keyBindings)
+                    {
+                        string keyList = string.Join(", ", pair.Value);
+                        Debug.Log($"[KeyBinding] {pair.Key} => {keyList}");
+                        if (pair.Value.Count > 0)
+                        {
+                            KeyCode key = pair.Value[0];
+                            if (assignedKeys.ContainsValue(key))
+                            {
+                                // 중복 키 발견
+                                foreach (var kv in assignedKeys)
+                                {
+                                    if (kv.Value == key)
+                                    {
+                                        duplicatedActions.Add(kv.Key);
+                                        duplicatedActions.Add(pair.Key);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                assignedKeys[pair.Key] = key;
+                            }
+                        }
+                    }
+                    // 버튼 색 (중복이면 빨강, 아니면 흰색)
+                    foreach (var row in keyRows)
+                    {
+                        var image = row.keyButton.GetComponent<Image>();
+                        if (image != null)
+                        {
+                            if (duplicatedActions.Contains(row.actionName))
+                                image.color = Color.red;
+                            else
+                                image.color = Color.white;
+                        }
+                    }
+
+                    // 중복이면 저장 안 함
+                    if (!duplicatedActions.Contains(currentListeningRow.actionName))
+                    {
+                        keyBindings[currentListeningRow.actionName] = new List<KeyCode> { code };
+                    }
+
                     currentListeningRow = null;
                     break;
                 }
             }
         }
     }
+
+
+
+
+
 
     // 기본 키 바인딩들을 불러옴
     private void LoadAllBindings()
@@ -83,7 +138,7 @@ public class KeyBindingManager : MonoBehaviour
     private void LoadBinding(string key, List<KeyCode> defaultKeys)
     {
         List<KeyCode> result = new();
-        string saved = PlayerPrefs.GetString(key, "");
+        string saved = PlayerPrefs.GetString($"Key_{key}", "");
 
         if (string.IsNullOrEmpty(saved))
         {
@@ -104,6 +159,12 @@ public class KeyBindingManager : MonoBehaviour
         }
 
         keyBindings[key] = result;
+        KeyBindRow row = keyRows.Find(r => r.actionName == key);
+        if (row != null)
+        {
+            row.keyCodes = result;
+            UpdateKeyText(row);
+        }
     }
 
     // 특정 액션에 해당하는 키가 눌렸는지 확인
@@ -148,6 +209,11 @@ public class KeyBindingManager : MonoBehaviour
     // 현재 키 바인딩들을 저장
     public void SaveKeyBindings()
     {
+        if (HasDuplicateBindings())
+        {
+            return;
+        }
+
         foreach (var row in keyRows)
         {
             if (row.keyCodes.Count > 0)
@@ -161,6 +227,7 @@ public class KeyBindingManager : MonoBehaviour
         Debug.Log("키 설정 저장 완료");
         panelSetting.SetActive(false);
     }
+
 
     // 외부에서 바인딩을 직접 설정
     public void SetBinding(string action, List<KeyCode> keys)
@@ -176,4 +243,27 @@ public class KeyBindingManager : MonoBehaviour
         PlayerPrefs.SetString(key, result);
         PlayerPrefs.Save();
     }
+    // 중복 키할당 확인
+    private bool HasDuplicateBindings()
+    {
+        Dictionary<KeyCode, string> assignedKeys = new Dictionary<KeyCode, string>();
+
+        foreach (var row in keyRows)
+        {
+            if (row.keyCodes.Count == 0) continue;
+
+            KeyCode key = row.keyCodes[0];
+
+            if (assignedKeys.ContainsKey(key))
+            {
+                return true;
+            }
+
+            assignedKeys[key] = row.actionName;
+        }
+
+        return false;
+    }
+
+
 }
