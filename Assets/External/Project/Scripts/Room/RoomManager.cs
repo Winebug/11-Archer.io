@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
@@ -5,6 +6,9 @@ public class RoomManager : MonoBehaviour
     public static RoomManager Instance;
     public Transform player;
     public float roomGapY = 20f;
+    public Room room;
+    public bool isOpen = false;
+    public float moveDistanceY = 10f;
 
     private void Awake()
     {
@@ -23,6 +27,34 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        // Room이 연결되어 있고 적이 전부 제거되면 자동으로 열림
+        if (room != null && room.AreAllEnemiesCleared())
+        {
+            if (!isOpen)
+            {
+                isOpen = true;
+                Debug.Log($"{gameObject.name} 문 열림 (Enemy 전멸)");
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isOpen && collision.CompareTag("Player"))
+        {
+            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Vector2 newPos = rb.position;
+                newPos.y += moveDistanceY;
+                rb.MovePosition(newPos);
+                Debug.Log("Player 다음 Room으로 이동!");
+            }
+        }
+    }
+
     public void OnRoomCleared(int clearedRoomIndex)
     {
         MovePlayerToNextRoom();
@@ -30,7 +62,7 @@ public class RoomManager : MonoBehaviour
 
     private void MovePlayerToNextRoom()
     {
-        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = player.GetComponent<Rigidbody2D> ();
         if (rb != null)
         {
             Vector2 newPos = rb.position;
