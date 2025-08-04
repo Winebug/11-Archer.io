@@ -1,5 +1,14 @@
 ![Archer.jpg](img/Archer.jpg)
 
+<img width="7848" height="2422" alt="image" src="https://github.com/user-attachments/assets/ff925eda-5284-4235-883e-34d300688e4d" />
+
+(위 전개는 수정될 수 있음)
+
+<img width="9968" height="6946" alt="image" src="https://github.com/user-attachments/assets/48a3f57b-5897-45cd-9505-b7dc1c1ef733" />
+
+<img width="13390" height="2754" alt="image" src="https://github.com/user-attachments/assets/2ffb4aca-a4c4-4402-8f7c-06598eed59af" />
+
+
 ### **궁수의 전설**
 
 - 장르 : 탑다운 / 로그라이크 / 슈팅
@@ -20,6 +29,10 @@
     - 스킬 조합으로 플레이어의 전략적 선택 제공
 - **보스전**
     - 특정 방에서 보스 등장. 다양한 공격 패턴과 높은 체력
+- **동료 시스템**
+    - 방 입장시 랜덤 동료 영입하여 함께 전투 (엘프궁수, 드워프주술사, 리자드맨전사)
+- **사운드 및 이펙트**
+    - 배경음악 및 효과음, 이펙트를 구현
  
 ---
 

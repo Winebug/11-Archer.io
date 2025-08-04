@@ -34,5 +34,10 @@ public class UIManager : MonoBehaviour
         AudioListener.volume = value;
         PlayerPrefs.SetFloat(VolumeKey, value);
     }
+    public void StopBGM()
+    {
+        if (bgmSource != null && bgmSource.isPlaying)
+            bgmSource.Stop();
+    }
 }
 

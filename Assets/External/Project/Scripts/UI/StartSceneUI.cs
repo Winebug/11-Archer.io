@@ -23,7 +23,9 @@ public class StartSceneUI : MonoBehaviour
 
     private void OnStartClicked()
     {
+        UIManager.Instance.StopBGM();
         SceneManager.LoadScene("SampleScene"); //나중에 씬이름 변경시 이 코드도 변경
+        
     }
 
     private void OnExitClicked()
