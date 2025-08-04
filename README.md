@@ -44,6 +44,8 @@
 
 - **사운드 및 이펙트**
     - 배경음악 및 효과음, 이펙트를 구현
+ 
+![이펙트](https://github.com/user-attachments/assets/f971816d-acd2-49b8-8582-c2324d8fd2a7)
 
 - **게임 시작 화면**
     - 게임 시작 전 **Play**, **Settings**, **Exit** 버튼을 포함한 시작 화면 제작
