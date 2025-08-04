@@ -891,7 +891,6 @@ MonoBehaviour:
   room: {fileID: 0}
   isOpen: 0
   moveDistanceY: 10
-  sui: {fileID: 0}
 --- !u!4 &2050959386
 Transform:
   m_ObjectHideFlags: 0
@@ -928,12 +927,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 4993468768858253285}
-  player: {fileID: 0}
+  player: {fileID: 7041094586482419724}
   hpText: {fileID: 476184940079400515}
   offset: {x: 0, y: 1}
-  target: {fileID: 0}
+  target: {fileID: 6035318266797021304}
   hpbarPos: {fileID: 8582604473885127700}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 519420031}
 --- !u!1 &242484087807422084
 GameObject:
   m_ObjectHideFlags: 0
