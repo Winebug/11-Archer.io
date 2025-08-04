@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Enemy : UnitController
 {
+    private Room currentRoom;
+
+    public void SetRoom(Room room)
+    {
+        currentRoom = room;
+        Debug.Log($"{gameObject.name}은(는) {room.name}에 속했습니다.");
+    }
+
     [SerializeField] float attakRange = 0.1f;
 
     protected Transform playerTransform;

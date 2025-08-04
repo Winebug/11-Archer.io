@@ -72,8 +72,8 @@ public class WeaponHandler : MonoBehaviour
         AttackAnimation();
 
         // 사운드가 설정되어 있을 경우 재생
-        if (attackSoundClip != null)
-            SoundManager.PlayClip(attackSoundClip);
+        //if (attackSoundClip != null)
+          //  SoundManager.PlayClip(attackSoundClip);
     }
 
     public void AttackAnimation()
