@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 게임 전체를 관리하는 메인 매니저 클래스
 public class GameManager : MonoBehaviour
@@ -64,9 +65,15 @@ public class GameManager : MonoBehaviour
     }
     public void StageClear()
     {
-        if (stageClearPanel != null)
+        if (stageClearPanel != null) {
             stageClearPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
         else
             Debug.LogWarning("Stage Clear Panel이 연결되지 않았습니다.");
+    }
+    public void OnReturnClicked()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
