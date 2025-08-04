@@ -11,6 +11,18 @@ public class RoomManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogWarning("플레이어 오브젝트가 없음.");
+            }
+        }
     }
     // void Start()
     // {
@@ -30,7 +42,7 @@ public class RoomManager : MonoBehaviour
             Vector2 newPos = rb.position;
             newPos.y += roomGapY;
             rb.MovePosition(newPos); // Rigidbody로 안전하게 이동
-            Debug.Log($"✅ Rigidbody로 Player 이동: {newPos}");
+            Debug.Log($"Rigidbody로 Player 이동: {newPos}");
         }
         else
         {
@@ -38,7 +50,7 @@ public class RoomManager : MonoBehaviour
             Vector3 newPosition = player.position;
             newPosition.y += roomGapY;
             player.position = newPosition;
-            Debug.Log($"✅ Transform으로 Player 이동: {player.position}");
+            Debug.Log($"Transform으로 Player 이동: {player.position}");
         }
     }
 }

@@ -9,6 +9,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] GameObject howToMoveUI;
     [SerializeField] GameObject howToAttackUI;
     [SerializeField] GameObject endTutorialUI;
+    [SerializeField] GameObject door;
 
     int coinObtainderNum = 0;
     bool tutorialEnd = false;
@@ -67,6 +68,8 @@ public class TutorialManager : MonoBehaviour
         tutorialEnd = true;
         howToAttackUI.SetActive(false);
         endTutorialUI.SetActive(true);
+        Collider2D doorCollider = door.gameObject.GetComponent<Collider2D>();
+        doorCollider.isTrigger = true;
     }
 
 }

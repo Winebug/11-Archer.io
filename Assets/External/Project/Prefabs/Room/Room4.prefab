@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1874340106055455507}
   - component: {fileID: 7183927084872905202}
   - component: {fileID: 3446399426959618150}
-  - component: {fileID: 3366426083362857258}
+  - component: {fileID: 8407272014408932433}
   - component: {fileID: 4807749500890352643}
   m_Layer: 0
   m_Name: Door
@@ -170,7 +170,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &3366426083362857258
+--- !u!114 &8407272014408932433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,11 +179,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 767584977403709698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cc195b6be161564895c3374f9a87280, type: 3}
+  m_Script: {fileID: 11500000, guid: a4a508b8ac4614a45a60b9fd5a11c5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: -1899364968089437964}
   isOpen: 0
-  animator: {fileID: 0}
+  moveDistanceY: 10
 --- !u!61 &4807749500890352643
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1196,6 +1197,55 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1 &2011540861413399765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8137263917840895720}
+  - component: {fileID: 6543304871875518116}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8137263917840895720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011540861413399765}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -20, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3270305268496016300}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6543304871875518116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011540861413399765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3cbbb95e4ce6b49a5af4943c445f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 6609226266096557723, guid: 5dba061429d415d45af725efa4c5bab1, type: 3}
+  spawnCount: 3
+  spawnAreaSize: {x: 7, y: 10}
+  room: {fileID: -1899364968089437964}
 --- !u!1 &2395419969935099938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3376,6 +3426,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8137263917840895720}
   - {fileID: 6137835630928422838}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3392,3 +3443,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomIndex: 3
+  door: {fileID: 0}
