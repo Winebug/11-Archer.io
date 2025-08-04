@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1.0f;
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -38,10 +39,6 @@ public class UIManager : MonoBehaviour
     {
         if (bgmSource != null && bgmSource.isPlaying)
             bgmSource.Stop();
-    }
-    public void OnReturnClicked()
-    {
-        SceneManager.LoadScene("StartScene");
     }
 }
 
