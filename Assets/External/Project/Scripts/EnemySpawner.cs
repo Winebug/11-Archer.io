@@ -36,8 +36,14 @@ public class EnemySpawner : MonoBehaviour
         {
             Enemy chosenEnemy = enemyList[Random.Range(0, enemyList.Count)];
             Vector3 spawnPostition = PostionForSpawn(SpanwStandardPoint);
-            Instantiate(chosenEnemy, spawnPostition, Quaternion.identity);
- 
+            Enemy spawnedEnemy = Instantiate(chosenEnemy, spawnPostition, Quaternion.identity);
+            if (chosenEnemy == enemyList[2])
+            {
+                MuddyEnemy spawnedMuddy = spawnedEnemy.GetComponent<MuddyEnemy>();
+                spawnedMuddy.roomOrigin = SpanwStandardPoint;
+            }
+
+
         }
 
     }

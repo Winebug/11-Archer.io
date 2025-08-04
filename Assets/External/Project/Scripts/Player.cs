@@ -108,7 +108,6 @@ public class Player : UnitController
 
     protected override void HandleAction()
     {
-        Debug.Log("Player HandleAction called111111");
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
