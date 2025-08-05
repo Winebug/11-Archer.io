@@ -76,8 +76,10 @@ public class CompanionManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             SpawnCompanion();
+
+            Destroy(gameObject); // 트리거가 활성화되면 자기 자신을 파괴
         }
 
-        Destroy(gameObject); // 트리거가 활성화되면 자기 자신을 파괴
+        
     }
 }

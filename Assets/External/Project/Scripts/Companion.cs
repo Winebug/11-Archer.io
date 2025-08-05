@@ -12,8 +12,6 @@ public class Companion : UnitController
     //강의에서는 Init로 플레이어 할당해주므로, 아마 수정 예정
     protected Transform targetTemp;
     protected Transform followTarget;
-    [SerializeField] private CompanionStat statData;
-    public CompanionStat StatData => statData;
 
     GameManager gameManager;
 
@@ -27,30 +25,19 @@ public class Companion : UnitController
     {
         base.Start();
 
-        if (statData != null) // 기본스탯등을 불러와서 초기화
-        {
-            Health = statData.health;
-            Speed = statData.moveSpeed;
-            Health = statData.health;
-            weaponHandler = statData.weaponPrefab;
-        }
-
         GameObject playerObject = GameObject.FindWithTag("Player");
         followTarget = playerObject.transform;
-
-        if (GameObject.FindWithTag("Enemy") != null)
-        {
-            GameObject enemyObject = GameObject.FindWithTag("Enemy");
-            targetTemp = enemyObject.transform;
-        }
     }
 
     protected override void HandleAction()
     {
         // 부모에서 정의한 기본 동작 처리
-        base.HandleAction();
+        //base.HandleAction();
 
-        isAttacking = false;
+        // 일정 주기마다 가장 가까운 적을 찾아서 targetTemp에 할당
+        FindNearestEnemy();
+
+        //isAttacking = false;
 
         float distance = DistanceBetween();
         Vector2 direction = FaceDirection();
@@ -75,9 +62,15 @@ public class Companion : UnitController
             return;
         }
 
+        Debug.Log("targetTemp" + targetTemp);
+
+        Debug.Log("distance" + distance);
+
         // 타겟이 있고 searchRange 안에 있을 때만 추적 시작
         if (targetTemp != null && distance <= searchRange)
         {
+            Debug.Log("타겟 발견" + targetTemp);
+
             lookDirection = direction;
 
             // follow target에게 접근
@@ -99,8 +92,8 @@ public class Companion : UnitController
                 lookDirection = direction;
                 movementDirection = Vector2.zero;
                 return;
-                }
-            
+            }
+
         }
     }
 
@@ -144,20 +137,29 @@ public class Companion : UnitController
         Gizmos.DrawWireSphere(transform.position, searchRange);
     }
 
-    public void StartWave(int waveCount)
+    //가장 가까운 적을 찾아 targetTemp에 할당하는 새로운 메서드 추가
+    void FindNearestEnemy()
     {
-        // 0 이하일 경우 적 생성 없이 바로 웨이브 종료 처리
-        if (waveCount <= 0)
-        {
-            gameManager.EndOfWave(); // GameManager에 웨이브 종료 알림
-            return;
-        }
-    }
+        // "Enemy" 태그를 가진 모든 게임 오브젝트를 찾음
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-    // End of Wave 시 컴패니언 디스트로이
-    public override void Death()
-    {
-        Debug.Log("Companion left.");
-        base.Death();
+        Transform nearestEnemy = null;
+        float shortestDistance = Mathf.Infinity;
+
+        // 찾은 적들 중에서 가장 가까운 적을 선택
+        foreach (GameObject enemy in enemies)
+        {
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+
+            // 현재 찾은 적이 searchRange 안에 있고, 가장 가까운 적이면 업데이트
+            if (distanceToEnemy <= searchRange && distanceToEnemy < shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy.transform;
+            }
+        }
+
+        // 가장 가까운 적이 있다면 targetTemp에 할당
+        targetTemp = nearestEnemy;
     }
 }
