@@ -38,18 +38,27 @@ public class SpikeTrap : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        // 플레이어 태그와 충돌한 경우만 처리
         if (collision.CompareTag(playerTag))
         {
-            // Phase 2~4 구간에서만 데미지 적용 나중에 체력바 생기면 데미지 적용
-            //if (currentPhase >= 1 && currentPhase <= 3)
-            //{
-            //    PlayerHealth player = collision.GetComponent<PlayerHealth>();
-            //    if (player != null)
-            //    {
-            //        player.TakeDamage(damage);
-            //    }
-            //}
-            Debug.Log("아야");
+            // UnitController 가져오기
+            UnitController unitController = collision.GetComponent<UnitController>();
+            if (unitController == null)
+            {
+                Debug.LogWarning($"UnitController가 없습니다: {collision.name}");
+                return;
+            }
+
+            // Phase 2~4 구간에서만 데미지 적용
+            if (currentPhase >= 1 && currentPhase <= 3)
+            {
+                // ChangeHealth를 통해 체력 감소 (예: -10 데미지)
+                bool damaged = unitController.ChangeHealth(-10f);
+                if (damaged)
+                {
+                    Debug.Log($"{collision.name}가 스파이크 트랩에서 데미지를 입음");
+                }
+            }
         }
     }
 }

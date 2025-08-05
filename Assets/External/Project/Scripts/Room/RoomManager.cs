@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviour
     public Room room;
     public bool isOpen = false;
     public float moveDistanceY = 10f;
+    [SerializeField] private SkillSelectorUI sui;
 
     private void Awake()
     {
