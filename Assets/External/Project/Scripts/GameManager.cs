@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private UnitController _unitController;
 
     [SerializeField] private GameObject stageClearPanel;
+    [SerializeField] private GameObject stageFailPanel;
 
     // 컴패니언 생성 및 관리하는 매니저
     private CompanionManager companionManager;
@@ -52,7 +53,12 @@ public class GameManager : MonoBehaviour
     // 플레이어가 죽었을 때 게임 오버 처리
     public void GameOver()
     {
-        // 스폰 중지
+        if (stageFailPanel != null) {
+            stageFailPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+            Debug.LogWarning("Stage Clear Panel이 연결되지 않았습니다.");
     }
 
     // 개발용 테스트: Space 키로 게임 시작
