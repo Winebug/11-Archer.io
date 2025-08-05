@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OrcWarrior
   m_EditorClassIdentifier: 
   monsterName: OrcWarroir
-  health: 15
+  health: 20
   moveSpeed: 2
-  attackPower: 2
+  attackPower: 10
   weaponPrefab: {fileID: 0}

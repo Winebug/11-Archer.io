@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ogre
   m_EditorClassIdentifier: 
   monsterName: Ogre
-  health: 75
+  health: 50
   moveSpeed: 1.5
-  attackPower: 5
+  attackPower: 15
   weaponPrefab: {fileID: 0}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a862d78f24509449b21ac25b861ed90, type: 3}
   m_Name: Muddy
   m_EditorClassIdentifier: 
-  monsterName: MaskedOrc
+  monsterName: Muddy
   health: 20
   moveSpeed: 3
-  attackPower: 3
+  attackPower: 5
   weaponPrefab: {fileID: 0}
